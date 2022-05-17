@@ -1,5 +1,6 @@
 import React from 'react';
+import Main from './scenes';
 
 export default function App() {
-  return <div>444</div>;
+  return <Main />;
 }

@@ -1,11 +1,10 @@
+@import 'reset.scss';
 
-
-html body {
+html, body {
   height: 100%;
-  background-color: green;
 }
 
-.wrapper {
+#root {
   min-height: 100%;
   overflow: hidden;
 }

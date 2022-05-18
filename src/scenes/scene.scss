@@ -1,0 +1,14 @@
+.scene {
+  max-width: 1370px;
+  min-height: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.scene__side-bar-left {
+    flex: 0 0 auto;
+}
+
+.scene__main-scene {
+    flex: 1 1 auto;
+}

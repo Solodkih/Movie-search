@@ -1,12 +1,12 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const path = require("path");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 module.exports = {
-  devtool: "cheap-module-source-map",
-  entry: "./src/index.js",
+  devtool: 'cheap-module-source-map',
+  entry: './src/index.js',
   output: {
-    path: path.join(__dirname, "./public"),
-    filename: "bundle.js",
+    path: path.join(__dirname, './public'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -14,18 +14,22 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "style.css",
+      filename: 'style.css',
     }),
   ],
 };

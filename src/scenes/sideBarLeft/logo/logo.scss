@@ -1,9 +1,11 @@
 .logo {
   font-family: 'Goma Octagon';
-}
 
-.logo__title {
-}
+  &__title {
+    font-size: 24px;
+  }
 
-.logo__subtitle {
+  &__subtitle {
+    font-size: 14px;
+  }
 }

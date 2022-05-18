@@ -1,10 +1,18 @@
 @import 'reset.scss';
+@import 'constants.scss';
 
-html, body {
+
+html,
+body {
   height: 100%;
 }
 
 #root {
   min-height: 100%;
   overflow: hidden;
+}
+
+._container {
+  max-width: 1370px;
+  margin: 0 auto;
 }

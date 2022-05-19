@@ -1,0 +1,12 @@
+.item-menu {
+  display: flex;
+
+  &__image {
+    height: 25px;
+    margin-right: 10px;
+  }
+
+  &__name {
+    align-self: center;
+  }
+}

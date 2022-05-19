@@ -1,13 +1,13 @@
 @import '../../../constants.scss';
 
-.menu {
+.menu-side-bar {
   margin-top: 60px;
   color: $main-white;
   font-size: 20px;
 
   &__logo {
     color: grey;
-    margin-bottom: 15px;
+    margin-bottom: 7px;
   }
 
   &__list {

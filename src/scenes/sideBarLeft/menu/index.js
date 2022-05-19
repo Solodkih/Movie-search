@@ -1,27 +1,28 @@
 import React from 'react';
-import img from '../../../icon/Home.png';
+import ItemMenu from '../../../components/itemMenu';
+import imgHome from '../../../icon/Home.png';
+import imgDiscovery from '../../../icon/Safari.png';
+import imgAwards from '../../../icon/Award.png';
+import imgCelebrities from '../../../icon/Verified.png';
 
 import './menu.scss';
 
 export default function Menu() {
   return (
-    <div className="menu">
-      <div className="menu__logo">Menu</div>
-      <ul className="menu__list">
+    <div className="menu-side-bar">
+      <div className="menu-side-bar__logo">Menu</div>
+      <ul className="menu-side-bar__list">
         <li>
-          <div className="item">
-            <img className="item__image" src={img} alt="Home" />
-            <div className="item__name">Home</div>
-          </div>
+          <ItemMenu img={imgHome} name="Home" alt="Home" />
         </li>
         <li>
-          <div>Discovery</div>
+          <ItemMenu img={imgDiscovery} name="Discovery" alt="Discovery" />
         </li>
         <li>
-          <div>Awards</div>
+          <ItemMenu img={imgAwards} name="Awards" alt="Awards" />
         </li>
         <li>
-          <div>Celebrities</div>
+          <ItemMenu img={imgCelebrities} name="Celebrities" alt="Celebrities" />
         </li>
       </ul>
     </div>

@@ -1,0 +1,20 @@
+@import '../../../constants.scss';
+
+.menu {
+  margin-top: 60px;
+  color: $main-white;
+  font-size: 20px;
+
+  &__logo {
+    color: grey;
+    margin-bottom: 15px;
+  }
+
+  &__list {
+    list-style-type: none;
+  }
+
+  &__list > li {
+    padding: 15px 0;
+  }
+}

@@ -1,0 +1,14 @@
+@import '../../../../constants.scss';
+
+.seach {
+  background-color: $lite-dark;
+  color: $main-white;
+  border-width: 0px;
+  border-radius: 10px;
+  height: 40px;
+  border: 1px solid grey;
+}
+.seach::placeholder {
+  color: $main-white;
+  padding-left: 30px;
+}

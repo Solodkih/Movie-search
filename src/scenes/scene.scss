@@ -1,14 +1,15 @@
 .scene {
   max-width: 1370px;
-  min-height: 100%;
+  height: 100%;
   margin: 0 auto;
   display: flex;
 }
 
 .scene__side-bar-left {
-    flex: 0 0 auto;
+  flex: 0 0 auto;
+  height: 100%;
 }
 
 .scene__main-scene {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }

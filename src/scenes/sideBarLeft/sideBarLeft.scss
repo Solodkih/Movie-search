@@ -8,5 +8,9 @@
 }
 
 .side-bar-left__container {
-  margin: 28px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }

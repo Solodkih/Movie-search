@@ -1,14 +1,48 @@
 @import '../../../../constants.scss';
 
 .seach {
-  background-color: $lite-dark;
-  color: $main-white;
-  border-width: 0px;
-  border-radius: 10px;
-  height: 40px;
-  border: 1px solid grey;
+  position: relative;
+  display: flex;
+
+  &__input {
+    position: relative;
+    background-color: $lite-dark;
+    color: $main-white;
+    border-radius: 10px;
+    height: 40px;
+    width: 250px;
+    border: 1px solid grey;
+    padding-left: 60px;
+    padding-right: 40px;
+    z-index: 20;
+  }
+
+  &__input:focus {
+    outline: none;
+    border: 1px solid $lite-green;
+  }
+
+  &__button {
+    &-seach {
+      position: absolute;
+      background-color: $lite-dark;
+      z-index: 50;
+      width: 24px;
+      left: 20px;
+      top: 7px;
+    }
+
+    &-filter {
+      position: absolute;
+      background-color: $lite-dark;
+      z-index: 50;
+      width: 20px;
+      right: 10px;
+      top: 7px;
+    }
+  }
 }
-.seach::placeholder {
-  color: $main-white;
-  padding-left: 30px;
+
+.seach-input::placeholder {
+  color: grey;
 }

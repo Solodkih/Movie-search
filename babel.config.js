@@ -1,6 +1,13 @@
 module.exports = {
-    presets: [
-      ["@babel/preset-env", { targets: "> 0.25%, not dead" }],
-      "@babel/preset-react"
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          esmodules: true,
+        },
+      },
     ],
-  };
+    '@babel/preset-react',
+  ],
+};

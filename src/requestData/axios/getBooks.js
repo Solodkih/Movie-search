@@ -1,15 +1,22 @@
 import axios from 'axios';
 
-const reguestDataGetBook = {
+const urlListBook =
+  'https://openlibrary.org/api/books?bibkeys=ISBN:0385472579,LCCN:62019420&format=json';
+
+const urlListBooks =
+  'https://openlibrary.org/api/books?bibkeys=ISBN:0385472579';
+
+const reguestDataGetBooks = {
   method: 'get',
-  url: 'https://openlibrary.org/search.json?subject=civilization&page=2',
+  url: urlListBoks,
 };
 
-export async function getBook() {
+export async function getBooks() {
   try {
-    const response = await axios(reguestDataGetBook);
+    const response = await axios(reguestDataGetBooks);
     console.log(response);
   } catch (result) {
+    console.log(result);
     throw result;
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from './navigation';
 import './mainScene.scss';
-import TrendingBooks from './trendingBooks';
+import ListBooks from './listBooks';
 
 export default function MainScene({ className }) {
   return (
@@ -9,7 +9,7 @@ export default function MainScene({ className }) {
       <div>
         <Navigation />
       </div>
-      <TrendingBooks />
+      <ListBooks />
     </section>
   );
 }

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { getBooks } from '../../../requestData/axios/getBooks';
+import { getBook } from '../../../requestData/axios/getBooks';
 import './listBooks.scss';
 
 export default function ListBooks() {
-  let response = null;
+  let book = null;
 
   useEffect(() => {
     async function get() {
-      response = await getBooks();
+      book = await getBook();
     }
     get();
   }, []);

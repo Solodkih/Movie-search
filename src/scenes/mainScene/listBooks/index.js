@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { getBook } from '../../../requestData/axios/getBooks';
 import './listBooks.scss';
+import ItemListBooks from '../../../components/itemListBooks';
 
 export default function ListBooks() {
   let book = null;
@@ -15,12 +16,12 @@ export default function ListBooks() {
   return (
     <div className="list-books">
       <div className="list-books__container">
-        <div className="list-books__item item-list-books">Books 1</div>
-        <div className="list-books__item item-list-books">Books 2</div>
-        <div className="list-books__item item-list-books">Books 3</div>
-        <div className="list-books__item item-list-books">Books 4</div>
-        <div className="list-books__item item-list-books">Books 5</div>
-        <div className="list-books__item item-list-books">Books 6</div>
+        <ItemListBooks className="list-books__item" />
+        <ItemListBooks className="list-books__item" />
+        <ItemListBooks className="list-books__item" />
+        <ItemListBooks className="list-books__item" />
+        <ItemListBooks className="list-books__item" />
+        <ItemListBooks className="list-books__item" />
       </div>
     </div>
   );

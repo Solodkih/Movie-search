@@ -1,19 +1,21 @@
 import React from 'react';
-import {SIZE_IMAGE_MEDIUM, GetUrlImage, SIZE_IMAGE_LARGE} from '../../util/image'
+import { SIZE_IMAGE_MEDIUM, getUrlImage } from '../../util/image';
+import urlImageNotFound from '../../icon/sad.png';
 import './itemListBooks.scss';
 
-export default function ItemListBooks({ className, data }) {
-  let image
-  
-  if (data.image === undefined) {
-      
+export default function ItemListBooks({ className, book = { title: 'undefined' } }) {
+  let imageSrc;
+
+  if (book.images === undefined || book === null || book.images === undefined) {
+    imageSrc = urlImageNotFound;
+  } else {
+    imageSrc = getUrlImage({ size: SIZE_IMAGE_MEDIUM, number: book.images[0] });
   }
 
   return (
     <div className={`${className} item-list-books`}>
-      <img className="item-list-books__image" src={GetUrlImage(SIZE_IMAGE_LARGE, image )} alt="Omg" />
-      <div className="item-list-books__title">Title</div>
-      <div className="item-list-books__authors">Authors</div>
+      <img className="item-list-books__image" src={imageSrc} alt="Omg" />
+      <div className="item-list-books__title">{book.title}</div>
     </div>
   );
 }

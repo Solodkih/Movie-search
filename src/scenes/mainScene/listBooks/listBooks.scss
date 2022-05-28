@@ -5,12 +5,12 @@
 }
 .list-books__container {
   display: flex;
-  margin: 15px;
+  padding: 8px;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 .list-books__item {
   flex: 0 0 auto;
-  margin: 30px 30px;
+  margin: 10px 10px;
 }
 

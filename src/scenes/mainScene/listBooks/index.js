@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getBook } from '../../../requestData/axios/getBooks';
 import './listBooks.scss';
 import ItemListBooks from '../../../components/itemListBooks';
 
 export default function ListBooks() {
-  let book = null;
+  const [book, setBooks] = useState();
 
   useEffect(() => {
     async function get() {
-      book = await getBook();
+      let data = await getBook();
+      setBooks(data);
     }
     get();
   }, []);
@@ -16,12 +17,12 @@ export default function ListBooks() {
   return (
     <div className="list-books">
       <div className="list-books__container">
-        <ItemListBooks className="list-books__item" />
-        <ItemListBooks className="list-books__item" />
-        <ItemListBooks className="list-books__item" />
-        <ItemListBooks className="list-books__item" />
-        <ItemListBooks className="list-books__item" />
-        <ItemListBooks className="list-books__item" />
+        <ItemListBooks className="list-books__item" book={book} />
+        <ItemListBooks className="list-books__item" book={book} />
+        <ItemListBooks className="list-books__item" book={book} />
+        <ItemListBooks className="list-books__item" book={book} />
+        <ItemListBooks className="list-books__item" book={book} />
+        <ItemListBooks className="list-books__item" book={book} />
       </div>
     </div>
   );

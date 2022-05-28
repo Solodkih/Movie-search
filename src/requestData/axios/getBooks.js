@@ -18,6 +18,8 @@ export async function getBook() {
       method: 'get',
       url: `${urlMain}${responseBook.data.authors[0].author.key}.json`,
     });
+    console.log(responseAutor.data);
+
     return {
       title: responseBook.data.title,
       description: responseBook.data.description,

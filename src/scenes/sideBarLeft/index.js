@@ -10,9 +10,9 @@ export default function SideBarLeft({ className }) {
     <aside className={`${className} side-bar-left`}>
       <div className="side-bar-left__container">
         <Logo className="side-bar-left__log" />
-        <Menu />
-        <Library />
-        <General />
+        <Menu className="side-bar-left__item" />
+        <Library className="side-bar-left__item" />
+        <General className="side-bar-left__item" />
       </div>
     </aside>
   );

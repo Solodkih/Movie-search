@@ -7,9 +7,9 @@ import imgCelebrities from '../../../icon/Verified.png';
 
 import './menu.scss';
 
-export default function Menu() {
+export default function Menu({ className }) {
   return (
-    <div className="menu-side-bar">
+    <div className={`${className} menu-side-bar`}>
       <div className="menu-side-bar__logo">Menu</div>
       <ul className="menu-side-bar__list">
         <li>

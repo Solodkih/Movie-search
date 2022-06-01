@@ -3,9 +3,9 @@ import ItemMenu from '../../../components/itemMenu';
 import imgSettings from '../../../icon/Settings.png';
 import imgLogOut from '../../../icon/Exit.png';
 
-export default function General() {
+export default function General({className}) {
   return (
-    <div className="menu-side-bar">
+    <div className={`${className} menu-side-bar`}>
       <div className="menu-side-bar__logo">General</div>
       <ul className="menu-side-bar__list">
         <li>

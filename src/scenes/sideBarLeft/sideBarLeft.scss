@@ -4,13 +4,17 @@
   background-color: $lite-dark;
   color: $main-white;
   width: 220px;
-  height: 100%;
+  min-height: 100%;
 }
 
 .side-bar-left__container {
   padding: 28px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
   height: 100%;
+}
+
+.side-bar-left__item {
+  margin-top: 10px;
 }

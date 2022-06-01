@@ -1,7 +1,7 @@
 @import '../../../constants.scss';
 
 .list-books {
-  background-color: gray;
+  background-color: $big-dark;
 }
 .list-books__container {
   display: flex;
@@ -13,4 +13,3 @@
   flex: 0 0 auto;
   margin: 10px 10px;
 }
-

@@ -1,14 +1,14 @@
+@import '../../constants.scss';
+
 .item-list-books {
   width: 200px;
-  height: 300px;
-  background-color: green;
+  background-color: $big-dark;
   display: flex;
   flex-direction: column;
 
   &__image {
-    margin: 10px 0px;
-    max-width: 200px;
-    max-height: 220px;
+    margin: 5px 0px;
+    min-width: 100%;
     align-self: center;
   }
 
@@ -16,10 +16,12 @@
     margin-top: 5px;
     text-align: center;
     padding-left: 10px;
+    font-size: 20px;
   }
-  
+
   &__author {
     text-align: right;
     padding-right: 10px;
+    font-size: 12px;
   }
 }

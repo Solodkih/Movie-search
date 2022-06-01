@@ -8,9 +8,9 @@ import imgWatchlist from '../../../icon/Add.png';
 
 import imgCompleted from '../../../icon/Checked.png';
 
-export default function Library() {
+export default function Library({ className }) {
   return (
-    <div className="menu-side-bar">
+    <div className={`${className} menu-side-bar`}>
       <div className="menu-side-bar__logo">Library</div>
       <ul className="menu-side-bar__list">
         <li>

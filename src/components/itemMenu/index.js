@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './itemMenu.scss';
 
@@ -10,3 +11,9 @@ export default function ItemMenu({ img, name, alt }) {
     </div>
   );
 }
+
+ItemMenu.propTypes = {
+  img: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};

@@ -9,7 +9,7 @@
     "build": "webpack --mode production",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md|vue)\"",
     "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix ./src"
   },
   "author": "SolodkihVP",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "mini-css-extract-plugin": "^1.5.0",

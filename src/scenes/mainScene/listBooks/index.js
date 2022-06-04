@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getBookSubjects } from '../../../util/axios/getBooks';
+import getBookSubjects from '../../../util/axios/getBooks';
 import './listBooks.scss';
 import ItemListBooks from '../../../components/itemListBooks';
 
@@ -8,7 +8,7 @@ export default function ListBooks() {
 
   useEffect(() => {
     async function get() {
-      let data = await getBookSubjects();
+      const data = await getBookSubjects();
       setBooks(data);
     }
     get();

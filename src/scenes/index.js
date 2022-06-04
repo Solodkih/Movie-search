@@ -1,10 +1,8 @@
 import React from 'react';
 import SideBarLeft from './sideBarLeft';
-import SideBarRight from './sideBarRight';
 import MainScene from './mainScene';
 
 import './scene.scss';
-
 
 export default function Main() {
   return (
@@ -14,4 +12,3 @@ export default function Main() {
     </div>
   );
 }
-//// <SideBarRight className="scene__side-bar-left" />

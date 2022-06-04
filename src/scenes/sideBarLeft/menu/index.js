@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import ItemMenu from '../../../components/itemMenu';
 import imgHome from '../../../icon/Home.png';
 import imgDiscovery from '../../../icon/Safari.png';
@@ -28,3 +30,7 @@ export default function Menu({ className }) {
     </div>
   );
 }
+
+Menu.propTypes = {
+  className: PropTypes.string.isRequired,
+};

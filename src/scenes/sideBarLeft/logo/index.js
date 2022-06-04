@@ -1,5 +1,7 @@
 import React from 'react';
-import './logo.scss'
+import PropTypes from 'prop-types';
+
+import './logo.scss';
 
 export default function Logo({ className }) {
   return (
@@ -9,3 +11,7 @@ export default function Logo({ className }) {
     </div>
   );
 }
+
+Logo.propTypes = {
+  className: PropTypes.string.isRequired,
+};

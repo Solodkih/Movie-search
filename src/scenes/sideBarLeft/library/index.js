@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import ItemMenu from '../../../components/itemMenu';
 import imgHome from '../../../icon/Home.png';
 import imgDiscovery from '../../../icon/Safari.png';
 import imgAwards from '../../../icon/Award.png';
 import imgPlayLists from '../../../icon/Heart.png';
 import imgWatchlist from '../../../icon/Add.png';
-
 import imgCompleted from '../../../icon/Checked.png';
 
 export default function Library({ className }) {
@@ -35,3 +36,7 @@ export default function Library({ className }) {
     </div>
   );
 }
+
+Library.propTypes = {
+  className: PropTypes.string.isRequired,
+};

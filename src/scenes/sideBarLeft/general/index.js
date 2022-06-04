@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import ItemMenu from '../../../components/itemMenu';
 import imgSettings from '../../../icon/Settings.png';
 import imgLogOut from '../../../icon/Exit.png';
 
-export default function General({className}) {
+export default function General({ className }) {
   return (
     <div className={`${className} menu-side-bar`}>
       <div className="menu-side-bar__logo">General</div>
@@ -18,3 +20,7 @@ export default function General({className}) {
     </div>
   );
 }
+
+General.propTypes = {
+  className: PropTypes.string.isRequired,
+};

@@ -1,9 +1,12 @@
-import './sideBarLeft.scss';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Logo from './logo';
 import Menu from './menu';
 import Library from './library';
 import General from './general';
+
+import './sideBarLeft.scss';
 
 export default function SideBarLeft({ className }) {
   return (
@@ -17,3 +20,7 @@ export default function SideBarLeft({ className }) {
     </aside>
   );
 }
+
+SideBarLeft.propTypes = {
+  className: PropTypes.string.isRequired,
+};

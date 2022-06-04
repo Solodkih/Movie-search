@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Navigation from './navigation';
-import './mainScene.scss';
 import ListBooks from './listBooks';
+
+import './mainScene.scss';
 
 export default function MainScene({ className }) {
   return (
@@ -13,3 +15,7 @@ export default function MainScene({ className }) {
     </section>
   );
 }
+
+MainScene.propTypes = {
+  className: PropTypes.string.isRequired,
+};

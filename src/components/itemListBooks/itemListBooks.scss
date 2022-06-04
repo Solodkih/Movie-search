@@ -9,19 +9,21 @@
   &__image {
     margin: 5px 0px;
     min-width: 100%;
-    align-self: center;
+    flex: 1 1 auto;
   }
 
   &__title {
     margin-top: 5px;
-    text-align: center;
+    text-align: left;
     padding-left: 10px;
     font-size: 20px;
+    align-content: flex-end;
   }
 
   &__author {
-    text-align: right;
-    padding-right: 10px;
+    text-align: left;
+    padding-left: 10px;
     font-size: 12px;
+    align-content: flex-end;
   }
 }

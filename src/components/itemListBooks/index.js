@@ -12,7 +12,7 @@ export default function ItemListBooks({
     <div className={`${className} item-list-books`}>
       <img className="item-list-books__image" src={book.urlImage} alt="Omg" />
       <div className="item-list-books__title">{book.title}</div>
-      <div className="item-list-books__author">{book.authors[0]}</div>
+      <div className="item-list-books__author"> by {book.authors[0]}</div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navigation from './navigation';
 import ListBooks from './listBooks';
-
+import { Outlet } from 'react-router-dom';
 import './mainScene.scss';
 
 export default function MainScene({ className }) {
@@ -11,7 +11,7 @@ export default function MainScene({ className }) {
       <div>
         <Navigation />
       </div>
-      <ListBooks />
+      <Outlet />
     </section>
   );
 }

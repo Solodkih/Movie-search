@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Navigation from './navigation';
-import ListBooks from './listBooks';
 import { Outlet } from 'react-router-dom';
+import Navigation from './navigation';
 import './mainScene.scss';
 
 export default function MainScene({ className }) {

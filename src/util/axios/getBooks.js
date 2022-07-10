@@ -9,11 +9,13 @@ const reguestDataGetBook = {
   url: `${urlMain}${urlBook}`,
 };
 
-export default async function getBookSubjects() {
+export async function getBookSubjects() {
   const responseBook = await axios(reguestDataGetBook);
+  console.log(responseBook);
   const arrayBooks = responseBook.data.works.map((item) => {
     return {
       title: item.title,
+      urlBookByWork: item.key,
       authors: item.authors.map((itemAuthors) => {
         return itemAuthors.name;
       }),
@@ -21,4 +23,40 @@ export default async function getBookSubjects() {
     };
   });
   return arrayBooks;
+}
+
+export async function getBookByWorks(urlWorks) {
+  const responseBook = await axios({
+    method: 'get',
+    url: `${urlMain}/works/${urlWorks}.json`,
+  });
+  console.log(responseBook);
+  return {
+    images: responseBook.data.covers,
+    authors: responseBook.data.authors.map((itemAuthors) => {
+      return itemAuthors.author.key;
+    }),
+    description: responseBook.data.description,
+    arrayUrlImage: responseBook.data.covers.map((itemUrl) => {
+      return `https://covers.openlibrary.org/b/id/${itemUrl}-L.jpg`;
+    }),
+  };
+}
+
+export async function getAuthor(urlAuthor) {
+  const responseBook = await axios({
+    method: 'get',
+    url: `${urlMain}/works/${urlWorks}.json`,
+  });
+  console.log(responseBook);
+  return {
+    images: responseBook.data.covers,
+    authors: responseBook.data.authors.map((itemAuthors) => {
+      return itemAuthors.author.key;
+    }),
+    description: responseBook.data.description,
+    arrayUrlImage: responseBook.data.covers.map((itemUrl) => {
+      return `https://covers.openlibrary.org/b/id/${itemUrl}-L.jpg`;
+    }),
+  };
 }

@@ -12,9 +12,11 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<ListBooks />} />
-          <Route path="book/" element={<Book />} />
-          <Route path="author/" element={<Author />} />
-          <Route path="search/" element={<SearchList />} />
+          <Route path="book">
+            <Route path="works/:worksId" element={<Book />} />
+          </Route>
+          <Route path="author" element={<Author />} />
+          <Route path="search" element={<SearchList />} />
         </Route>
       </Routes>
     </BrowserRouter>

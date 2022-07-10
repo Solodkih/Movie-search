@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import getBookSubjects from '../../../util/axios/getBooks';
+import { getBookSubjects } from '../../../util/axios/getBooks';
 import './listBooks.scss';
 import ItemListBooks from '../../../components/itemListBooks';
 

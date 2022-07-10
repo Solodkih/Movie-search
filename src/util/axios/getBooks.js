@@ -30,9 +30,8 @@ export async function getBookByWorks(urlWorks) {
     method: 'get',
     url: `${urlMain}/works/${urlWorks}.json`,
   });
-  console.log(responseBook);
   return {
-    images: responseBook.data.covers,
+    firstPublishDate: responseBook.data.first_publish_date,
     authors: responseBook.data.authors.map((itemAuthors) => {
       return itemAuthors.author.key;
     }),
@@ -43,20 +42,10 @@ export async function getBookByWorks(urlWorks) {
   };
 }
 
-export async function getAuthor(urlAuthor) {
-  const responseBook = await axios({
+export async function getNameAuthorForBook(urlAuthor) {
+  const responseAuthor = await axios({
     method: 'get',
-    url: `${urlMain}/works/${urlWorks}.json`,
+    url: `${urlMain}${urlAuthor}.json`,
   });
-  console.log(responseBook);
-  return {
-    images: responseBook.data.covers,
-    authors: responseBook.data.authors.map((itemAuthors) => {
-      return itemAuthors.author.key;
-    }),
-    description: responseBook.data.description,
-    arrayUrlImage: responseBook.data.covers.map((itemUrl) => {
-      return `https://covers.openlibrary.org/b/id/${itemUrl}-L.jpg`;
-    }),
-  };
+  return responseAuthor.data.alternate_names[0];
 }

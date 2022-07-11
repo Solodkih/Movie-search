@@ -31,6 +31,7 @@ export async function getBookByWorks(urlWorks) {
     url: `${urlMain}/works/${urlWorks}.json`,
   });
   return {
+    title: responseBook.data.title,
     firstPublishDate: responseBook.data.first_publish_date,
     authors: responseBook.data.authors.map((itemAuthors) => {
       return itemAuthors.author.key;

@@ -1,12 +1,54 @@
 @import '../../../constants.scss';
 
 .book {
-  min-height: 100%;
+  &__container {
+    padding: 10px;
+    display: flex;
+  }
+
+  &__image {
+    width: 100%;
+  }
+
+  &__image-block {
+    min-width: 550px;
+    flex: 0 0 auto;
+    padding: 40px;
+  }
+
+  &__aboutBook {
+    flex: 1 1 auto;
+    padding: 40px 10px 10px 10px;
+  }
 }
 
-.books__container {
-  display: flex;
-  padding: 8px;
-  justify-content: space-around;
-  flex-wrap: wrap;
+.book-aboutBook {
+  &__title {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 40px;
+  }
+
+  &__description {
+    padding-top: 20px;
+    text-indent: 20px;
+    line-height: 30px;
+    text-align: justify;
+    font-size: 20px;
+  }
+
+  &__authors {
+    text-indent: 20px;
+    font-size: 20px;
+  }
+
+  &__item-author {
+    padding-top: 10px;
+  }
+
+  &__first-publish-date {
+    text-indent: 20px;
+    font-size: 20px;
+    padding-top: 10px;
+  }
 }

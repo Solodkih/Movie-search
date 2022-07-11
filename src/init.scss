@@ -1,12 +1,6 @@
 @import 'reset.scss';
 @import 'constants.scss';
 
-html,
-body,
-#root {
-  height: 100%;
-}
-
 @font-face {
   font-family: 'Goma Octagon';
   src: url('./fonts/goma-octagon.regular.ttf') format('truetype');

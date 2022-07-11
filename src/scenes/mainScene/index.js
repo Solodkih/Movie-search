@@ -7,9 +7,7 @@ import './mainScene.scss';
 export default function MainScene({ className }) {
   return (
     <section className={`${className} main-scene`}>
-      <div>
-        <Navigation />
-      </div>
+      <Navigation />
       <Outlet />
     </section>
   );

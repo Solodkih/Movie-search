@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import urlImageNotFound from '../../icon/sad.png';
 import { useNavigate } from 'react-router-dom';
+import urlImageNotFound from '../../icon/sad.png';
 
 import './itemListBooks.scss';
 
@@ -9,15 +9,17 @@ export default function ItemListBooks({
   className,
   book = { title: 'Not found', urlImage: urlImageNotFound },
 }) {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   function handleOnClick(event) {
     event.preventdefault;
+    console.log(22);
     navigate(`/book${book.urlBookByWork}`);
   }
 
   return (
     <div
+      role="presentation"
       className={`${className} item-list-books`}
       onClick={(e) => handleOnClick(e)}
     >

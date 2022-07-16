@@ -2,53 +2,77 @@
 
 .book {
   &__container {
-    padding: 10px;
-    display: flex;
+    padding: 20px;
   }
 
   &__image {
+    max-width: 500px;
     width: 100%;
   }
 
   &__image-block {
-    min-width: 550px;
-    flex: 0 0 auto;
+    float: left;
     padding: 40px;
-  }
-
-  &__aboutBook {
-    flex: 1 1 auto;
-    padding: 40px 10px 10px 10px;
   }
 }
 
 .book-aboutBook {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px 10px 10px 10px;
+
   &__title {
+    flex: 1 1 100%;
     padding-top: 20px;
     text-align: center;
     font-size: 40px;
   }
 
-  &__description {
-    padding-top: 20px;
-    text-indent: 20px;
-    line-height: 30px;
-    text-align: justify;
-    font-size: 20px;
-  }
-
   &__authors {
-    text-indent: 20px;
-    font-size: 20px;
-  }
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 
-  &__item-author {
-    padding-top: 10px;
+    &-title {
+      flex: 0 0 160px;
+      font-size: 20px;
+      padding-right: 7px;
+    }
+
+    &-item:not(:first-child) {
+      padding-top: 10px;
+    }
+
+    &-list {
+      flex: 1 1 content;
+      font-size: 20px;
+    }
   }
 
   &__first-publish-date {
-    text-indent: 20px;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
     font-size: 20px;
     padding-top: 10px;
+
+    &-data {
+      flex: 1 1 auto;
+    }
+
+    &-title {
+      flex: 0 0 160px;
+      padding-right: 7px;
+    }
   }
+}
+
+.book-description {
+  white-space: pre-wrap;
+  padding-top: 20px;
+  text-indent: 20px;
+  line-height: 30px;
+  text-align: justify;
+  font-size: 20px;
 }

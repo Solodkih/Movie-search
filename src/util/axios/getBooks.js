@@ -11,7 +11,6 @@ const reguestDataGetBook = {
 
 export async function getBookSubjects() {
   const responseBook = await axios(reguestDataGetBook);
-  console.log(responseBook);
   const arrayBooks = responseBook.data.works.map((item) => {
     return {
       title: item.title,
@@ -30,13 +29,16 @@ export async function getBookByWorks(urlWorks) {
     method: 'get',
     url: `${urlMain}/works/${urlWorks}.json`,
   });
+  console.log(responseBook);
   return {
     title: responseBook.data.title,
     firstPublishDate: responseBook.data.first_publish_date,
     authors: responseBook.data.authors.map((itemAuthors) => {
       return itemAuthors.author.key;
     }),
-    description: responseBook.data.description,
+    description: responseBook.data.description.value
+      ? responseBook.data.description.value
+      : responseBook.data.description,
     arrayUrlImage: responseBook.data.covers.map((itemUrl) => {
       return `https://covers.openlibrary.org/b/id/${itemUrl}-L.jpg`;
     }),

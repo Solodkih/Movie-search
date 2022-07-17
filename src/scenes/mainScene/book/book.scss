@@ -1,6 +1,10 @@
 @import '../../../constants.scss';
 
 .book {
+  &__main-block {
+    overflow: hidden;
+  }
+
   &__container {
     padding: 20px;
   }
@@ -12,14 +16,14 @@
 
   &__image-block {
     float: left;
-    padding: 40px;
+    padding: 40px 20px 20px 20px;
   }
 }
 
 .book-aboutBook {
   display: flex;
   flex-wrap: wrap;
-  padding: 40px 10px 10px 10px;
+  padding: 20px 10px 10px 10px;
 
   &__title {
     flex: 1 1 100%;
@@ -44,6 +48,10 @@
       padding-top: 10px;
     }
 
+    &-item {
+      list-style-type: none;
+    }
+
     &-list {
       flex: 1 1 content;
       font-size: 20px;
@@ -55,7 +63,7 @@
     width: 100%;
     flex-wrap: wrap;
     font-size: 20px;
-    padding-top: 10px;
+    padding-top: 20px;
 
     &-data {
       flex: 1 1 auto;
@@ -64,6 +72,30 @@
     &-title {
       flex: 0 0 160px;
       padding-right: 7px;
+    }
+  }
+
+  &__subject {
+    white-space: pre-wrap;
+    padding-top: 20px;
+    display: flex;
+
+    &-title {
+      flex: 0 0 160px;
+      font-size: 20px;
+      padding-right: 7px;
+    }
+
+    &-list {
+      white-space: pre-line;
+      overflow: hidden;
+      font-size: 20px;
+      line-height: 30px;
+      max-width: inherit;
+    }
+
+    &-item {
+      overflow: hidden;
     }
   }
 }

@@ -12,8 +12,7 @@ export default function ItemListBooks({
   const navigate = useNavigate();
 
   function handleOnClick(event) {
-    event.preventdefault;
-    console.log(22);
+    event.preventDefault();
     navigate(`/book${book.urlBookByWork}`);
   }
 
@@ -21,7 +20,7 @@ export default function ItemListBooks({
     <div
       role="presentation"
       className={`${className} item-list-books`}
-      onClick={(e) => handleOnClick(e)}
+      onClick={(event) => handleOnClick(event)}
     >
       <img className="item-list-books__image" src={book.urlImage} alt="Omg" />
       <div className="item-list-books__title">{book.title}</div>

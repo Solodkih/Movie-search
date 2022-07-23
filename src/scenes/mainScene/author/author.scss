@@ -1,0 +1,22 @@
+@import '../../../constants.scss';
+
+.author {
+  &__main-block {
+    overflow: hidden;
+  }
+
+  &__container {
+    padding: 20px;
+  }
+
+  &__image {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  &__image-block {
+    float: left;
+    padding: 40px 20px 20px 20px;
+  }
+}
+

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getBookByWorks, getNameAuthorForBook } from '../../../util/axios/getBooks';
 import urlImageNotFound from '../../../icon/sad.png';
 
@@ -18,14 +18,20 @@ export default function Book({ className = '' }) {
     },
     authors: [],
   });
+  const navigate = useNavigate();
+
+  function handleOnClickAuthor(event, authorURL) {
+    event.preventDefault();
+    navigate(`${authorURL}`);
+  }
 
   useEffect(() => {
     async function get() {
       const bookData = await getBookByWorks(worksId);
       const authors = await Promise.all(
-        bookData.authors.map(async (authorName) => {
-          const name = await getNameAuthorForBook(authorName);
-          return name;
+        bookData.authors.map(async (authorURL) => {
+          const name = await getNameAuthorForBook(authorURL);
+          return { authorURL, name };
         })
       );
       setBook({
@@ -60,9 +66,13 @@ export default function Book({ className = '' }) {
           <div className="book-aboutBook__authors">
             <div className="book-aboutBook__authors-title">Authors:</div>
             <ul className="book-aboutBook__authors-list">
-              {book.authors.map((name) => {
+              {book.authors.map(({ name, authorURL }) => {
                 return (
-                  <li className="book-aboutBook__authors-item" key={`${name}`}>
+                  <li
+                    onClick={(event) => handleOnClickAuthor(event, authorURL)}
+                    className="book-aboutBook__authors-item"
+                    key={`${authorURL}`}
+                  >
                     {name}
                   </li>
                 );

@@ -72,3 +72,20 @@ export async function getNameAuthorForBook(urlAuthor) {
   });
   return responseAuthor.data.name;
 }
+
+export async function getAuthor(urlAuthor) {
+  const responseAuthor = await axios({
+    method: 'get',
+    url: `${urlMain}${urlAuthor}.json`,
+  });
+  console.log(responseAuthor.data);
+  return {
+    alternateNames: responseAuthor.data.alternate_names,
+    bio: responseAuthor.data.bio,
+    birthDate: responseAuthor.data.birth_date,
+    deathDate: responseAuthor.data.death_date,
+    name: responseAuthor.data.name,
+    personalName: responseAuthor.data.personal_name,
+    title: responseAuthor.data.title,
+  };
+}

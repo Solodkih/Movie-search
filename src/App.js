@@ -15,7 +15,9 @@ export default function App() {
           <Route path="book">
             <Route path="works/:worksId" element={<Book />} />
           </Route>
-          <Route path="author" element={<Author />} />
+          <Route path="authors">
+            <Route path=":authorId" element={<Author />} />
+          </Route>
           <Route path="search" element={<SearchList />} />
         </Route>
       </Routes>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getUrlImage, SIZE_IMAGE_LARGE } from '../image';
 
 const urlMain = 'https://openlibrary.org';
 
@@ -71,4 +72,33 @@ export async function getNameAuthorForBook(urlAuthor) {
     url: `${urlMain}${urlAuthor}.json`,
   });
   return responseAuthor.data.name;
+}
+
+export async function getAuthor(urlAuthor) {
+  const responseAuthor = await axios({
+    method: 'get',
+    url: `${urlMain}${urlAuthor}.json`,
+  });
+  return {
+    alternateNames: responseAuthor.data.alternate_names,
+    bio: (() => {
+      if (responseAuthor.data.bio) {
+        if (responseAuthor.data.bio.value) {
+          return responseAuthor.data.bio.value;
+        }
+        return responseAuthor.data.bio;
+      }
+      return null;
+    })(),
+    birthDate: responseAuthor.data.birth_date,
+    deathDate: responseAuthor.data.death_date,
+    name: responseAuthor.data.name,
+    personalName: responseAuthor.data.personal_name,
+    title: responseAuthor.data.title,
+    photos: responseAuthor.data.photos
+      ? responseAuthor.data.photos.map((item) => {
+          return getUrlImage(SIZE_IMAGE_LARGE, item);
+        })
+      : [],
+  };
 }

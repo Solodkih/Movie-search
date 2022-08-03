@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getUrlImage, SIZE_IMAGE_LARGE } from '../image.js';
 
 const urlMain = 'https://openlibrary.org';
 
@@ -78,14 +79,22 @@ export async function getAuthor(urlAuthor) {
     method: 'get',
     url: `${urlMain}${urlAuthor}.json`,
   });
-  console.log(responseAuthor.data);
   return {
     alternateNames: responseAuthor.data.alternate_names,
-    bio: responseAuthor.data.bio,
+    bio: responseAuthor.data.bio
+      ? responseAuthor.data.bio.value
+        ? responseAuthor.data.bio.value
+        : responseAuthor.data.bio
+      : null,
     birthDate: responseAuthor.data.birth_date,
     deathDate: responseAuthor.data.death_date,
     name: responseAuthor.data.name,
     personalName: responseAuthor.data.personal_name,
     title: responseAuthor.data.title,
+    photos: responseAuthor.data.photos
+      ? responseAuthor.data.photos.map((item) => {
+          return getUrlImage(SIZE_IMAGE_LARGE, item);
+        })
+      : [],
   };
 }

@@ -82,10 +82,10 @@ export async function getAuthor(urlAuthor) {
   return {
     alternateNames: responseAuthor.data.alternate_names,
     bio: (() => {
-      if (responseAuthor.data.bio.value) {
-        return responseAuthor.data.bio.value;
-      }
       if (responseAuthor.data.bio) {
+        if (responseAuthor.data.bio.value) {
+          return responseAuthor.data.bio.value;
+        }
         return responseAuthor.data.bio;
       }
       return null;

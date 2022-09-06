@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Search from '../../../components/search';
 import './advanceSearch.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdvanceSearch({ className }) {
+  const navigate = useNavigate();
   const [filter, setFilter] = useState({
     title: { title: '', show: true },
   });
@@ -59,7 +61,7 @@ export default function AdvanceSearch({ className }) {
         className="menu-side-bar__button-search"
         onClick={(e) => {
           e.preventDefault();
-          alert(filter.title.title);
+          navigate(`/\search?title=${filter.title.title}`);
         }}
       >
         SEACH

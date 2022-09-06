@@ -7,6 +7,14 @@ export default function Seach({
   value,
   handleChange,
 }) {
+  if (placeholder === null || placeholder === undefined) {
+    placeholder = '';
+  }
+
+  if (value === null || value === undefined) {
+    value = '';
+  }
+
   return (
     <div className="seach">
       {imageButtonSeach && (

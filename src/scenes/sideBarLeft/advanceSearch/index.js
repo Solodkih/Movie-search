@@ -1,67 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Search from '../../../components/search';
 import './advanceSearch.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import TitleSeach from './titleSearch';
 
 export default function AdvanceSearch({ className }) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [filter, setFilter] = useState({
-    title: { title: '', show: true },
+    titleData: { title: '', show: true },
   });
+  useEffect(async () => {
+    async function get() {
+      return {
+        title: searchParams.get('title'),
+      };
+    }
+    let test = await get();
+    console.log(test);
+    setFilter({ titleData: { title: test.title, show: filter.titleData.show } });
+  }, [searchParams]);
+
+  function setTitle(title, show) {
+    setFilter({ titleData: { title: title, show: show } });
+  }
 
   return (
     <div className={`${className} menu-side-bar`}>
       <div className="menu-side-bar__logo">Advance Search</div>
       <ul className="menu-side-bar__list">
         <li>
-          <div className="menu-side-bar__buttons">
-            <button
-              className="menu-side-bar__button-title"
-              onClick={(e) => {
-                e.preventDefault();
-                setFilter({
-                  ...filter,
-                  title: { title: filter.title.title, show: !filter.title.show },
-                });
-              }}
-            >
-              Title
-            </button>
-            {filter.title.show && (
-              <button
-                className="menu-side-bar__button-clear"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setFilter({
-                    ...filter,
-                    title: { title: '', show: filter.title.show },
-                  });
-                }}
-              >
-                CLEAR
-              </button>
-            )}
-          </div>
-          {filter.title.show && (
-            <Search
-              placeholder="e.g Pinocchio"
-              value={filter.title.title}
-              handleChange={(event) => {
-                setFilter({
-                  ...filter,
-                  title: { title: event.target.value, show: filter.title.show },
-                });
-              }}
-            />
-          )}
+          <TitleSeach
+            titleData={filter.titleData}
+            setTitle={(title, show) => {
+              setTitle(title, show);
+            }}
+          />
         </li>
       </ul>
       <button
         className="menu-side-bar__button-search"
         onClick={(e) => {
           e.preventDefault();
-          navigate(`/\search?title=${filter.title.title}`);
+          navigate(`/\search?title=${filter.titleData.title}`);
         }}
       >
         SEACH

@@ -19,7 +19,7 @@ export default function SearchList({ className = '' }) {
       console.log(params);
     }
     get();
-  }, []);
+  }, [searchParams]);
 
   return <div className={`${className}`}>SearchList</div>;
 }

@@ -61,10 +61,10 @@ export default function AdvanceSearch({ className }) {
           e.preventDefault();
 
           let titleUrlParams = filter.titleData.title
-            ? `title=${filter.titleData.title}&&`
+            ? `title=${filter.titleData.title}&`
             : '';
           let authorUrlParams = filter.authorData.author
-            ? `author=${filter.authorData.author}&&`
+            ? `author=${filter.authorData.author}&`
             : '';
           navigate(`/\search?${titleUrlParams}${authorUrlParams}`);
         }}

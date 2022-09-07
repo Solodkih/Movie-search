@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
+import { getBooksBySearch } from '../../../util/axios/getBooksBySearch';
+import ItemListBooks from '../../../components/itemListBooks';
 
 export default function SearchList({ className = '' }) {
   const [searchParams] = useSearchParams();
-
-  useEffect(() => {
+  const [books, setBooks] = useState([]);
+  useEffect(async () => {
     async function get() {
       let params = {
         query: searchParams.get('query'),
@@ -17,11 +19,28 @@ export default function SearchList({ className = '' }) {
         language: searchParams.get('language'),
       };
       console.log(params);
+      return params;
     }
-    get();
+    let params = await get();
+    let books = await getBooksBySearch(params);
+    setBooks(books);
   }, [searchParams]);
 
-  return <div className={`${className}`}>SearchList</div>;
+  return (
+    <div className="list-books">
+      <div className="list-books__container">
+        {books.map((book) => {
+          return (
+            <ItemListBooks
+              key={`${book.title}+${book.urlImage}`}
+              className="list-books__item"
+              book={book}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 SearchList.propTypes = {

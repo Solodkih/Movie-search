@@ -12,9 +12,10 @@ export async function getBooksBySearch({
   language,
 }) {
   const strTitle = title ? `title=${title}` : null;
+  const strAuthor = author ? `author=${author}` : null;
   const responseBooks = await axios({
     method: 'get',
-    url: `${URL_MAIN}/search.json?${strTitle}&limit=10`,
+    url: `${URL_MAIN}/search.json?${strTitle}&${strAuthor}&limit=10`,
   });
 
   const arrayBooks = responseBooks.data.docs.map((item) => {

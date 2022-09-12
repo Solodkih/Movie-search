@@ -10,7 +10,6 @@ export default function Navigation() {
       <div>Movies</div>
       <div>TV Shows</div>
       <div>Anime</div>
-      <Seach imageButtonSeach={imageSearchButton} />
       <Profile />
     </nav>
   );

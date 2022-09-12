@@ -11,11 +11,12 @@ export async function getBooksBySearch({
   person,
   language,
 }) {
-  const strTitle = title ? `title=${title}` : null;
-  const strAuthor = author ? `author=${author}` : null;
+  const strTitle = title ? `title=${title}` : '';
+  const strAuthor = author ? `author=${author}` : '';
+  const strQuery = query ? `q=${query}` : '';
   const responseBooks = await axios({
     method: 'get',
-    url: `${URL_MAIN}/search.json?${strTitle}&${strAuthor}&limit=10`,
+    url: `${URL_MAIN}/search.json?${strQuery}&${strTitle}&${strAuthor}&limit=10`,
   });
 
   const arrayBooks = responseBooks.data.docs.map((item) => {
@@ -28,5 +29,6 @@ export async function getBooksBySearch({
       urlImage: `https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`,
     };
   });
+  console.log(responseBooks);
   return arrayBooks;
 }

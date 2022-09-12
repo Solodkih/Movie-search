@@ -11,6 +11,8 @@ export default function AdvanceSearch({
   setTitle,
   authorData,
   setAuthor,
+  subjectData,
+  setSubject,
 }) {
   return (
     <div className={`${className} menu-side-bar`}>
@@ -29,6 +31,14 @@ export default function AdvanceSearch({
             authorData={authorData}
             setAuthor={(author, show) => {
               setAuthor(author, show);
+            }}
+          />
+        </li>
+        <li>
+          <SubjectSearch
+            subjectData={subjectData}
+            setSubject={(subject, show) => {
+              setSubject(subject, show);
             }}
           />
         </li>

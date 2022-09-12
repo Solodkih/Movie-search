@@ -15,6 +15,10 @@ export default function SideBarLeft({ className }) {
     queryData: { query: '', show: true },
     titleData: { title: '', show: true },
     authorData: { author: '', show: true },
+    subjectData: { subject: '', show: true },
+    placeData: { place: '', show: true },
+    personData: { person: '', show: true },
+    publisher: { publisher: '', show: true },
   });
   useEffect(async () => {
     async function get() {
@@ -22,6 +26,10 @@ export default function SideBarLeft({ className }) {
         title: searchParams.get('title'),
         author: searchParams.get('author'),
         query: searchParams.get('query'),
+        subject: searchParams.get('subject'),
+        place: searchParams.get('place'),
+        person: searchParams.get('person'),
+        publisher: searchParams.get('publisher'),
       };
     }
     let data = await get();
@@ -30,6 +38,10 @@ export default function SideBarLeft({ className }) {
       titleData: { title: data.title, show: filter.titleData.show },
       authorData: { author: data.author, show: filter.authorData.show },
       queryData: { query: data.query, show: filter.queryData.show },
+      subjectData: { subject: data.subject, show: filter.subjectData.show },
+      placeData: { place: data.place, show: filter.placeData.show },
+      personData: { person: data.person, show: filter.personData.show },
+      publisherData: { publisher: data.publisher, show: filter.publisherData.show },
     });
   }, [searchParams]);
 
@@ -42,6 +54,19 @@ export default function SideBarLeft({ className }) {
   function setQuery(query, show) {
     setFilter({ ...filter, queryData: { query: query, show: show } });
   }
+  function setSubject(subject, show) {
+    setFilter({ ...filter, subjectData: { subjec: subjec, show: show } });
+  }
+  function setPlace(place, show) {
+    setFilter({ ...filter, placeData: { place: place, show: show } });
+  }
+  function setPerson(person, show) {
+    setFilter({ ...filter, personData: { person: person, show: show } });
+  }
+  function setPublisher(publisher, show) {
+    setFilter({ ...filter, publisherData: { publisher: publisher, show: show } });
+  }
+
   return (
     <aside className={`${className} side-bar-left`}>
       <div className="side-bar-left__container">
@@ -69,16 +94,25 @@ export default function SideBarLeft({ className }) {
           onClick={(e) => {
             e.preventDefault();
             let queryUrlParams = filter.queryData.query
-              ? `query=${filter.queryData.query}&`
+              ? `query=${filter.queryData.query}`
               : '';
             let titleUrlParams = filter.titleData.title
-              ? `title=${filter.titleData.title}&`
+              ? `title=&${filter.titleData.title}`
               : '';
             let authorUrlParams = filter.authorData.author
-              ? `author=${filter.authorData.author}&`
+              ? `author=&${filter.authorData.author}`
+              : '';
+            let subjectUrlParams = filter.subjectData.subject
+              ? `subject=&${filter.subjectData.subject}`
+              : '';
+            let placeUrlParams = filter.placeData.place
+              ? `place=&${filter.placeData.place}`
+              : '';
+            let personUrlParams = filter.personData.person
+              ? `person=&${filter.personData.person}`
               : '';
             navigate(
-              `/\search?${queryUrlParams}${titleUrlParams}${authorUrlParams}`
+              `/\search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}`
             );
           }}
         >

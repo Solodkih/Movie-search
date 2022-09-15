@@ -17,8 +17,8 @@ export default function SearchList({ className = '' }) {
         place: searchParams.get('place'),
         person: searchParams.get('person'),
         language: searchParams.get('language'),
+        publisher: searchParams.get('publisher'),
       };
-      console.log(params);
       return params;
     }
     let params = await get();
@@ -27,7 +27,7 @@ export default function SearchList({ className = '' }) {
   }, [searchParams]);
 
   return (
-    <div className="list-books">
+    <div className={`${className} list-books`}>
       <div className="list-books__container">
         {books.map((book) => {
           return (

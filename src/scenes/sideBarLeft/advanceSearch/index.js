@@ -4,6 +4,10 @@ import './advanceSearch.scss';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import TitleSeach from './titleSearch';
 import AuthorSearch from './authorSearch';
+import SubjectSearch from './subjectSearch';
+import PlaceSearch from './placeSearch';
+import PersonSearch from './personSearch';
+import PublisherSearch from './publisherSearch';
 
 export default function AdvanceSearch({
   className,
@@ -13,6 +17,12 @@ export default function AdvanceSearch({
   setAuthor,
   subjectData,
   setSubject,
+  placeData,
+  setPlace,
+  personData,
+  setPerson,
+  publisherData,
+  setPublisher,
 }) {
   return (
     <div className={`${className} menu-side-bar`}>
@@ -39,6 +49,31 @@ export default function AdvanceSearch({
             subjectData={subjectData}
             setSubject={(subject, show) => {
               setSubject(subject, show);
+            }}
+          />
+        </li>
+        <li>
+          <PlaceSearch
+            placeData={placeData}
+            setPlace={(place, show) => {
+              setPlace(place, show);
+            }}
+          />
+        </li>
+        <li>
+          <PersonSearch
+            personData={personData}
+            setPerson={(person, show) => {
+              setPerson(person, show);
+            }}
+          />
+        </li>
+        <li>
+          {console.log(publisherData)}
+          <PublisherSearch
+            publisherData={publisherData}
+            setPublisher={(publisher, show) => {
+              setPublisher(publisher, show);
             }}
           />
         </li>

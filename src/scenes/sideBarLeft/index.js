@@ -18,7 +18,7 @@ export default function SideBarLeft({ className }) {
     subjectData: { subject: '', show: true },
     placeData: { place: '', show: true },
     personData: { person: '', show: true },
-    publisher: { publisher: '', show: true },
+    publisherData: { publisher: '', show: true },
   });
   useEffect(async () => {
     async function get() {
@@ -55,7 +55,7 @@ export default function SideBarLeft({ className }) {
     setFilter({ ...filter, queryData: { query: query, show: show } });
   }
   function setSubject(subject, show) {
-    setFilter({ ...filter, subjectData: { subjec: subjec, show: show } });
+    setFilter({ ...filter, subjectData: { subject: subject, show: show } });
   }
   function setPlace(place, show) {
     setFilter({ ...filter, placeData: { place: place, show: show } });
@@ -87,6 +87,22 @@ export default function SideBarLeft({ className }) {
           setAuthor={(author, show) => {
             setAuthor(author, show);
           }}
+          subjectData={filter.subjectData}
+          setSubject={(subject, show) => {
+            setSubject(subject, show);
+          }}
+          placeData={filter.placeData}
+          setPlace={(place, show) => {
+            setPlace(place, show);
+          }}
+          personData={filter.personData}
+          setPerson={(person, show) => {
+            setPerson(person, show);
+          }}
+          publisherData={filter.publisherData}
+          setPublisher={(publisher, show) => {
+            setPublisher(publisher, show);
+          }}
           className="side-bar-left__item"
         />
         <button
@@ -97,22 +113,25 @@ export default function SideBarLeft({ className }) {
               ? `query=${filter.queryData.query}`
               : '';
             let titleUrlParams = filter.titleData.title
-              ? `title=&${filter.titleData.title}`
+              ? `&title=${filter.titleData.title}`
               : '';
             let authorUrlParams = filter.authorData.author
-              ? `author=&${filter.authorData.author}`
+              ? `&author=${filter.authorData.author}`
               : '';
             let subjectUrlParams = filter.subjectData.subject
-              ? `subject=&${filter.subjectData.subject}`
+              ? `&subject=${filter.subjectData.subject}`
               : '';
             let placeUrlParams = filter.placeData.place
-              ? `place=&${filter.placeData.place}`
+              ? `&place=${filter.placeData.place}`
               : '';
             let personUrlParams = filter.personData.person
-              ? `person=&${filter.personData.person}`
+              ? `&person=${filter.personData.person}`
+              : '';
+            let publisherUrlParams = filter.publisherData.publisher
+              ? `&publisher=${filter.publisherData.publisher}`
               : '';
             navigate(
-              `/\search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}`
+              `/\search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}${publisherUrlParams}`
             );
           }}
         >

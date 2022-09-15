@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from '../../../components/search';
 
-export default function SubjectSeach({ subjectData, setSubject }) {
+export default function PersonSearch({ personData, setPerson }) {
   return (
     <>
       <div className="menu-side-bar__buttons">
@@ -9,29 +9,29 @@ export default function SubjectSeach({ subjectData, setSubject }) {
           className="menu-side-bar__button-title"
           onClick={(e) => {
             e.preventDefault();
-            setSubject(subjectData.subject, !subjectData.show);
+            setPerson(personData.person, !personData.show);
           }}
         >
-          Subject
+          Person
         </button>
-        {subjectData.show && (
+        {personData.show && (
           <button
             className="menu-side-bar__button-clear"
             onClick={(e) => {
               e.preventDefault();
-              setSubject('', subjectData.show);
+              setPerson('', personData.show);
             }}
           >
             CLEAR
           </button>
         )}
       </div>
-      {subjectData.show && (
+      {personData.show && (
         <Search
-          placeholder="e.g love"
-          value={subjectData.subject}
+          placeholder="e.g Hermione"
+          value={personData.person}
           handleChange={(event) => {
-            setSubject (event.target.value, subjectData.show);
+            setPerson(event.target.value, personData.show);
           }}
         />
       )}

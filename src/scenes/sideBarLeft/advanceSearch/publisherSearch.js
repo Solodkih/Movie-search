@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from '../../../components/search';
 
-export default function SubjectSeach({ subjectData, setSubject }) {
+export default function PublisherSearch({ publisherData, setPublisher }) {
   return (
     <>
       <div className="menu-side-bar__buttons">
@@ -9,29 +9,29 @@ export default function SubjectSeach({ subjectData, setSubject }) {
           className="menu-side-bar__button-title"
           onClick={(e) => {
             e.preventDefault();
-            setSubject(subjectData.subject, !subjectData.show);
+            setPublisher(publisherData.publisher, !publisherData.show);
           }}
         >
-          Subject
+          Publisher
         </button>
-        {subjectData.show && (
+        {publisherData.show && (
           <button
             className="menu-side-bar__button-clear"
             onClick={(e) => {
               e.preventDefault();
-              setSubject('', subjectData.show);
+              setPublisher('', publisherData.show);
             }}
           >
             CLEAR
           </button>
         )}
       </div>
-      {subjectData.show && (
+      {publisherData.show && (
         <Search
-          placeholder="e.g love"
-          value={subjectData.subject}
+          placeholder="e.g HarperCollins"
+          value={publisherData.publisher}
           handleChange={(event) => {
-            setSubject (event.target.value, subjectData.show);
+            setPublisher(event.target.value, publisherData.show);
           }}
         />
       )}

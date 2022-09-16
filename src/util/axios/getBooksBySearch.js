@@ -1,4 +1,5 @@
 import axios from 'axios';
+import stringWithSpaceToStringWithPlus from './../changeString';
 
 const URL_MAIN = 'https://openlibrary.org';
 
@@ -12,27 +13,39 @@ export async function getBooksBySearch({
   language,
   publisher,
 }) {
-  const strQuery = query ? `q=${query}` : '';
-  const strTitle = title ? `&title=${title}` : '';
-  const strAuthor = author ? `&author=${author}` : '';
-  const strSubject = subject ? `&subject=${subject}` : '';
-  const strPlace = place ? `&place=${place}` : '';
-  const strPerson = person ? `&person=${person}` : '';
-  const strLanguage = language ? `&language=${language}` : '';
-  const strPublisher = publisher ? `&publisher=${publisher}` : '';
+  const strQuery = query ? `q=${stringWithSpaceToStringWithPlus(query)}` : '';
+  const strTitle = title ? `&title=${stringWithSpaceToStringWithPlus(title)}` : '';
+  const strAuthor = author
+    ? `&author=${stringWithSpaceToStringWithPlus(author)}`
+    : '';
+  const strSubject = subject
+    ? `&subject=${stringWithSpaceToStringWithPlus(subject)}`
+    : '';
+  const strPlace = place ? `&place=${stringWithSpaceToStringWithPlus(place)}` : '';
+  const strPerson = person
+    ? `&person=${stringWithSpaceToStringWithPlus(person)}`
+    : '';
+  const strLanguage = language
+    ? `&language=${stringWithSpaceToStringWithPlus(language)}`
+    : '';
+  const strPublisher = publisher
+    ? `&publisher=${stringWithSpaceToStringWithPlus(publisher)}`
+    : '';
 
   const responseBooks = await axios({
     method: 'get',
     url: `${URL_MAIN}/search.json?${strQuery}${strTitle}${strAuthor}${strSubject}${strPlace}${strPerson}${strLanguage}${strPublisher}&limit=10`,
   });
-
+  console.log(responseBooks);
   const arrayBooks = responseBooks.data.docs.map((item) => {
     return {
       title: item.title,
       urlBookByWork: item.key,
-      authors: item.author_name.map((itemAuthors) => {
-        return itemAuthors;
-      }),
+      authors: item.author_name
+        ? item.author_name.map((itemAuthors) => {
+            return itemAuthors;
+          })
+        : [''],
       urlImage: `https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`,
     };
   });

@@ -33,13 +33,29 @@ export default function SideBarLeft({ className }) {
       };
     }
     let data = await get();
+
     setFilter({
       ...filter,
-      titleData: { title: data.title, show: filter.titleData.show },
-      authorData: { author: data.author, show: filter.authorData.show },
-      queryData: { query: data.query, show: filter.queryData.show },
-      subjectData: { subject: data.subject, show: filter.subjectData.show },
-      placeData: { place: data.place, show: filter.placeData.show },
+      titleData: {
+        title: data.title ? data.title : filter.titleData.title,
+        show: filter.titleData.show,
+      },
+      authorData: {
+        author: data.author ? data.author : filter.authorData.author,
+        show: filter.authorData.show,
+      },
+      queryData: {
+        query: data.query ? data.query : filter.queryData.query,
+        show: filter.queryData.show,
+      },
+      subjectData: {
+        subject: data.subject ? data.subject : filter.subjectData.subject,
+        show: filter.subjectData.show,
+      },
+      placeData: {
+        place: data.place ? data.place : filter.placeData.place,
+        show: filter.placeData.show,
+      },
       personData: { person: data.person, show: filter.personData.show },
       publisherData: { publisher: data.publisher, show: filter.publisherData.show },
     });

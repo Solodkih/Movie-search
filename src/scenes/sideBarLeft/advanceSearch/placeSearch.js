@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Search from '../../../components/search';
 
 export default function PlaceSearch({ placeData, setPlace }) {
@@ -6,6 +7,7 @@ export default function PlaceSearch({ placeData, setPlace }) {
     <>
       <div className="menu-side-bar__buttons">
         <button
+          type="button"
           className="menu-side-bar__button-title"
           onClick={(e) => {
             e.preventDefault();
@@ -16,6 +18,7 @@ export default function PlaceSearch({ placeData, setPlace }) {
         </button>
         {placeData.show && (
           <button
+            type="button"
             className="menu-side-bar__button-clear"
             onClick={(e) => {
               e.preventDefault();
@@ -38,3 +41,19 @@ export default function PlaceSearch({ placeData, setPlace }) {
     </>
   );
 }
+
+PlaceSearch.propTypes = {
+  placeData: PropTypes.shape({
+    place: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  setPlace: PropTypes.func,
+};
+
+PlaceSearch.defaultProps = {
+  placeData: PropTypes.shape({
+    place: '',
+    show: false,
+  }),
+  setPlace: () => {},
+};

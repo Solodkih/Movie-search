@@ -1,20 +1,13 @@
 import React from 'react';
 import './search.scss';
+import PropTypes from 'prop-types';
 
 export default function Seach({
-  placeholder,
+  placeholder = '',
   imageButtonSeach,
-  value,
+  value = '',
   handleChange,
 }) {
-  if (placeholder === null || placeholder === undefined) {
-    placeholder = '';
-  }
-
-  if (value === null || value === undefined) {
-    value = '';
-  }
-
   return (
     <div className="seach">
       {imageButtonSeach && (
@@ -39,3 +32,17 @@ export default function Seach({
     </div>
   );
 }
+
+Seach.propTypes = {
+  placeholder: PropTypes.string,
+  imageButtonSeach: PropTypes.string,
+  value: PropTypes.string,
+  handleChange: PropTypes.func,
+};
+
+Seach.defaultProps = {
+  placeholder: '',
+  imageButtonSeach: '',
+  value: '',
+  handleChange: () => {},
+};

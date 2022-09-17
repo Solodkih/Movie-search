@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './advanceSearch.scss';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import TitleSeach from './titleSearch';
 import AuthorSearch from './authorSearch';
 import SubjectSearch from './subjectSearch';
@@ -69,7 +68,6 @@ export default function AdvanceSearch({
           />
         </li>
         <li>
-          {console.log(publisherData)}
           <PublisherSearch
             publisherData={publisherData}
             setPublisher={(publisher, show) => {
@@ -83,5 +81,71 @@ export default function AdvanceSearch({
 }
 
 AdvanceSearch.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  titleData: PropTypes.shape({
+    title: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  authorData: PropTypes.shape({
+    author: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+
+  subjectData: PropTypes.shape({
+    subject: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  placeData: PropTypes.shape({
+    place: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  personData: PropTypes.shape({
+    person: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  publisherData: PropTypes.shape({
+    publisher: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  setTitle: PropTypes.func,
+  setAuthor: PropTypes.func,
+  setSubject: PropTypes.func,
+  setPlace: PropTypes.func,
+  setPerson: PropTypes.func,
+  setPublisher: PropTypes.func,
+};
+
+AdvanceSearch.defaultProps = {
+  className: '',
+  titleData: PropTypes.shape({
+    title: '',
+    show: false,
+  }),
+  authorData: PropTypes.shape({
+    author: '',
+    show: false,
+  }),
+
+  subjectData: PropTypes.shape({
+    subject: '',
+    show: false,
+  }),
+  placeData: PropTypes.shape({
+    place: '',
+    show: false,
+  }),
+  personData: PropTypes.shape({
+    person: '',
+    show: false,
+  }),
+  publisherData: PropTypes.shape({
+    publisher: '',
+    show: false,
+  }),
+  setTitle: () => {},
+  setAuthor: () => {},
+  setSubject: () => {},
+  setPlace: () => {},
+  setPerson: () => {},
+  setPublisher: () => {},
 };

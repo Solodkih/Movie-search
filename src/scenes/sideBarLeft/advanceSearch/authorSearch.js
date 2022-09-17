@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Search from '../../../components/search';
 
 export default function AuthorSearch({ authorData, setAuthor }) {
@@ -6,6 +7,7 @@ export default function AuthorSearch({ authorData, setAuthor }) {
     <>
       <div className="menu-side-bar__buttons">
         <button
+          type="button"
           className="menu-side-bar__button-title"
           onClick={(e) => {
             e.preventDefault();
@@ -16,6 +18,7 @@ export default function AuthorSearch({ authorData, setAuthor }) {
         </button>
         {authorData.show && (
           <button
+            type="button"
             className="menu-side-bar__button-clear"
             onClick={(e) => {
               e.preventDefault();
@@ -38,3 +41,19 @@ export default function AuthorSearch({ authorData, setAuthor }) {
     </>
   );
 }
+
+AuthorSearch.propTypes = {
+  authorData: PropTypes.shape({
+    author: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  setAuthor: PropTypes.func,
+};
+
+AuthorSearch.defaultProps = {
+  authorData: PropTypes.shape({
+    author: '',
+    show: false,
+  }),
+  setAuthor: () => {},
+};

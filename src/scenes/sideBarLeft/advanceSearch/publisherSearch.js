@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Search from '../../../components/search';
 
 export default function PublisherSearch({ publisherData, setPublisher }) {
@@ -6,6 +7,7 @@ export default function PublisherSearch({ publisherData, setPublisher }) {
     <>
       <div className="menu-side-bar__buttons">
         <button
+          type="button"
           className="menu-side-bar__button-title"
           onClick={(e) => {
             e.preventDefault();
@@ -16,6 +18,7 @@ export default function PublisherSearch({ publisherData, setPublisher }) {
         </button>
         {publisherData.show && (
           <button
+            type="button"
             className="menu-side-bar__button-clear"
             onClick={(e) => {
               e.preventDefault();
@@ -38,3 +41,19 @@ export default function PublisherSearch({ publisherData, setPublisher }) {
     </>
   );
 }
+
+PublisherSearch.propTypes = {
+  publisherData: PropTypes.shape({
+    publisher: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  setPublisher: PropTypes.func,
+};
+
+PublisherSearch.defaultProps = {
+  publisherData: PropTypes.shape({
+    publisher: '',
+    show: false,
+  }),
+  setPublisher: () => {},
+};

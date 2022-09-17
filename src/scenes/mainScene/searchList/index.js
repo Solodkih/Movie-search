@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
-import { getBooksBySearch } from '../../../util/axios/getBooksBySearch';
+import getBooksBySearch from '../../../util/axios/getBooksBySearch';
 import ItemListBooks from '../../../components/itemListBooks';
 
 export default function SearchList({ className = '' }) {
@@ -9,7 +9,7 @@ export default function SearchList({ className = '' }) {
   const [books, setBooks] = useState([]);
   useEffect(async () => {
     async function get() {
-      let params = {
+      const params = {
         query: searchParams.get('query'),
         title: searchParams.get('title'),
         author: searchParams.get('author'),
@@ -21,9 +21,9 @@ export default function SearchList({ className = '' }) {
       };
       return params;
     }
-    let params = await get();
-    let books = await getBooksBySearch(params);
-    setBooks(books);
+    const params = await get();
+    const responsBooks = await getBooksBySearch(params);
+    setBooks(responsBooks);
   }, [searchParams]);
 
   return (

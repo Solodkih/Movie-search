@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Search from '../../../components/search';
 
 export default function TitleSeach({ titleData, setTitle }) {
@@ -6,6 +7,7 @@ export default function TitleSeach({ titleData, setTitle }) {
     <>
       <div className="menu-side-bar__buttons">
         <button
+          type="button"
           className="menu-side-bar__button-title"
           onClick={(e) => {
             e.preventDefault();
@@ -16,6 +18,7 @@ export default function TitleSeach({ titleData, setTitle }) {
         </button>
         {titleData.show && (
           <button
+            type="button"
             className="menu-side-bar__button-clear"
             onClick={(e) => {
               e.preventDefault();
@@ -38,3 +41,19 @@ export default function TitleSeach({ titleData, setTitle }) {
     </>
   );
 }
+
+TitleSeach.propTypes = {
+  titleData: PropTypes.shape({
+    title: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  setTitle: PropTypes.func,
+};
+
+TitleSeach.defaultProps = {
+  titleData: PropTypes.shape({
+    title: '',
+    show: false,
+  }),
+  setTitle: () => {},
+};

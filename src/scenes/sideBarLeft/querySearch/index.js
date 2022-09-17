@@ -1,6 +1,6 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import Search from '../../../components/search';
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function QuerySearch({ className, queryData, setQuery }) {
   return (
@@ -10,6 +10,7 @@ export default function QuerySearch({ className, queryData, setQuery }) {
         <li>
           <div className="menu-side-bar__buttons">
             <button
+              type="button"
               className="menu-side-bar__button-title"
               onClick={(e) => {
                 e.preventDefault();
@@ -20,6 +21,7 @@ export default function QuerySearch({ className, queryData, setQuery }) {
             </button>
             {queryData.show && (
               <button
+                type="button"
                 className="menu-side-bar__button-clear"
                 onClick={(e) => {
                   e.preventDefault();
@@ -44,3 +46,21 @@ export default function QuerySearch({ className, queryData, setQuery }) {
     </div>
   );
 }
+
+QuerySearch.propTypes = {
+  className: PropTypes.string,
+  queryData: PropTypes.shape({
+    query: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+  }),
+  setQuery: PropTypes.func,
+};
+
+QuerySearch.defaultProps = {
+  className: '',
+  queryData: PropTypes.shape({
+    query: '',
+    show: false,
+  }),
+  setQuery: () => {},
+};

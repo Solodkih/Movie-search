@@ -1,9 +1,9 @@
 import axios from 'axios';
-import stringWithSpaceToStringWithPlus from './../changeString';
+import stringWithSpaceToStringWithPlus from '../changeString';
 
 const URL_MAIN = 'https://openlibrary.org';
 
-export async function getBooksBySearch({
+export default async function getBooksBySearch({
   query,
   title,
   author,
@@ -36,7 +36,6 @@ export async function getBooksBySearch({
     method: 'get',
     url: `${URL_MAIN}/search.json?${strQuery}${strTitle}${strAuthor}${strSubject}${strPlace}${strPerson}${strLanguage}${strPublisher}&limit=10`,
   });
-  console.log(responseBooks);
   const arrayBooks = responseBooks.data.docs.map((item) => {
     return {
       title: item.title,
@@ -49,6 +48,5 @@ export async function getBooksBySearch({
       urlImage: `https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`,
     };
   });
-  console.log(responseBooks);
   return arrayBooks;
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import AdvanceSearch from './advanceSearch';
 import QuerySearch from './querySearch';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Logo from './logo';
 
@@ -32,7 +32,7 @@ export default function SideBarLeft({ className }) {
         publisher: searchParams.get('publisher'),
       };
     }
-    let data = await get();
+    const data = await get();
 
     setFilter({
       ...filter,
@@ -62,25 +62,25 @@ export default function SideBarLeft({ className }) {
   }, [searchParams]);
 
   function setTitle(title, show) {
-    setFilter({ ...filter, titleData: { title: title, show: show } });
+    setFilter({ ...filter, titleData: { title, show } });
   }
   function setAuthor(author, show) {
-    setFilter({ ...filter, authorData: { author: author, show: show } });
+    setFilter({ ...filter, authorData: { author, show } });
   }
   function setQuery(query, show) {
-    setFilter({ ...filter, queryData: { query: query, show: show } });
+    setFilter({ ...filter, queryData: { query, show } });
   }
   function setSubject(subject, show) {
-    setFilter({ ...filter, subjectData: { subject: subject, show: show } });
+    setFilter({ ...filter, subjectData: { subject, show } });
   }
   function setPlace(place, show) {
-    setFilter({ ...filter, placeData: { place: place, show: show } });
+    setFilter({ ...filter, placeData: { place, show } });
   }
   function setPerson(person, show) {
-    setFilter({ ...filter, personData: { person: person, show: show } });
+    setFilter({ ...filter, personData: { person, show } });
   }
   function setPublisher(publisher, show) {
-    setFilter({ ...filter, publisherData: { publisher: publisher, show: show } });
+    setFilter({ ...filter, publisherData: { publisher, show } });
   }
 
   return (
@@ -122,32 +122,33 @@ export default function SideBarLeft({ className }) {
           className="side-bar-left__item"
         />
         <button
+          type="button"
           className="menu-side-bar__button-search"
           onClick={(e) => {
             e.preventDefault();
-            let queryUrlParams = filter.queryData.query
+            const queryUrlParams = filter.queryData.query
               ? `query=${filter.queryData.query}`
               : '';
-            let titleUrlParams = filter.titleData.title
+            const titleUrlParams = filter.titleData.title
               ? `&title=${filter.titleData.title}`
               : '';
-            let authorUrlParams = filter.authorData.author
+            const authorUrlParams = filter.authorData.author
               ? `&author=${filter.authorData.author}`
               : '';
-            let subjectUrlParams = filter.subjectData.subject
+            const subjectUrlParams = filter.subjectData.subject
               ? `&subject=${filter.subjectData.subject}`
               : '';
-            let placeUrlParams = filter.placeData.place
+            const placeUrlParams = filter.placeData.place
               ? `&place=${filter.placeData.place}`
               : '';
-            let personUrlParams = filter.personData.person
+            const personUrlParams = filter.personData.person
               ? `&person=${filter.personData.person}`
               : '';
-            let publisherUrlParams = filter.publisherData.publisher
+            const publisherUrlParams = filter.publisherData.publisher
               ? `&publisher=${filter.publisherData.publisher}`
               : '';
             navigate(
-              `/\search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}${publisherUrlParams}`
+              `/search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}${publisherUrlParams}`
             );
           }}
         >

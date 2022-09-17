@@ -1,0 +1,41 @@
+@import '../../../constants.scss';
+
+.menu-side-bar {
+  color: $main-white;
+
+  &__logo {
+    color: grey;
+    margin-bottom: 7px;
+    font-size: 20px;
+  }
+
+  &__list {
+    list-style-type: none;
+  }
+
+  &__list > li {
+    padding: 15px 0;
+  }
+
+  &__button-title {
+    color: $main-white;
+    font-size: 20px;
+  }
+
+  &__button-clear {
+    color: grey;
+    font-size: 15px;
+  }
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__button-search {
+    display: block;
+    border-radius: 10px;
+    color: black;
+    background-color: $lite-green;
+    width: 100%;
+    height: 40px;
+  }
+}

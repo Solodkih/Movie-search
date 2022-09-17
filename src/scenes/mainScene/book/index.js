@@ -66,14 +66,16 @@ export default function Book({ className = '' }) {
           <div className="book-aboutBook__authors">
             <div className="book-aboutBook__authors-title">Authors:</div>
             <ul className="book-aboutBook__authors-list">
-              {book.authors.map(({ name, authorURL }) => {
+              {book.authors.map(({ name, authorURL }, i) => {
                 return (
-                  <li
-                    onClick={(event) => handleOnClickAuthor(event, authorURL)}
-                    className="book-aboutBook__authors-item"
-                    key={`${authorURL}`}
-                  >
-                    {name}
+                  <li className="book-aboutBook__authors-item" key={`${authorURL}`}>
+                    <div
+                      role="button"
+                      onClick={(event) => handleOnClickAuthor(event, authorURL)}
+                      tabIndex={i}
+                    >
+                      {name}
+                    </div>
                   </li>
                 );
               })}

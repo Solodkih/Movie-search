@@ -1,4 +1,4 @@
-@import '../../../../constants.scss';
+@import '../../constants.scss';
 
 .seach {
   position: relative;
@@ -12,8 +12,6 @@
     height: 40px;
     width: 250px;
     border: 1px solid grey;
-    padding-left: 60px;
-    padding-right: 40px;
     z-index: 20;
   }
 
@@ -28,17 +26,8 @@
       background-color: $lite-dark;
       z-index: 50;
       width: 24px;
-      left: 20px;
-      top: 7px;
-    }
-
-    &-filter {
-      position: absolute;
-      background-color: $lite-dark;
-      z-index: 50;
-      width: 20px;
-      right: 10px;
-      top: 7px;
+      left: 10px;
+      top: 9px;
     }
   }
 }

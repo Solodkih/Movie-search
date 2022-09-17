@@ -56,8 +56,14 @@ export default function SideBarLeft({ className }) {
         place: data.place ? data.place : filter.placeData.place,
         show: filter.placeData.show,
       },
-      personData: { person: data.person, show: filter.personData.show },
-      publisherData: { publisher: data.publisher, show: filter.publisherData.show },
+      personData: {
+        person: data.person ? data.person : filter.personData.person,
+        show: filter.personData.show,
+      },
+      publisherData: {
+        publisher: data.publisher ? data.publisher : filter.publisherData.publisher,
+        show: filter.publisherData.show,
+      },
     });
   }, [searchParams]);
 

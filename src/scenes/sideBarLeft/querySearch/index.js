@@ -5,13 +5,12 @@ import Search from '../../../components/search';
 export default function QuerySearch({ className, queryData, setQuery }) {
   return (
     <div className={`${className} menu-side-bar`}>
-      <div className="menu-side-bar__logo">Book search</div>
       <ul className="menu-side-bar__list">
         <li>
           <div className="menu-side-bar__buttons">
             <button
               type="button"
-              className="menu-side-bar__button-title"
+              className="menu-side-bar__logo"
               onClick={(e) => {
                 e.preventDefault();
                 setQuery(queryData.query, !queryData.show);
@@ -34,7 +33,7 @@ export default function QuerySearch({ className, queryData, setQuery }) {
           </div>
           {queryData.show && (
             <Search
-              placeholder="e.g "
+              placeholder="e.g Leo"
               value={queryData.query}
               handleChange={(event) => {
                 setQuery(event.target.value, queryData.show);

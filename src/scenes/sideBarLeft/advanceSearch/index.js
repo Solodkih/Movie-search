@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './advanceSearch.scss';
 import TitleSeach from './titleSearch';
@@ -23,59 +23,71 @@ export default function AdvanceSearch({
   publisherData,
   setPublisher,
 }) {
+  const [showAdvanceSearch, setShowshowAdvanceSearch] = useState(false);
+
   return (
     <div className={`${className} menu-side-bar`}>
-      <div className="menu-side-bar__logo">Advance Search</div>
-      <ul className="menu-side-bar__list">
-        <li>
-          <TitleSeach
-            titleData={titleData}
-            setTitle={(title, show) => {
-              setTitle(title, show);
-            }}
-          />
-        </li>
-        <li>
-          <AuthorSearch
-            authorData={authorData}
-            setAuthor={(author, show) => {
-              setAuthor(author, show);
-            }}
-          />
-        </li>
-        <li>
-          <SubjectSearch
-            subjectData={subjectData}
-            setSubject={(subject, show) => {
-              setSubject(subject, show);
-            }}
-          />
-        </li>
-        <li>
-          <PlaceSearch
-            placeData={placeData}
-            setPlace={(place, show) => {
-              setPlace(place, show);
-            }}
-          />
-        </li>
-        <li>
-          <PersonSearch
-            personData={personData}
-            setPerson={(person, show) => {
-              setPerson(person, show);
-            }}
-          />
-        </li>
-        <li>
-          <PublisherSearch
-            publisherData={publisherData}
-            setPublisher={(publisher, show) => {
-              setPublisher(publisher, show);
-            }}
-          />
-        </li>
-      </ul>
+      <button
+        type="button"
+        onClick={() => {
+          setShowshowAdvanceSearch(!showAdvanceSearch);
+        }}
+        className="menu-side-bar__logo"
+      >
+        Advance Search
+      </button>
+      {showAdvanceSearch && (
+        <ul className="menu-side-bar__list">
+          <li>
+            <TitleSeach
+              titleData={titleData}
+              setTitle={(title, show) => {
+                setTitle(title, show);
+              }}
+            />
+          </li>
+          <li>
+            <AuthorSearch
+              authorData={authorData}
+              setAuthor={(author, show) => {
+                setAuthor(author, show);
+              }}
+            />
+          </li>
+          <li>
+            <SubjectSearch
+              subjectData={subjectData}
+              setSubject={(subject, show) => {
+                setSubject(subject, show);
+              }}
+            />
+          </li>
+          <li>
+            <PlaceSearch
+              placeData={placeData}
+              setPlace={(place, show) => {
+                setPlace(place, show);
+              }}
+            />
+          </li>
+          <li>
+            <PersonSearch
+              personData={personData}
+              setPerson={(person, show) => {
+                setPerson(person, show);
+              }}
+            />
+          </li>
+          <li>
+            <PublisherSearch
+              publisherData={publisherData}
+              setPublisher={(publisher, show) => {
+                setPublisher(publisher, show);
+              }}
+            />
+          </li>
+        </ul>
+      )}
     </div>
   );
 }

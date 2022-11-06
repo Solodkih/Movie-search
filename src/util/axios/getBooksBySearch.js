@@ -3,16 +3,10 @@ import stringWithSpaceToStringWithPlus from '../changeString';
 
 const URL_MAIN = 'https://openlibrary.org';
 
-export default async function getBooksBySearch({
-  query,
-  title,
-  author,
-  subject,
-  place,
-  person,
-  language,
-  publisher,
-}) {
+export default async function getBooksBySearch(
+  { query, title, author, subject, place, person, language, publisher },
+  page
+) {
   const strQuery = query ? `q=${stringWithSpaceToStringWithPlus(query)}` : '';
   const strTitle = title ? `&title=${stringWithSpaceToStringWithPlus(title)}` : '';
   const strAuthor = author
@@ -34,7 +28,7 @@ export default async function getBooksBySearch({
 
   const responseBooks = await axios({
     method: 'get',
-    url: `${URL_MAIN}/search.json?${strQuery}${strTitle}${strAuthor}${strSubject}${strPlace}${strPerson}${strLanguage}${strPublisher}&limit=10`,
+    url: `${URL_MAIN}/search.json?${strQuery}${strTitle}${strAuthor}${strSubject}${strPlace}${strPerson}${strLanguage}${strPublisher}&page=${page}`,
   });
   const arrayBooks = responseBooks.data.docs.map((item) => {
     return {

@@ -26,7 +26,7 @@ export default function SearchList({ className = '' }) {
           );
         })}
       </div>
-      <div ref={containerRef}>{page}</div>
+      <div ref={containerRef}></div>
     </div>
   );
 }

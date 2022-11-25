@@ -39,7 +39,7 @@ export default async function getBooksBySearch(
             return itemAuthors;
           })
         : [''],
-      urlImage: `https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`,
+      urlImage: item.cover_i && `https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`,
     };
   });
   return arrayBooks;

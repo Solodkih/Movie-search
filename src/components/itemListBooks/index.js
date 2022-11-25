@@ -5,10 +5,11 @@ import urlImageNotFound from '../../icon/sad.png';
 
 import './itemListBooks.scss';
 
-export default function ItemListBooks({
-  className,
-  book = { title: 'Not found', urlImage: urlImageNotFound },
-}) {
+function imageNotFound() {
+  return <div className="item-list-books__imageNotFound">Sorry, we didn't find the picture.<br/><br/> We will try to fix it soon</div>;
+}
+
+export default function ItemListBooks({ className, book = { title: 'Not found' } }) {
   const MAX_LENGTH_STRING = 45;
   const navigate = useNavigate();
 
@@ -31,7 +32,10 @@ export default function ItemListBooks({
       onClick={(event) => handleOnClick(event)}
     >
       <div className="item-list-books__image-wrapper">
-        <img className="item-list-books__image" src={book.urlImage} alt="Omg" />
+        {(book.urlImage && (
+          <img className="item-list-books__image" src={book.urlImage} alt="Omg" />
+        )) ||
+        imageNotFound()}
       </div>
       <div className="item-list-books__title">{checkAndTrimString(book.title)}</div>
       <div className="item-list-books__author">

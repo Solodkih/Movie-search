@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getBookByWorks, getNameAuthorForBook } from '../../../util/axios/getBooks';
-import urlImageNotFound from '../../../icon/sad.png';
+import ImageNotFound from '../../../components/imageNotFound';
 
 import './book.scss';
 
@@ -10,7 +10,7 @@ export default function Book({ className = '' }) {
   const { worksId } = useParams();
   const [book, setBook] = useState({
     bookData: {
-      arrayUrlImage: [urlImageNotFound],
+      arrayUrlImage: [],
       subjects: [],
       subjectPlaces: [],
       subjectPeople: [],
@@ -46,11 +46,14 @@ export default function Book({ className = '' }) {
     <div className={`${className} book book__container`}>
       <div className="book__main-block">
         <div className="book__image-block">
-          <img
-            className="book__image"
-            src={book.bookData.arrayUrlImage[0]}
-            alt={book.bookData.title}
-          />
+          {book.bookData.arrayUrlImage.length != 0 || <ImageNotFound />}
+          {book.bookData.arrayUrlImage.length == 0 || (
+            <img
+              className="book__image"
+              src={book.bookData.arrayUrlImage[0]}
+              alt={book.bookData.title}
+            />
+          )}
         </div>
         <div className="book-aboutBook">
           <div className="book-aboutBook__title">

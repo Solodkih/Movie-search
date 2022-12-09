@@ -10,7 +10,7 @@ function imageNotFound() {
 }
 
 export default function ItemListBooks({ className, book = { title: 'Not found' } }) {
-  const MAX_LENGTH_STRING = 45;
+  const MAX_LENGTH_STRING = 35;
   const navigate = useNavigate();
 
   function handleOnClick(event) {

@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
-import useIntersect from './useIntersect';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useSearchParams } from 'react-router-dom';
+import useIntersect from './useIntersect';
 import ItemListBooks from '../../../components/itemListBooks';
 import useUpdateList from './useUpdateList';
+import './searchList.scss';
 
 export default function SearchList({ className = '' }) {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const containerRef = useRef(null);
 
-  useIntersect(containerRef, page, setPage);
+  useIntersect(containerRef, setPage);
   useUpdateList(books, setBooks, page, setPage);
 
   return (
@@ -26,7 +26,7 @@ export default function SearchList({ className = '' }) {
           );
         })}
       </div>
-      <div ref={containerRef}></div>
+      <div id="ref" ref={containerRef} />
     </div>
   );
 }

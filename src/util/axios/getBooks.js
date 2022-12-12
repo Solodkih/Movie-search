@@ -31,38 +31,22 @@ export async function getBookByWorks(urlWorks) {
     url: `${urlMain}/works/${urlWorks}.json`,
   });
 
-  const description = () => {
-    if (Object.prototype.hasOwnProperty.call(responseBook.data, 'description')) {
-      if (
-        Object.prototype.hasOwnProperty.call(responseBook.data.description, 'value')
-      ) {
-        return responseBook.data.description.value;
-      }
-      return responseBook.data.description;
-    }
-    return '';
-  };
-
   return {
-    subjectTimes: responseBook.data.subject_times
-      ? responseBook.data.subject_times
-      : [],
-    subjectPlaces: responseBook.data.subject_places
-      ? responseBook.data.subject_places
-      : [],
-    subjectPeople: responseBook.data.subject_people
-      ? responseBook.data.subject_people
-      : [],
-    subjects: responseBook.data.subjects ? responseBook.data.subjects : [],
+    subjectTimes: responseBook.data?.subject_times ?? [],
+    subjectPlaces: responseBook.data?.subject_places ?? [],
+    subjectPeople: responseBook.data?.subject_people ?? [],
+    subjects: responseBook.data?.subjects ?? [],
     title: responseBook.data.title,
     firstPublishDate: responseBook.data.first_publish_date,
     authors: responseBook.data.authors.map((itemAuthors) => {
       return itemAuthors.author.key;
     }),
-    description: description(),
-    arrayUrlImage: responseBook.data.covers.map((itemUrl) => {
-      return `https://covers.openlibrary.org/b/id/${itemUrl}-L.jpg`;
-    }),
+    description:
+      responseBook.data?.description?.value ?? responseBook.data?.description ?? '',
+    arrayUrlImage:
+      responseBook.data?.covers?.map((itemUrl) => {
+        return `https://covers.openlibrary.org/b/id/${itemUrl}-L.jpg`;
+      }) ?? [],
   };
 }
 

@@ -6,17 +6,17 @@ const options = {
   threshold: 0.5,
 };
 
-export default function useIntersect(containerRef, page, setPage) {
+export default function useIntersect(containerRef, setPage) {
+  const intersectionObserverCalback = ([entry]) => {
+    if (entry.isIntersecting) {
+      setPage((page) => page + 1);
+    }
+  };
+
   useEffect(() => {
-    const intersectionObserverCalback = ([entry]) => {
-      if (entry.isIntersecting) {
-        setPage((page += 1));
-      }
-    };
     const observer = new IntersectionObserver(intersectionObserverCalback, options);
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
   }, [containerRef]);
-  return;
 }

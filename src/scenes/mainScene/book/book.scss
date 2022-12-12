@@ -9,14 +9,24 @@
     padding: 20px;
   }
 
-  &__image {
-    max-width: 500px;
-    width: 100%;
+  &__image-block {
+    width: 300px;
+    height: 500px;
+    float: left;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    background-color: $lite-dark;
+    border-radius: 10px;
+    border: 2px solid $lite-green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  &__image-block {
-    float: left;
-    padding: 40px 20px 20px 20px;
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 
@@ -32,6 +42,10 @@
     font-size: 40px;
   }
 
+  &__title > span {
+    border-bottom: 3px solid $lite-green;
+  }
+
   &__authors {
     padding-top: 20px;
     width: 100%;
@@ -44,12 +58,29 @@
       padding-right: 7px;
     }
 
+    &-title > span {
+      border-bottom: 2px solid $lite-green;
+    }
+
     &-item:not(:first-child) {
       padding-top: 10px;
     }
 
     &-item {
       list-style-type: none;
+    }
+
+    &-item > div > span {
+      padding: 3px;
+      border: 1px solid $lite-green;
+      background-color: $lite-dark;
+      border-radius: 4px;
+    }
+
+    &-item > div > span:hover {
+      padding: 5px;
+      background-color: $lite-green;
+      border-radius: 3px;
     }
 
     &-list {
@@ -73,6 +104,10 @@
       flex: 0 0 160px;
       padding-right: 7px;
     }
+
+    &-title > span {
+      border-bottom: 3px solid $lite-green;
+    }
   }
 
   &__subject {
@@ -84,6 +119,10 @@
       flex: 0 0 160px;
       font-size: 20px;
       padding-right: 7px;
+    }
+
+    &-title > span {
+      border-bottom: 3px solid $lite-green;
     }
 
     &-list {

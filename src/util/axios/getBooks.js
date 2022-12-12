@@ -31,18 +31,6 @@ export async function getBookByWorks(urlWorks) {
     url: `${urlMain}/works/${urlWorks}.json`,
   });
 
-  const description = () => {
-    if (Object.prototype.hasOwnProperty.call(responseBook.data, 'description')) {
-      if (
-        Object.prototype.hasOwnProperty.call(responseBook.data.description, 'value')
-      ) {
-        return responseBook.data.description.value;
-      }
-      return responseBook.data.description;
-    }
-    return '';
-  };
-
   return {
     subjectTimes: responseBook.data?.subject_times ?? [],
     subjectPlaces: responseBook.data?.subject_places ?? [],

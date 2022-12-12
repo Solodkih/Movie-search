@@ -46,8 +46,8 @@ export default function Book({ className = '' }) {
     <div className={`${className} book book__container`}>
       <div className="book__main-block">
         <div className="book__image-block">
-          {book.bookData.arrayUrlImage.length != 0 || <ImageNotFound />}
-          {book.bookData.arrayUrlImage.length == 0 || (
+          {book.bookData.arrayUrlImage.length !== 0 || <ImageNotFound />}
+          {book.bookData.arrayUrlImage.length === 0 || (
             <img
               className="book__image"
               src={book.bookData.arrayUrlImage[0]}

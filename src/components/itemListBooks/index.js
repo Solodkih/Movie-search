@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import urlImageNotFound from '../../icon/sad.png';
 
 import './itemListBooks.scss';
 
 function imageNotFound() {
-  return <div className="item-list-books__imageNotFound">Sorry, we didn't find the picture.<br/><br/> We will try to fix it soon</div>;
+  return (
+    <div className="item-list-books__imageNotFound">
+      Sorry, we didn&apos;t find the picture.
+      <br />
+      <br /> We will try to fix it soon
+    </div>
+  );
 }
 
 export default function ItemListBooks({ className, book = { title: 'Not found' } }) {
@@ -18,8 +23,8 @@ export default function ItemListBooks({ className, book = { title: 'Not found' }
     navigate(`/book${book.urlBookByWork}`);
   }
 
-  let checkAndTrimString = (string) => {
-    if (typeof string == 'string' && string.length > MAX_LENGTH_STRING) {
+  const checkAndTrimString = (string) => {
+    if (typeof string === 'string' && string.length > MAX_LENGTH_STRING) {
       return string.slice(0, MAX_LENGTH_STRING).concat('...');
     }
     return string;
@@ -35,7 +40,7 @@ export default function ItemListBooks({ className, book = { title: 'Not found' }
         {(book.urlImage && (
           <img className="item-list-books__image" src={book.urlImage} alt="Omg" />
         )) ||
-        imageNotFound()}
+          imageNotFound()}
       </div>
       <div className="item-list-books__title">{checkAndTrimString(book.title)}</div>
       <div className="item-list-books__author">

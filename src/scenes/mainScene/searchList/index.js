@@ -19,7 +19,7 @@ export default function SearchList({ className = '' }) {
         {books.map((book) => {
           return (
             <ItemListBooks
-              key={`${book.title}+${book.urlImage}`}
+              key={`${book.title}+${book.urlImage}+${book.urlBookByWork}`}
               className="list-books__item"
               book={book}
             />

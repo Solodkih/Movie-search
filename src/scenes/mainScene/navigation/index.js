@@ -27,18 +27,23 @@ export default function Navigation() {
 
   return (
     <nav className="navigation">
-      <div className="navigation_title">{`We are looking for a book\u00A0`} </div>
-      <div className="navigation_item">
-        {params.query && <span>{`with:\u00A0${params.query}`}</span>}
+      <div className="navigation_title">
+        {`We are looking for `}
+        {<span>a book</span>}
+        {params.query && ` by request: `}
+        {params.query && <span>{params.query}</span>}
       </div>
       <div className="navigation_item">
-        {params.title && `Title:${params.title}`}
+        {params.title && `with title: `}
+        {params.title && <span>{params.title}</span>}
       </div>
       <div className="navigation_item">
-        {params.author && `Author:${params.author}`}
+        {params.author && `with author: `}
+        {params.author && <span>{params.author}</span>}
       </div>
       <div className="navigation_item">
-        {params.subject && `Subject:${params.subject}`}
+        {params.subject && `with subject: `}
+        {params.subject && <span> {params.subject} </span>}
       </div>
       <div className="navigation_item">
         {params.place && `Place:${params.place}`}

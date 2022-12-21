@@ -7,20 +7,33 @@
   display: flex;
   justify-content: flex-start;
   padding: 50px 30px 30px 30px;
+  flex-wrap: wrap;
 
   &_title {
     font-family: 'Goma Octagon';
     font-size: 30px;
+    width:100%;
+  }
+
+  &_title > span {
+    padding: 4px;
+    background-color: $lite-dark;
+    border-radius: 7px;
+    border: 2px solid $lite-green;
   }
 
   &_item {
+    padding-top: 15px;
+    padding-bottom: 15px;
     font-family: 'Goma Octagon';
     font-size: 30px;
   }
 
   &_item > span {
+    padding: 4px;
     background-color: $lite-dark;
     border-radius: 7px;
-    border: 3px solid $lite-green;
+    border: 2px solid $lite-green;
   }
+
 }

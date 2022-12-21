@@ -27,15 +27,31 @@ export default function Navigation() {
 
   return (
     <nav className="navigation">
-      <div>Query:{params.query}</div>
-      <div>Title:{params.title}</div>
-      <div>Author:{params.author}</div>
-      <div>Subject:{params.subject}</div>
-      <div>Place:{params.place}</div>
-      <div>Person:{params.person}</div>
-      <div>Language:{params.language}</div>
-      <div>Publisher:{params.publisher}</div>
-      <Profile />
+      <div className="navigation_title">{`We are looking for a book\u00A0`} </div>
+      <div className="navigation_item">
+        {params.query && <span>{`with:\u00A0${params.query}`}</span>}
+      </div>
+      <div className="navigation_item">
+        {params.title && `Title:${params.title}`}
+      </div>
+      <div className="navigation_item">
+        {params.author && `Author:${params.author}`}
+      </div>
+      <div className="navigation_item">
+        {params.subject && `Subject:${params.subject}`}
+      </div>
+      <div className="navigation_item">
+        {params.place && `Place:${params.place}`}
+      </div>
+      <div className="navigation_item">
+        {params.person && `Person:${params.person}`}
+      </div>
+      <div className="navigation_item">
+        {params.language && `Language:${params.language}`}
+      </div>
+      <div className="navigation_item">
+        {params.publisher && `Publisher:${params.publisher}`}
+      </div>
     </nav>
   );
 }

@@ -1,8 +1,26 @@
+@import '../../../constants.scss';
+
 .navigation {
   width: 100%;
   height: 150px;
   font-size: 24px;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
+  padding: 50px 30px 30px 30px;
+
+  &_title {
+    font-family: 'Goma Octagon';
+    font-size: 30px;
+  }
+
+  &_item {
+    font-family: 'Goma Octagon';
+    font-size: 30px;
+  }
+
+  &_item > span {
+    background-color: $lite-dark;
+    border-radius: 7px;
+    border: 3px solid $lite-green;
+  }
 }

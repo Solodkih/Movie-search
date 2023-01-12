@@ -12,7 +12,7 @@
   &_title {
     font-family: 'Goma Octagon';
     font-size: 30px;
-    width:100%;
+    width: 100%;
   }
 
   &_title > span {
@@ -23,8 +23,7 @@
   }
 
   &_item {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px 15px 15px 0;
     font-family: 'Goma Octagon';
     font-size: 30px;
   }
@@ -35,5 +34,4 @@
     border-radius: 7px;
     border: 2px solid $lite-green;
   }
-
 }

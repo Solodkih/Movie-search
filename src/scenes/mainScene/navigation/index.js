@@ -33,30 +33,42 @@ export default function Navigation() {
         {params.query && ` by request: `}
         {params.query && <span>{params.query}</span>}
       </div>
-      <div className="navigation_item">
-        {params.title && `with title: `}
-        {params.title && <span>{params.title}</span>}
-      </div>
-      <div className="navigation_item">
-        {params.author && `with author: `}
-        {params.author && <span>{params.author}</span>}
-      </div>
-      <div className="navigation_item">
-        {params.subject && `with subject: `}
-        {params.subject && <span> {params.subject} </span>}
-      </div>
-      <div className="navigation_item">
-        {params.place && `Place:${params.place}`}
-      </div>
-      <div className="navigation_item">
-        {params.person && `Person:${params.person}`}
-      </div>
-      <div className="navigation_item">
-        {params.language && `Language:${params.language}`}
-      </div>
-      <div className="navigation_item">
-        {params.publisher && `Publisher:${params.publisher}`}
-      </div>
+      {params.title && (
+        <div className="navigation_item">
+          {`with title: `}
+          <span>{params.title}</span>
+        </div>
+      )}
+      {params.author && (
+        <div className="navigation_item">
+          {`with author: `}
+          <span>{params.author}</span>
+        </div>
+      )}
+      {params.subject && (
+        <div className="navigation_item">
+          {`with subject: `}
+          {<span> {params.subject} </span>}
+        </div>
+      )}
+      {params.place && (
+        <div className="navigation_item">
+          {`Place: `}
+          {<span> {params.place} </span>}
+        </div>
+      )}
+      {params.person && (
+        <div className="navigation_item">
+          {`Person: `}
+          {<span> {params.person} </span>}
+        </div>
+      )}
+      {params.publisher && (
+        <div className="navigation_item">
+          {`Publisher: `}
+          {<span> {params.person} </span>}
+        </div>
+      )}
     </nav>
   );
 }

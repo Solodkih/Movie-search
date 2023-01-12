@@ -1,29 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import './navigation.scss';
-import Profile from './profile';
+import useGetSearchParams from '../../../components/hooks/useGetSearchParams';
 
 export default function Navigation() {
-  const [searchParams] = useSearchParams();
   const [params, setParams] = useState({});
-
-  async function getSearchParams() {
-    return {
-      query: searchParams.get('query'),
-      title: searchParams.get('title'),
-      author: searchParams.get('author'),
-      subject: searchParams.get('subject'),
-      place: searchParams.get('place'),
-      person: searchParams.get('person'),
-      language: searchParams.get('language'),
-      publisher: searchParams.get('publisher'),
-    };
-  }
-
-  useEffect(async () => {
-    const newParams = await getSearchParams();
-    setParams(newParams);
-  }, [searchParams]);
+  useGetSearchParams(setParams);
 
   return (
     <nav className="navigation">

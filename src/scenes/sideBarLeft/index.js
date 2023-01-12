@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import AdvanceSearch from './advanceSearch';
 import QuerySearch from './querySearch';
+import useGetSearchParams from '../../components/hooks/useGetSearchParams';
 
 import Logo from './logo';
 
@@ -10,7 +11,6 @@ import './sideBarLeft.scss';
 
 export default function SideBarLeft({ className }) {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const [filter, setFilter] = useState({
     queryData: { query: '', show: true },
     titleData: { title: '', show: true },
@@ -20,52 +20,43 @@ export default function SideBarLeft({ className }) {
     personData: { person: '', show: true },
     publisherData: { publisher: '', show: true },
   });
-  useEffect(async () => {
-    async function get() {
-      return {
-        title: searchParams.get('title'),
-        author: searchParams.get('author'),
-        query: searchParams.get('query'),
-        subject: searchParams.get('subject'),
-        place: searchParams.get('place'),
-        person: searchParams.get('person'),
-        publisher: searchParams.get('publisher'),
-      };
-    }
-    const data = await get();
 
-    setFilter({
-      ...filter,
-      titleData: {
-        title: data.title ? data.title : filter.titleData.title,
-        show: filter.titleData.show,
-      },
-      authorData: {
-        author: data.author ? data.author : filter.authorData.author,
-        show: filter.authorData.show,
-      },
-      queryData: {
-        query: data.query ? data.query : filter.queryData.query,
-        show: filter.queryData.show,
-      },
-      subjectData: {
-        subject: data.subject ? data.subject : filter.subjectData.subject,
-        show: filter.subjectData.show,
-      },
-      placeData: {
-        place: data.place ? data.place : filter.placeData.place,
-        show: filter.placeData.show,
-      },
-      personData: {
-        person: data.person ? data.person : filter.personData.person,
-        show: filter.personData.show,
-      },
-      publisherData: {
-        publisher: data.publisher ? data.publisher : filter.publisherData.publisher,
-        show: filter.publisherData.show,
-      },
+  useGetSearchParams((searchParams) => {
+    setFilter((filter) => {
+      return {
+        titleData: {
+          title: searchParams.title ? searchParams.title : filter.titleData.title,
+          show: filter.titleData.show,
+        },
+        authorData: {
+          author: searchParams.author ? searchParams.author : filter.authorData.author,
+          show: filter.authorData.show,
+        },
+        queryData: {
+          query: searchParams.query ? searchParams.query : filter.queryData.query,
+          show: filter.queryData.show,
+        },
+        subjectData: {
+          subject: searchParams.subject ? searchParams.subject : filter.subjectData.subject,
+          show: filter.subjectData.show,
+        },
+        placeData: {
+          place: searchParams.place ? searchParams.place : filter.placeData.place,
+          show: filter.placeData.show,
+        },
+        personData: {
+          person: searchParams.person ? searchParams.person : filter.personData.person,
+          show: filter.personData.show,
+        },
+        publisherData: {
+          publisher: searchParams.publisher
+            ? searchParams.publisher
+            : filter.publisherData.publisher,
+          show: filter.publisherData.show,
+        },
+      };
     });
-  }, [searchParams]);
+  });
 
   function setTitle(title, show) {
     setFilter({ ...filter, titleData: { title, show } });

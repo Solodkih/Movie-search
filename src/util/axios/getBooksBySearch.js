@@ -1,36 +1,31 @@
 import axios from 'axios';
 import stringWithSpaceToStringWithPlus from '../changeString';
 
-const URL_MAIN = 'https://openlibrary.org';
-
 export default async function getBooksBySearch(
   { query, title, author, subject, place, person, language, publisher },
   page
 ) {
-  const strQuery = query ? `q=${stringWithSpaceToStringWithPlus(query)}` : '';
-  const strTitle = title ? `&title=${stringWithSpaceToStringWithPlus(title)}` : '';
-  const strAuthor = author
-    ? `&author=${stringWithSpaceToStringWithPlus(author)}`
-    : '';
-  const strSubject = subject
-    ? `&subject=${stringWithSpaceToStringWithPlus(subject)}`
-    : '';
-  const strPlace = place ? `&place=${stringWithSpaceToStringWithPlus(place)}` : '';
-  const strPerson = person
-    ? `&person=${stringWithSpaceToStringWithPlus(person)}`
-    : '';
-  const strLanguage = language
-    ? `&language=${stringWithSpaceToStringWithPlus(language)}`
-    : '';
-  const strPublisher = publisher
-    ? `&publisher=${stringWithSpaceToStringWithPlus(publisher)}`
-    : '';
+  const url = new URL('https://openlibrary.org/search.json');
+  query && url.searchParams.set('q', stringWithSpaceToStringWithPlus(query));
+  title && url.searchParams.set('title', stringWithSpaceToStringWithPlus(title));
+  author && url.searchParams.set('author', stringWithSpaceToStringWithPlus(author));
+  subject &&
+    url.searchParams.set('subject', stringWithSpaceToStringWithPlus(subject));
+  place && url.searchParams.set('place', stringWithSpaceToStringWithPlus(place));
+  person && url.searchParams.set('person', stringWithSpaceToStringWithPlus(person));
+  language &&
+    url.searchParams.set('language', stringWithSpaceToStringWithPlus(language));
+  publisher &&
+    url.searchParams.set('publisher', stringWithSpaceToStringWithPlus(publisher));
+  url.searchParams.set('page', page);
 
-  const responseBooks = await axios({
-    method: 'get',
-    url: `${URL_MAIN}/search.json?${strQuery}${strTitle}${strAuthor}${strSubject}${strPlace}${strPerson}${strLanguage}${strPublisher}&page=${page}`,
+  let response = await fetch(url, {
+    method: 'GET',
   });
-  const arrayBooks = responseBooks.data.docs.map((item) => {
+
+  let worksJson;
+  worksJson = await response.json();
+  const arrayWorks = worksJson.docs.map((item) => {
     return {
       title: item.title,
       urlBookByWork: item.key,
@@ -43,5 +38,5 @@ export default async function getBooksBySearch(
         item.cover_i && `https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`,
     };
   });
-  return arrayBooks;
+  return arrayWorks;
 }

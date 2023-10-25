@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import getBooksBySearch from '../../../util/axios/getBooksBySearch';
+import getBooksBySearch from '../../../util/AJAX/getBooksBySearch';
 
 export default function useUpdateList(books, setBooks, page, setPage) {
   const [searchParams] = useSearchParams();

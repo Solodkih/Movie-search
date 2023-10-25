@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getBookByWorks, getNameAuthorForBook } from '../../../util/axios/getBooks';
+import { getBookByWorks } from '../../../util/AJAX/getBook';
+import { getNameAuthorForBook } from '../../../util/AJAX/getAuthor';
 import ImageNotFound from '../../../components/imageNotFound';
 
 import './book.scss';

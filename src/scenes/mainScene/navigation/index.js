@@ -10,7 +10,7 @@ export default function Navigation() {
     <nav className="navigation">
       <div className="navigation_title">
         {`We are looking for `}
-        {<span>a book</span>}
+        <span>a book</span>
         {params.query && ` by request: `}
         {params.query && <span>{params.query}</span>}
       </div>
@@ -29,25 +29,25 @@ export default function Navigation() {
       {params.subject && (
         <div className="navigation_item">
           {`with subject: `}
-          {<span> {params.subject} </span>}
+          <span> {params.subject} </span>
         </div>
       )}
       {params.place && (
         <div className="navigation_item">
           {`Place: `}
-          {<span> {params.place} </span>}
+          <span> {params.place} </span>
         </div>
       )}
       {params.person && (
         <div className="navigation_item">
           {`Person: `}
-          {<span> {params.person} </span>}
+          <span> {params.person} </span>
         </div>
       )}
       {params.publisher && (
         <div className="navigation_item">
           {`Publisher: `}
-          {<span> {params.person} </span>}
+          <span> {params.person} </span>
         </div>
       )}
     </nav>

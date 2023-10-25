@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { getAuthor } from '../../../util/axios/getBooks';
+import { getAuthor } from '../../../util/AJAX/getAuthor';
 import ImageNotFound from '../../../components/imageNotFound';
 import './author.scss';
 

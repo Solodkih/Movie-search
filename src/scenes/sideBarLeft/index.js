@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AdvanceSearch from './advanceSearch';
 import QuerySearch from './querySearch';
 import useGetSearchParams from '../../components/hooks/useGetSearchParams';
@@ -22,37 +22,43 @@ export default function SideBarLeft({ className }) {
   });
 
   useGetSearchParams((searchParams) => {
-    setFilter((filter) => {
+    setFilter((oldFilter) => {
       return {
         titleData: {
-          title: searchParams.title ? searchParams.title : filter.titleData.title,
-          show: filter.titleData.show,
+          title: searchParams.title ? searchParams.title : oldFilter.titleData.title,
+          show: oldFilter.titleData.show,
         },
         authorData: {
-          author: searchParams.author ? searchParams.author : filter.authorData.author,
-          show: filter.authorData.show,
+          author: searchParams.author
+            ? searchParams.author
+            : oldFilter.authorData.author,
+          show: oldFilter.authorData.show,
         },
         queryData: {
-          query: searchParams.query ? searchParams.query : filter.queryData.query,
-          show: filter.queryData.show,
+          query: searchParams.query ? searchParams.query : oldFilter.queryData.query,
+          show: oldFilter.queryData.show,
         },
         subjectData: {
-          subject: searchParams.subject ? searchParams.subject : filter.subjectData.subject,
-          show: filter.subjectData.show,
+          subject: searchParams.subject
+            ? searchParams.subject
+            : oldFilter.subjectData.subject,
+          show: oldFilter.subjectData.show,
         },
         placeData: {
-          place: searchParams.place ? searchParams.place : filter.placeData.place,
-          show: filter.placeData.show,
+          place: searchParams.place ? searchParams.place : oldFilter.placeData.place,
+          show: oldFilter.placeData.show,
         },
         personData: {
-          person: searchParams.person ? searchParams.person : filter.personData.person,
-          show: filter.personData.show,
+          person: searchParams.person
+            ? searchParams.person
+            : oldFilter.personData.person,
+          show: oldFilter.personData.show,
         },
         publisherData: {
           publisher: searchParams.publisher
             ? searchParams.publisher
-            : filter.publisherData.publisher,
-          show: filter.publisherData.show,
+            : oldFilter.publisherData.publisher,
+          show: oldFilter.publisherData.show,
         },
       };
     });

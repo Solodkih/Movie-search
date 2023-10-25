@@ -1,4 +1,3 @@
-import axios from 'axios';
 import stringWithSpaceToStringWithPlus from '../changeString';
 
 export default async function getBooksBySearch(
@@ -19,13 +18,12 @@ export default async function getBooksBySearch(
     url.searchParams.set('publisher', stringWithSpaceToStringWithPlus(publisher));
   url.searchParams.set('page', page);
 
-  let response = await fetch(url, {
+  const response = await fetch(url, {
     method: 'GET',
   });
 
-  let worksJson;
-  worksJson = await response.json();
-  const arrayWorks = worksJson.docs.map((item) => {
+  const works = await response.json();
+  const arrayWorks = works.docs.map((item) => {
     return {
       title: item.title,
       urlBookByWork: item.key,

@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { getBookByWorks } from '../../../util/AJAX/getBook';
 import { getNameAuthorForBook } from '../../../util/AJAX/getAuthor';
+import { setBook } from '../../../redux/bookSlice';
 import ImageNotFound from '../../../components/imageNotFound';
 
 import './book.scss';
 
 export default function Book({ className = '' }) {
   const { worksId } = useParams();
-  const [book, setBook] = useState({
-    bookData: {
-      arrayUrlImage: [],
-      subjects: [],
-      subjectPlaces: [],
-      subjectPeople: [],
-      subjectTimes: [],
-    },
-    authors: [],
+
+  const dispatch = useDispatch();
+
+  const book = useSelector((state) => {
+    return state.book;
   });
+
   const navigate = useNavigate();
 
   function handleOnClickAuthor(event, authorURL) {
@@ -35,12 +35,13 @@ export default function Book({ className = '' }) {
           return { authorURL, name };
         })
       );
-      setBook({
-        bookData,
-        authors,
-      });
+      dispatch(
+        setBook({
+          bookData,
+          authors,
+        })
+      );
     }
-
     get();
   }, []);
   return (

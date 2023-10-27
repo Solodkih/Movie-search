@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { getAuthor } from '../../../util/AJAX/getAuthor';
 import ImageNotFound from '../../../components/imageNotFound';
+import { setAuthor } from '../../../redux/authorSlice';
+
 import './author.scss';
 
 export default function Author({ className = '' }) {
   const { authorId } = useParams();
-  const [author, setAuthor] = useState({ photos: [], alternateNames: [] });
+  const dispatch = useDispatch();
+
+  const author = useSelector((state) => {
+    return state.author;
+  });
 
   useEffect(() => {
     async function get() {
       const authorData = await getAuthor(`/authors/${authorId}`);
-      setAuthor(authorData);
+      dispatch(setAuthor(authorData));
     }
     get();
   }, []);
@@ -21,14 +29,15 @@ export default function Author({ className = '' }) {
     <div className={`${className} author author__container`}>
       <div className="author-main-block">
         <div className="author-main-block__image-block">
-          {author.photos.length !== 0 && (
+          {author.photos.length !== 0 ? (
             <img
               className="author-main-block__image"
               src={author.photos[0]}
               alt={author.name}
             />
+          ) : (
+            <ImageNotFound />
           )}
-          {author.photos.length === 0 && <ImageNotFound />}
         </div>
 
         <div className="author-main-block__name">

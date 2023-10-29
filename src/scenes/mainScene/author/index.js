@@ -3,26 +3,18 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getAuthor } from '../../../util/AJAX/getAuthor';
 import ImageNotFound from '../../../components/imageNotFound';
-import { setAuthor } from '../../../redux/authorSlice';
+import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
 
 import './author.scss';
 
 export default function Author({ className = '' }) {
   const { authorId } = useParams();
   const dispatch = useDispatch();
-
-  const author = useSelector((state) => {
-    return state.author;
-  });
+  const author = useSelector(selectAuthor);
 
   useEffect(() => {
-    async function get() {
-      const authorData = await getAuthor(`/authors/${authorId}`);
-      dispatch(setAuthor(authorData));
-    }
-    get();
+    dispatch(fetchAuthor(`/authors/${authorId}`));
   }, []);
 
   return (

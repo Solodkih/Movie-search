@@ -12,21 +12,29 @@ export const authorSlice = createSlice({
   initialState: {
     photos: [],
     alternateNames: [],
+    statusDownloadAuthor: false,
   },
   reducers: {
     setAuthor: (state, action) => {
-      return { ...action.payload };
+      return { ...action.payload, statusDownloadAuthor: state.statusDownloadAuthor };
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(fetchAuthor.pending, (state, action) => {
+      state.statusDownloadAuthor = true;
+    });
     builder.addCase(fetchAuthor.fulfilled, (state, action) => {
-      return { ...action.payload };
+      return { ...action.payload, statusDownloadAuthor: false };
     });
   },
 });
 
 export const selectAuthor = (state) => {
   return state.author;
+};
+
+export const selectAuthorStatusDownload = (state) => {
+  return state.author.statusDownloadAuthor;
 };
 
 export const { setAuthor } = authorSlice.actions;

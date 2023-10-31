@@ -24,7 +24,7 @@ export const authorSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAuthor.pending, (state, action) => {
+    builder.addCase(fetchAuthor.pending, (state) => {
       state.statusDownloadAuthor = true;
     });
     builder.addCase(fetchAuthor.fulfilled, (state, action) => {

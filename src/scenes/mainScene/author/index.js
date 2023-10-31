@@ -16,6 +16,7 @@ export default function Author({ className = '' }) {
   });
 
   useEffect(() => {
+    if (author.key === `/authors/${authorId}`) return;
     dispatch(fetchAuthor(`/authors/${authorId}`));
   }, []);
 

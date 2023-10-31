@@ -17,8 +17,8 @@ export async function getAuthor(urlAuthor) {
     method: 'get',
   });
   const author = await responseAuthor.json();
-
   return {
+    key: author.key,
     alternateNames: author.alternate_names,
     bio: (() => {
       if (author.bio) {

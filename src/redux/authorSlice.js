@@ -10,8 +10,12 @@ export const fetchAuthor = createAsyncThunk('author/fetchAuthor', async (url) =>
 export const authorSlice = createSlice({
   name: 'author',
   initialState: {
-    photos: [],
-    alternateNames: [],
+    authorList: {
+      notFoundAuthor: {
+        photos: [],
+        alternateNames: [],
+      },
+    },
     statusDownloadAuthor: false,
   },
   reducers: {
@@ -24,13 +28,17 @@ export const authorSlice = createSlice({
       state.statusDownloadAuthor = true;
     });
     builder.addCase(fetchAuthor.fulfilled, (state, action) => {
-      return { ...action.payload, statusDownloadAuthor: false };
+      state.statusDownloadAuthor = false;
+      state.authorList[action.payload.key] = action.payload;
     });
   },
 });
 
-export const selectAuthor = (state) => {
-  return state.author;
+export const selectAuthor = (state, key) => {
+  if (!state.author.authorList[key]) {
+    return state.author.authorList.notFoundAuthor;
+  }
+  return state.author.authorList[key];
 };
 
 export const selectAuthorStatusDownload = (state) => {

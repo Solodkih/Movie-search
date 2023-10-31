@@ -11,7 +11,9 @@ import './author.scss';
 export default function Author({ className = '' }) {
   const { authorId } = useParams();
   const dispatch = useDispatch();
-  const author = useSelector(selectAuthor);
+  const author = useSelector((state) => {
+    return selectAuthor(state, `/authors/${authorId}`);
+  });
 
   useEffect(() => {
     dispatch(fetchAuthor(`/authors/${authorId}`));

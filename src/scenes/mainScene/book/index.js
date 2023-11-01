@@ -12,12 +12,18 @@ import './book.scss';
 
 export default function Book({ className = '' }) {
   const { worksId } = useParams();
-
   const dispatch = useDispatch();
-
-  const book = useSelector((state) => {
-    return state.book;
+  const bookSelect = useSelector((state) => {
+    if (!state.book.worksList[`/works/${worksId}`])
+      return state.book.worksList.workNotFound;
+    return state.book.worksList[`/works/${worksId}`];
   });
+
+  const authors = useSelector((state) => {
+    return state.book.authors;
+  });
+
+  const book = { bookData: bookSelect, authors };
 
   const navigate = useNavigate();
 
@@ -29,7 +35,7 @@ export default function Book({ className = '' }) {
   useEffect(() => {
     async function get() {
       const bookData = await getBookByWorks(worksId);
-      const authors = await Promise.all(
+      const authorsBook = await Promise.all(
         bookData.authors.map(async (authorURL) => {
           const name = await getNameAuthorForBook(authorURL);
           return { authorURL, name };
@@ -38,7 +44,7 @@ export default function Book({ className = '' }) {
       dispatch(
         setBook({
           bookData,
-          authors,
+          authors: authorsBook,
         })
       );
     }

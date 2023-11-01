@@ -26,6 +26,7 @@ export async function getBookByWorks(urlWorks) {
   const book = await responseBook.json();
 
   return {
+    key: book.key,
     subjectTimes: book.subject_times ?? [],
     subjectPlaces: book.subject_places ?? [],
     subjectPeople: book.subject_people ?? [],

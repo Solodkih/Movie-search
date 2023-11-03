@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getBookByWorks } from '../../../util/AJAX/getBook';
-import { setBook, selectBookByKey } from '../../../redux/bookSlice';
-import { fetchAuthor, createAuthorsByArrayKey } from '../../../redux/authorSlice';
+import { fetchWork, selectBookByKey } from '../../../redux/bookSlice';
+import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
 import ImageNotFound from '../../../components/imageNotFound';
 
 import './book.scss';
@@ -26,18 +25,8 @@ export default function Book({ className = '' }) {
   }
 
   useEffect(() => {
-    async function get() {
-      const bookData = await getBookByWorks(worksId);
-      bookData.authors.map((keyAuthor) => {
-        dispatch(fetchAuthor(keyAuthor));
-      });
-      dispatch(
-        setBook({
-          bookData,
-        })
-      );
-    }
-    get();
+    if (bookSelect.key === `/works/${worksId}`) return;
+    dispatch(fetchWork(worksId));
   }, []);
   return (
     <div className={`${className} book book__container`}>
@@ -74,18 +63,18 @@ export default function Book({ className = '' }) {
             </div>
             <ul className="book-aboutBook__authors-list">
               {book.authors.map(({ name, key }, i) => {
-                  return (
-                    <li className="book-aboutBook__authors-item" key={key}>
-                      <div
-                        role="button"
-                        onClick={(event) => handleOnClickAuthor(event, key)}
-                        tabIndex={i}
-                      >
-                        <span>{name}</span>
-                      </div>
-                    </li>
-                  );
-                })}
+                return (
+                  <li className="book-aboutBook__authors-item" key={key}>
+                    <div
+                      role="button"
+                      onClick={(event) => handleOnClickAuthor(event, key)}
+                      tabIndex={i}
+                    >
+                      <span>{name}</span>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

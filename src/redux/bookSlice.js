@@ -1,4 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getBookByWorks } from '../util/AJAX/getBook';
+import { fetchAuthor } from './authorSlice';
+
+export const fetchWork = createAsyncThunk(
+  'book/fetchWork',
+  async (url, thunkAPI) => {
+    const response = await getBookByWorks(url);
+    response.authors.forEach((keyAuthor) => {
+      thunkAPI.dispatch(fetchAuthor(keyAuthor));
+    });
+    return response;
+  }
+);
 
 export const bookSlice = createSlice({
   name: 'book',
@@ -13,7 +26,7 @@ export const bookSlice = createSlice({
         authors: [],
       },
     },
-    authors: [],
+    statusDownloadWork: false,
   },
   reducers: {
     setBook: (state, action) => {
@@ -22,12 +35,25 @@ export const bookSlice = createSlice({
       state.authors = authors;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchWork.pending, (state) => {
+      state.statusDownloadWork = true;
+    });
+    builder.addCase(fetchWork.fulfilled, (state, action) => {
+      state.statusDownloadWork = false;
+      state.worksList[action.payload.key] = action.payload;
+    });
+  },
 });
 
 export const selectBookByKey = (state, key) => {
   if (!state.book.worksList[`/works/${key}`])
     return state.book.worksList.workNotFound;
   return state.book.worksList[`/works/${key}`];
+};
+
+export const selectWorkStatusDownload = (state) => {
+  return state.book.statusDownloadWork;
 };
 
 export const { setBook } = bookSlice.actions;

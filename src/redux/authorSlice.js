@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
 import { getAuthor } from '../util/AJAX/getAuthor';
 
@@ -39,6 +39,29 @@ export const selectAuthor = (state, key) => {
     return state.author.authorList.notFoundAuthor;
   }
   return state.author.authorList[key];
+};
+
+export const createAuthorsByArrayKey = (arrayKey = []) => {
+  const arrayFunctionsGetAuthor = arrayKey.map((item) => {
+    return (state) => {
+      return state.author.authorList[item];
+    };
+  });
+  const selectAuthorsByArrayKey = createSelector(
+    arrayFunctionsGetAuthor,
+    (...args) => {
+      return args.map((item) => {
+        if (!item) {
+          return {
+            photos: [],
+            alternateNames: [],
+          };
+        }
+        return item;
+      });
+    }
+  );
+  return selectAuthorsByArrayKey;
 };
 
 export const selectAuthorStatusDownload = (state) => {

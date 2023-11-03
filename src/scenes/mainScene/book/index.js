@@ -4,8 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getBookByWorks } from '../../../util/AJAX/getBook';
-import { getNameAuthorForBook } from '../../../util/AJAX/getAuthor';
-import { setBook } from '../../../redux/bookSlice';
+import { setBook, selectBookByKey } from '../../../redux/bookSlice';
+import { fetchAuthor, createAuthorsByArrayKey } from '../../../redux/authorSlice';
 import ImageNotFound from '../../../components/imageNotFound';
 
 import './book.scss';
@@ -14,37 +14,26 @@ export default function Book({ className = '' }) {
   const { worksId } = useParams();
   const dispatch = useDispatch();
   const bookSelect = useSelector((state) => {
-    if (!state.book.worksList[`/works/${worksId}`])
-      return state.book.worksList.workNotFound;
-    return state.book.worksList[`/works/${worksId}`];
+    return selectBookByKey(state, worksId);
   });
-
-  const authors = useSelector((state) => {
-    return state.book.authors;
-  });
-
+  const authors = useSelector(createAuthorsByArrayKey(bookSelect.authors));
   const book = { bookData: bookSelect, authors };
-
   const navigate = useNavigate();
 
-  function handleOnClickAuthor(event, authorURL) {
+  function handleOnClickAuthor(event, keyAuthor) {
     event.preventDefault();
-    navigate(`${authorURL}`);
+    navigate(keyAuthor);
   }
 
   useEffect(() => {
     async function get() {
       const bookData = await getBookByWorks(worksId);
-      const authorsBook = await Promise.all(
-        bookData.authors.map(async (authorURL) => {
-          const name = await getNameAuthorForBook(authorURL);
-          return { authorURL, name };
-        })
-      );
+      bookData.authors.map((keyAuthor) => {
+        dispatch(fetchAuthor(keyAuthor));
+      });
       dispatch(
         setBook({
           bookData,
-          authors: authorsBook,
         })
       );
     }
@@ -84,19 +73,19 @@ export default function Book({ className = '' }) {
               <span>Authors:</span>
             </div>
             <ul className="book-aboutBook__authors-list">
-              {book.authors.map(({ name, authorURL }, i) => {
-                return (
-                  <li className="book-aboutBook__authors-item" key={`${authorURL}`}>
-                    <div
-                      role="button"
-                      onClick={(event) => handleOnClickAuthor(event, authorURL)}
-                      tabIndex={i}
-                    >
-                      <span>{name}</span>
-                    </div>
-                  </li>
-                );
-              })}
+              {book.authors.map(({ name, key }, i) => {
+                  return (
+                    <li className="book-aboutBook__authors-item" key={key}>
+                      <div
+                        role="button"
+                        onClick={(event) => handleOnClickAuthor(event, key)}
+                        tabIndex={i}
+                      >
+                        <span>{name}</span>
+                      </div>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </div>

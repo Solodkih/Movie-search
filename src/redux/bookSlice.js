@@ -10,6 +10,7 @@ export const bookSlice = createSlice({
         subjectPlaces: [],
         subjectPeople: [],
         subjectTimes: [],
+        authors: [],
       },
     },
     authors: [],
@@ -22,6 +23,12 @@ export const bookSlice = createSlice({
     },
   },
 });
+
+export const selectBookByKey = (state, key) => {
+  if (!state.book.worksList[`/works/${key}`])
+    return state.book.worksList.workNotFound;
+  return state.book.worksList[`/works/${key}`];
+};
 
 export const { setBook } = bookSlice.actions;
 

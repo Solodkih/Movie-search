@@ -20,7 +20,7 @@ export default function ItemListBooks({ className, book = { title: 'Not found' }
 
   function handleOnClick(event) {
     event.preventDefault();
-    navigate(`/book${book.urlBookByWork}`);
+    navigate(book.key);
   }
 
   const checkAndTrimString = (string) => {
@@ -37,14 +37,18 @@ export default function ItemListBooks({ className, book = { title: 'Not found' }
       onClick={(event) => handleOnClick(event)}
     >
       <div className="item-list-books__image-wrapper">
-        {(book.urlImage && (
-          <img className="item-list-books__image" src={book.urlImage} alt="Omg" />
+        {(book.arrayUrlImage[0] && (
+          <img
+            className="item-list-books__image"
+            src={book.arrayUrlImage[0]}
+            alt="Omg"
+          />
         )) ||
           imageNotFound()}
       </div>
       <div className="item-list-books__title">{checkAndTrimString(book.title)}</div>
       <div className="item-list-books__author">
-        {book.authors[0] ? <span> by {book.authors[0]}</span> : null}
+        {book.authorsName[0] ? <span> by {book.authorsName[0]}</span> : null}
       </div>
     </div>
   );
@@ -54,6 +58,6 @@ ItemListBooks.propTypes = {
   className: PropTypes.string.isRequired,
   book: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    urlImage: PropTypes.string.isRequired,
+    arrayUrlImage: PropTypes.array.isRequired,
   }).isRequired,
 };

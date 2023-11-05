@@ -12,14 +12,14 @@ export default function SearchList({ className = '' }) {
 
   useIntersect(containerRef, setPage);
   useUpdateList(books, setBooks, page, setPage);
-
+  
   return (
     <div className={`${className} list-books`}>
       <div className="list-books__container">
         {books.map((book) => {
           return (
             <ItemListBooks
-              key={`${book.title}+${book.urlImage}+${book.urlBookByWork}`}
+              key={`${book.title}+${book.arrayUrlImage[0]}+${book.key}`}
               className="list-books__item"
               book={book}
             />

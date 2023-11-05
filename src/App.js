@@ -16,8 +16,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Main />}>
             <Route index element={<ListBooks />} />
-            <Route path="book">
-              <Route path="works/:worksId" element={<Book />} />
+            <Route path="works">
+              <Route path=":worksId" element={<Book />} />
             </Route>
             <Route path="authors">
               <Route path=":authorId" element={<Author />} />

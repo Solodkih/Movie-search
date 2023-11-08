@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const options = {
   root: null,
@@ -6,17 +6,17 @@ const options = {
   threshold: 0.5,
 };
 
-export default function useIntersect(containerRef, setPage) {
-  const intersectionObserverCalback = ([entry]) => {
-    if (entry.isIntersecting) {
-      setPage((page) => page + 1);
-    }
-  };
+export default function useIntersect(containerRef) {
+  const [intersection, setIntersection] = useState();
 
   useEffect(() => {
-    const observer = new IntersectionObserver(intersectionObserverCalback, options);
+    const observer = new IntersectionObserver(([entry]) => {
+      setIntersection(entry.isIntersecting);
+    }, options);
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
+    return () => observer.disconnect();
   }, [containerRef]);
+  return intersection;
 }

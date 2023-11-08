@@ -30,9 +30,7 @@ export const bookSlice = createSlice({
   },
   reducers: {
     setBook: (state, action) => {
-      const { bookData, authors } = action.payload;
-      state.worksList[bookData.key] = bookData;
-      state.authors = authors;
+      state.worksList[action.payload.key] = action.payload;
     },
   },
   extraReducers: (builder) => {

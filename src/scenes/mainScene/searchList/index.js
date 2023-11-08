@@ -1,4 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPageSearchObject } from '../../../redux/searchSlice';
+
 import PropTypes from 'prop-types';
 import useIntersect from './useIntersect';
 import ItemListBooks from '../../../components/itemListBooks';
@@ -7,12 +10,29 @@ import './searchList.scss';
 
 export default function SearchList({ className = '' }) {
   const [books, setBooks] = useState([]);
-  const [page, setPage] = useState(1);
-  const containerRef = useRef(null);
+  const dispatch = useDispatch();
+  const page = useSelector((state) => state.search.page);
 
-  useIntersect(containerRef, setPage);
-  useUpdateList(books, setBooks, page, setPage);
-  
+
+  const setPage = () => {
+    const newPage = page + 1;
+    dispatch(setPageSearchObject(newPage));
+  };
+  const resetPage = () => {
+    dispatch(setPageSearchObject(1));
+  };
+
+  const containerRef = useRef(null);
+  const intersection = useIntersect(containerRef);
+
+  useEffect(() => {
+    if (intersection) {
+      setPage();
+    }
+  }, [intersection]);
+
+  useUpdateList(books, setBooks, page, resetPage);
+
   return (
     <div className={`${className} list-books`}>
       <div className="list-books__container">

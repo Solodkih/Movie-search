@@ -37,7 +37,7 @@ export default function SearchList({ className = '' }) {
     }
   }, [intersection]);
 
-  useUpdateList(page, maxPage, resetPage);
+  useUpdateList(page, books, resetPage);
 
   return (
     <div className={`${className} list-books`}>

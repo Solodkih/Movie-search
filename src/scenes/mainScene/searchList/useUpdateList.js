@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useSearchParams } from 'react-router-dom';
@@ -9,8 +9,9 @@ import {
 } from '../../../redux/searchSlice';
 import { addListBook } from '../../../redux/bookSlice';
 
-export default function useUpdateList(page, maxPage, resetPage) {
+export default function useUpdateList(page, books, resetPage) {
   const [searchParams] = useSearchParams();
+  const isFirstRender = useRef(true);
 
   const dispatch = useDispatch();
 
@@ -28,30 +29,37 @@ export default function useUpdateList(page, maxPage, resetPage) {
   }
 
   useEffect(async () => {
-
-    const params = await getSearchParams();
-    const responsBooks = await getBooksBySearch(params, 1);
-    dispatch(addListBook(responsBooks.arrayWorks));
-    const url = window.location.href;
-    const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
-      return item.key;
-    });
-    dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
-    dispatch(setMaxPageSearchObject({ url, maxPage: responsBooks.maxPage }));
-    resetPage();
+    if (Array.isArray(books) && books.length === 0) {
+      const params = await getSearchParams();
+      const responsBooks = await getBooksBySearch(params, 1);
+      dispatch(addListBook(responsBooks.arrayWorks));
+      const url = window.location.href;
+      const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
+        return item.key;
+      });
+      dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
+      dispatch(setMaxPageSearchObject({ url, maxPage: responsBooks.maxPage }));
+      resetPage();
+    }
   }, [searchParams]);
 
   useEffect(async () => {
     if (page <= 1) {
       return;
     }
-    const params = await getSearchParams();
-    const responsBooks = await getBooksBySearch(params, page);
-    dispatch(addListBook(responsBooks.arrayWorks));
-    const url = window.location.href;
-    const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
-      return item.key;
-    });
-    dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
+    if (!isFirstRender.current) {
+      const params = await getSearchParams();
+      const responsBooks = await getBooksBySearch(params, page);
+      dispatch(addListBook(responsBooks.arrayWorks));
+      const url = window.location.href;
+      const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
+        return item.key;
+      });
+      dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
+    }
+    isFirstRender.current = false;
+    return () => {
+      isFirstRender.current = true;
+    };
   }, [page]);
 }

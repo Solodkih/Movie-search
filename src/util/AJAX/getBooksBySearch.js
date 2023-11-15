@@ -24,8 +24,10 @@ export default async function getBooksBySearch(
   });
 
   const works = await response.json();
+  const maxPage = Math.ceil((works.num_found || works.numFound) / 100);
+
   const arrayWorks = works.docs.map((item) => {
     return workFromSearchObjects(item);
   });
-  return arrayWorks;
+  return { arrayWorks, maxPage };
 }

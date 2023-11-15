@@ -32,6 +32,11 @@ export const bookSlice = createSlice({
     setBook: (state, action) => {
       state.worksList[action.payload.key] = action.payload;
     },
+    addListBook: (state, action) => {
+      action.payload.forEach((item) => {
+        state.worksList[item.key] = item;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWork.pending, (state) => {
@@ -54,6 +59,6 @@ export const selectWorkStatusDownload = (state) => {
   return state.book.statusDownloadWork;
 };
 
-export const { setBook } = bookSlice.actions;
+export const { setBook, addListBook } = bookSlice.actions;
 
 export default bookSlice.reducer;

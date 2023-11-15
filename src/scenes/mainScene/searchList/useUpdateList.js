@@ -3,9 +3,13 @@ import { useDispatch } from 'react-redux';
 
 import { useSearchParams } from 'react-router-dom';
 import getBooksBySearch from '../../../util/AJAX/getBooksBySearch';
-import { addPropsToSearchObject } from '../../../redux/searchSlice';
+import {
+  addPropsToSearchObject,
+  setMaxPageSearchObject,
+} from '../../../redux/searchSlice';
+import { addListBook } from '../../../redux/bookSlice';
 
-export default function useUpdateList(books, setBooks, page, resetPage) {
+export default function useUpdateList(page, maxPage, resetPage) {
   const [searchParams] = useSearchParams();
 
   const dispatch = useDispatch();
@@ -24,29 +28,30 @@ export default function useUpdateList(books, setBooks, page, resetPage) {
   }
 
   useEffect(async () => {
+
     const params = await getSearchParams();
     const responsBooks = await getBooksBySearch(params, 1);
+    dispatch(addListBook(responsBooks.arrayWorks));
     const url = window.location.href;
-    const arrayKeyWorks = responsBooks.map((item) => {
+    const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
       return item.key;
     });
     dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
+    dispatch(setMaxPageSearchObject({ url, maxPage: responsBooks.maxPage }));
     resetPage();
-    setBooks(responsBooks);
   }, [searchParams]);
 
   useEffect(async () => {
     if (page <= 1) {
       return;
     }
-    console.log('[page]');
     const params = await getSearchParams();
     const responsBooks = await getBooksBySearch(params, page);
+    dispatch(addListBook(responsBooks.arrayWorks));
     const url = window.location.href;
-    const arrayKeyWorks = responsBooks.map((item) => {
+    const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
       return item.key;
     });
     dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
-    setBooks([...books, ...responsBooks]);
   }, [page]);
 }

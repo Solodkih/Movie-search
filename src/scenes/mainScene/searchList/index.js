@@ -1,6 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPageSearchObject } from '../../../redux/searchSlice';
+import {
+  setPageSearchObject,
+  createSelectListWorkByArrayKey,
+} from '../../../redux/searchSlice';
 
 import PropTypes from 'prop-types';
 import useIntersect from './useIntersect';
@@ -9,17 +12,18 @@ import useUpdateList from './useUpdateList';
 import './searchList.scss';
 
 export default function SearchList({ className = '' }) {
-  const [books, setBooks] = useState([]);
   const dispatch = useDispatch();
-  const page = useSelector((state) => state.search.page);
-
+  const url = window.location.href;
+  const page = useSelector((state) => state.search.pageList[url]?.page) || 0;
+  const maxPage = useSelector((state) => state.search.pageList[url]?.maxPage) || 0;
+  const arrayUrl = useSelector((state) => state.search.seachList[url]) || [];
+  const books = useSelector(createSelectListWorkByArrayKey(arrayUrl));
 
   const setPage = () => {
-    const newPage = page + 1;
-    dispatch(setPageSearchObject(newPage));
+    dispatch(setPageSearchObject({ url, page: page + 1 }));
   };
   const resetPage = () => {
-    dispatch(setPageSearchObject(1));
+    dispatch(setPageSearchObject({ url, page: 1 }));
   };
 
   const containerRef = useRef(null);
@@ -27,11 +31,13 @@ export default function SearchList({ className = '' }) {
 
   useEffect(() => {
     if (intersection) {
-      setPage();
+      if (page + 1 <= maxPage) {
+        setPage();
+      }
     }
   }, [intersection]);
 
-  useUpdateList(books, setBooks, page, resetPage);
+  useUpdateList(page, maxPage, resetPage);
 
   return (
     <div className={`${className} list-books`}>
@@ -39,7 +45,7 @@ export default function SearchList({ className = '' }) {
         {books.map((book) => {
           return (
             <ItemListBooks
-              key={`${book.title}+${book.arrayUrlImage[0]}+${book.key}`}
+              key={`${book.title}+${book.key}`}
               className="list-books__item"
               book={book}
             />

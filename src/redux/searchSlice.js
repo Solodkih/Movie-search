@@ -1,4 +1,20 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
+import getBooksBySearch from '../util/AJAX/getBooksBySearch';
+import { addListBook } from './bookSlice';
+
+export const fetchSearchListWork = createAsyncThunk(
+  'search/fetchSearchListWork',
+  async ({params, page, url}, { dispatch }) => {
+    const responsBooks = await getBooksBySearch(params, page);
+    dispatch(addListBook(responsBooks.arrayWorks));
+    const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
+      return item.key;
+    });
+    dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
+    dispatch(setMaxPageSearchObject({ url, maxPage: responsBooks.maxPage }));
+    return responsBooks;
+  }
+);
 
 export const createSelectListWorkByArrayKey = (arrayKey = []) => {
   const arrayFunctionsGetWork = arrayKey.map((item) => {
@@ -23,6 +39,7 @@ export const createSelectListWorkByArrayKey = (arrayKey = []) => {
 export const searchSlice = createSlice({
   name: 'search',
   initialState: {
+    statusDownloadWork: false,
     seachList: {},
     pageList: {},
   },
@@ -49,6 +66,14 @@ export const searchSlice = createSlice({
       }
       state.pageList[action.payload.url].maxPage = action.payload.maxPage;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchSearchListWork.pending, (state) => {
+      state.statusDownloadWork = true;
+    });
+    builder.addCase(fetchSearchListWork.fulfilled, (state) => {
+      state.statusDownloadWork = false;
+    });
   },
 });
 

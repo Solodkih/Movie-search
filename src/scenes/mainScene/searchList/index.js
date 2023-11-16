@@ -18,6 +18,9 @@ export default function SearchList({ className = '' }) {
   const maxPage = useSelector((state) => state.search.pageList[url]?.maxPage) || 0;
   const arrayUrl = useSelector((state) => state.search.seachList[url]) || [];
   const books = useSelector(createSelectListWorkByArrayKey(arrayUrl));
+  const statusDownloadWork = useSelector((state) => {
+    return state.search.statusDownloadWork;
+  });
 
   const setPage = () => {
     dispatch(setPageSearchObject({ url, page: page + 1 }));
@@ -30,6 +33,9 @@ export default function SearchList({ className = '' }) {
   const intersection = useIntersect(containerRef);
 
   useEffect(() => {
+    if (statusDownloadWork) {
+      return;
+    }
     if (intersection) {
       if (page + 1 <= maxPage) {
         setPage();

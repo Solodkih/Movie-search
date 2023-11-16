@@ -2,12 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useSearchParams } from 'react-router-dom';
-import getBooksBySearch from '../../../util/AJAX/getBooksBySearch';
-import {
-  addPropsToSearchObject,
-  setMaxPageSearchObject,
-} from '../../../redux/searchSlice';
-import { addListBook } from '../../../redux/bookSlice';
+import { fetchSearchListWork } from '../../../redux/searchSlice';
 
 export default function useUpdateList(page, books, resetPage) {
   const [searchParams] = useSearchParams();
@@ -31,31 +26,17 @@ export default function useUpdateList(page, books, resetPage) {
   useEffect(async () => {
     if (Array.isArray(books) && books.length === 0) {
       const params = await getSearchParams();
-      const responsBooks = await getBooksBySearch(params, 1);
-      dispatch(addListBook(responsBooks.arrayWorks));
       const url = window.location.href;
-      const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
-        return item.key;
-      });
-      dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
-      dispatch(setMaxPageSearchObject({ url, maxPage: responsBooks.maxPage }));
+      dispatch(fetchSearchListWork({ params, page: 1, url }));
       resetPage();
     }
   }, [searchParams]);
 
   useEffect(async () => {
-    if (page <= 1) {
-      return;
-    }
-    if (!isFirstRender.current) {
+    if (!isFirstRender.current && page > 1) {
       const params = await getSearchParams();
-      const responsBooks = await getBooksBySearch(params, page);
-      dispatch(addListBook(responsBooks.arrayWorks));
       const url = window.location.href;
-      const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {
-        return item.key;
-      });
-      dispatch(addPropsToSearchObject({ url, arrayKeyWorks }));
+      dispatch(fetchSearchListWork({ params, page, url }));
     }
     isFirstRender.current = false;
     return () => {

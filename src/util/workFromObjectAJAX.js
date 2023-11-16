@@ -33,7 +33,7 @@ export const workFromSearchObjects = (objectAJAX) => {
     authors: objectAJAX.author_key.map((key) => {
       return `/authors/${key}`;
     }),
-    authorsName: objectAJAX.author_name && '',
+    authorsName: objectAJAX.author_name || '',
     description: objectAJAX.description?.value ?? objectAJAX.description ?? '',
     arrayUrlImage:
       (objectAJAX.cover_i && [

@@ -16,9 +16,19 @@
   width: 100%;
 }
 
-.loader__animation {
+.loader__big-animation {
   z-index: 10001;
   position: absolute;
+  border: 16px solid $main-white;
+  border-top: 16px solid $lite-green;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1.5s linear infinite;
+}
+
+.loader__small-animation {
+  margin: auto;
   border: 16px solid $main-white;
   border-top: 16px solid $lite-green;
   border-radius: 50%;

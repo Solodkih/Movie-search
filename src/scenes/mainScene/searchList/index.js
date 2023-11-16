@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { SmallLoader } from '../../../components/loader';
 import {
   setPageSearchObject,
   createSelectListWorkByArrayKey,
@@ -58,6 +59,7 @@ export default function SearchList({ className = '' }) {
           );
         })}
       </div>
+      {statusDownloadWork && <SmallLoader />}
       <div id="ref" ref={containerRef} />
     </div>
   );

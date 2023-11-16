@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import SideBarLeft from './sideBarLeft';
 import MainScene from './mainScene';
-import Loader from '../components/loader/index';
+import { BigLoader } from '../components/loader/index';
 import { selectAuthorStatusDownload } from '../redux/authorSlice';
 import { selectWorkStatusDownload } from '../redux/bookSlice';
 
@@ -16,7 +16,7 @@ export default function Main() {
 
   return (
     <>
-      {statusDownload && <Loader />}
+      {statusDownload && <BigLoader />}
       <div className="scene">
         <SideBarLeft className="scene__side-bar-left" />
         <MainScene className="scene__main-scene" />

@@ -1,4 +1,5 @@
 import stringWithSpaceToStringWithPlus from '../changeString';
+import { workFromSearchObjects } from '../workFromObjectAJAX';
 
 export default async function getBooksBySearch(
   { query, title, author, subject, place, person, language, publisher },
@@ -23,18 +24,10 @@ export default async function getBooksBySearch(
   });
 
   const works = await response.json();
+  const maxPage = Math.ceil((works.num_found || works.numFound) / 100);
+
   const arrayWorks = works.docs.map((item) => {
-    return {
-      title: item.title,
-      urlBookByWork: item.key,
-      authors: item.author_name
-        ? item.author_name.map((itemAuthors) => {
-            return itemAuthors;
-          })
-        : [''],
-      urlImage:
-        item.cover_i && `https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`,
-    };
+    return workFromSearchObjects(item);
   });
-  return arrayWorks;
+  return { arrayWorks, maxPage };
 }

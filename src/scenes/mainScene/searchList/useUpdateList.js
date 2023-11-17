@@ -1,9 +1,14 @@
-import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import getBooksBySearch from '../../../util/AJAX/getBooksBySearch';
+import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
-export default function useUpdateList(books, setBooks, page, setPage) {
+import { useSearchParams } from 'react-router-dom';
+import { fetchSearchListWork } from '../../../redux/searchSlice';
+
+export default function useUpdateList(page, books, resetPage) {
   const [searchParams] = useSearchParams();
+  const isFirstRender = useRef(true);
+
+  const dispatch = useDispatch();
 
   async function getSearchParams() {
     return {
@@ -19,15 +24,23 @@ export default function useUpdateList(books, setBooks, page, setPage) {
   }
 
   useEffect(async () => {
-    setPage(1);
-    const params = await getSearchParams();
-    const responsBooks = await getBooksBySearch(params, page);
-    setBooks(responsBooks);
+    if (Array.isArray(books) && books.length === 0) {
+      const params = await getSearchParams();
+      const url = window.location.href;
+      dispatch(fetchSearchListWork({ params, page: 1, url }));
+      resetPage();
+    }
   }, [searchParams]);
 
   useEffect(async () => {
-    const params = await getSearchParams();
-    const responsBooks = await getBooksBySearch(params, page);
-    setBooks([...books, ...responsBooks]);
+    if (!isFirstRender.current && page > 1) {
+      const params = await getSearchParams();
+      const url = window.location.href;
+      dispatch(fetchSearchListWork({ params, page, url }));
+    }
+    isFirstRender.current = false;
+    return () => {
+      isFirstRender.current = true;
+    };
   }, [page]);
 }

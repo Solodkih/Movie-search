@@ -1,47 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getBookByWorks } from '../../../util/AJAX/getBook';
-import { getNameAuthorForBook } from '../../../util/AJAX/getAuthor';
-import ImageNotFound from '../../../components/imageNotFound';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { fetchWork, selectBookByKey } from '../../../redux/bookSlice';
+import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
+import ImageNotFound from '../../../components/imageNotFound';
+import { SmallLoader } from '../../../components/loader';
 import './book.scss';
 
 export default function Book({ className = '' }) {
   const { worksId } = useParams();
-  const [book, setBook] = useState({
-    bookData: {
-      arrayUrlImage: [],
-      subjects: [],
-      subjectPlaces: [],
-      subjectPeople: [],
-      subjectTimes: [],
-    },
-    authors: [],
+  const dispatch = useDispatch();
+  const bookSelect = useSelector((state) => {
+    return selectBookByKey(state, worksId);
   });
+  const download =
+    useSelector((state) => {
+      return state.book.statusDownloadWork;
+    }) || false;
+  const authors = useSelector(createAuthorsByArrayKey(bookSelect.authors));
+  const book = { bookData: bookSelect, authors };
   const navigate = useNavigate();
 
-  function handleOnClickAuthor(event, authorURL) {
+  function handleOnClickAuthor(event, keyAuthor) {
     event.preventDefault();
-    navigate(`${authorURL}`);
+    navigate(keyAuthor);
   }
 
   useEffect(() => {
-    async function get() {
-      const bookData = await getBookByWorks(worksId);
-      const authors = await Promise.all(
-        bookData.authors.map(async (authorURL) => {
-          const name = await getNameAuthorForBook(authorURL);
-          return { authorURL, name };
-        })
-      );
-      setBook({
-        bookData,
-        authors,
-      });
-    }
-
-    get();
+    if (bookSelect.key === `/works/${worksId}` && bookSelect.download) return;
+    dispatch(fetchWork(worksId));
   }, []);
   return (
     <div className={`${className} book book__container`}>
@@ -77,12 +66,12 @@ export default function Book({ className = '' }) {
               <span>Authors:</span>
             </div>
             <ul className="book-aboutBook__authors-list">
-              {book.authors.map(({ name, authorURL }, i) => {
+              {book.authors.map(({ name, key }, i) => {
                 return (
-                  <li className="book-aboutBook__authors-item" key={`${authorURL}`}>
+                  <li className="book-aboutBook__authors-item" key={key}>
                     <div
                       role="button"
-                      onClick={(event) => handleOnClickAuthor(event, authorURL)}
+                      onClick={(event) => handleOnClickAuthor(event, key)}
                       tabIndex={i}
                     >
                       <span>{name}</span>
@@ -93,7 +82,10 @@ export default function Book({ className = '' }) {
             </ul>
           </div>
         </div>
-        <div className="book-description">{book.bookData.description}</div>
+        {download && <SmallLoader />}
+        {!download && (
+          <div className="book-description">{book.bookData.description}</div>
+        )}
       </div>
       <div className="book-aboutBook__subject">
         <div className="book-aboutBook__subject-title">

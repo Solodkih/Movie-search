@@ -1,34 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { getAuthor } from '../../../util/AJAX/getAuthor';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { SmallLoader } from '../../../components/loader';
 import ImageNotFound from '../../../components/imageNotFound';
+import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
+
 import './author.scss';
 
 export default function Author({ className = '' }) {
   const { authorId } = useParams();
-  const [author, setAuthor] = useState({ photos: [], alternateNames: [] });
+  const dispatch = useDispatch();
+  const author = useSelector((state) => {
+    return selectAuthor(state, `/authors/${authorId}`);
+  });
+  const download =
+    useSelector((state) => {
+      return state.author.statusDownloadAuthor;
+    }) || false;
 
   useEffect(() => {
-    async function get() {
-      const authorData = await getAuthor(`/authors/${authorId}`);
-      setAuthor(authorData);
-    }
-    get();
+    if (author.key === `/authors/${authorId}`) return;
+    dispatch(fetchAuthor(`/authors/${authorId}`));
   }, []);
 
   return (
     <div className={`${className} author author__container`}>
       <div className="author-main-block">
         <div className="author-main-block__image-block">
-          {author.photos.length !== 0 && (
+          {author.photos.length !== 0 ? (
             <img
               className="author-main-block__image"
               src={author.photos[0]}
               alt={author.name}
             />
+          ) : (
+            <ImageNotFound />
           )}
-          {author.photos.length === 0 && <ImageNotFound />}
         </div>
 
         <div className="author-main-block__name">
@@ -58,7 +67,8 @@ export default function Author({ className = '' }) {
             {author.deathDate ? author.deathDate : 'unknown'}
           </div>
         </div>
-        <div className="author-main-block__bio">{author.bio}</div>
+        {download && <SmallLoader />}
+        {!download && <div className="author-main-block__bio">{author.bio}</div>}
       </div>
       <div className="author__category">
         <div className="author__category-title">

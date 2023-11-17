@@ -30,11 +30,17 @@ export const bookSlice = createSlice({
   },
   reducers: {
     setBook: (state, action) => {
-      state.worksList[action.payload.key] = action.payload;
+      state.worksList[action.payload.key] = {
+        ...state.worksList[action.payload.key],
+        ...action.payload,
+      };
     },
     addListBook: (state, action) => {
       action.payload.forEach((item) => {
-        state.worksList[item.key] = item;
+        state.worksList[item.key] = {
+          ...state.worksList[item.key],
+          ...item,
+        };
       });
     },
   },
@@ -44,7 +50,10 @@ export const bookSlice = createSlice({
     });
     builder.addCase(fetchWork.fulfilled, (state, action) => {
       state.statusDownloadWork = false;
-      state.worksList[action.payload.key] = action.payload;
+      state.worksList[action.payload.key] = {
+        ...state.worksList[action.payload.key],
+        ...action.payload,
+      };
     });
   },
 });

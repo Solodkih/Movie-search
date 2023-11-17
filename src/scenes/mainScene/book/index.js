@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchWork, selectBookByKey } from '../../../redux/bookSlice';
 import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
 import ImageNotFound from '../../../components/imageNotFound';
-
+import { SmallLoader } from '../../../components/loader';
 import './book.scss';
 
 export default function Book({ className = '' }) {
@@ -15,6 +15,10 @@ export default function Book({ className = '' }) {
   const bookSelect = useSelector((state) => {
     return selectBookByKey(state, worksId);
   });
+  const download =
+    useSelector((state) => {
+      return state.book.statusDownloadWork;
+    }) || false;
   const authors = useSelector(createAuthorsByArrayKey(bookSelect.authors));
   const book = { bookData: bookSelect, authors };
   const navigate = useNavigate();
@@ -25,7 +29,7 @@ export default function Book({ className = '' }) {
   }
 
   useEffect(() => {
-    if (bookSelect.key === `/works/${worksId}`) return;
+    if (bookSelect.key === `/works/${worksId}` && bookSelect.download) return;
     dispatch(fetchWork(worksId));
   }, []);
   return (
@@ -78,7 +82,10 @@ export default function Book({ className = '' }) {
             </ul>
           </div>
         </div>
-        <div className="book-description">{book.bookData.description}</div>
+        {download && <SmallLoader />}
+        {!download && (
+          <div className="book-description">{book.bookData.description}</div>
+        )}
       </div>
       <div className="book-aboutBook__subject">
         <div className="book-aboutBook__subject-title">

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { SmallLoader } from '../../../components/loader';
 import ImageNotFound from '../../../components/imageNotFound';
 import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
 
@@ -14,6 +15,10 @@ export default function Author({ className = '' }) {
   const author = useSelector((state) => {
     return selectAuthor(state, `/authors/${authorId}`);
   });
+  const download =
+    useSelector((state) => {
+      return state.author.statusDownloadAuthor;
+    }) || false;
 
   useEffect(() => {
     if (author.key === `/authors/${authorId}`) return;
@@ -62,7 +67,8 @@ export default function Author({ className = '' }) {
             {author.deathDate ? author.deathDate : 'unknown'}
           </div>
         </div>
-        <div className="author-main-block__bio">{author.bio}</div>
+        {download && <SmallLoader />}
+        {!download && <div className="author-main-block__bio">{author.bio}</div>}
       </div>
       <div className="author__category">
         <div className="author__category-title">

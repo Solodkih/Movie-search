@@ -11,7 +11,6 @@ export const workFromGetWorkObjects = (objectAJAX) => {
     authors: objectAJAX.authors.map((itemAuthors) => {
       return itemAuthors.author.key;
     }),
-    authorsName: objectAJAX.author_name && '',
     description: objectAJAX.description?.value ?? objectAJAX.description ?? '',
     arrayUrlImage:
       objectAJAX.covers?.map((itemUrl) => {

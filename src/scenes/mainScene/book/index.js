@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchWork, selectBookByKey } from '../../../redux/bookSlice';
 import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
+import { setShowImage } from '../../../redux/modalWindowImageSlice';
+import { fetchArrayImages } from '../../../redux/imageSlice';
 import BookView from './bookView';
 
 export default function Book({ className = '' }) {
@@ -21,6 +23,16 @@ export default function Book({ className = '' }) {
   const book = { bookData: bookSelect, authors };
   const navigate = useNavigate();
 
+  const handlerShowImage = () => {
+    dispatch(
+      setShowImage({
+        show: true,
+        currentImage: bookSelect.arrayUrlImage[0],
+        arrayImage: bookSelect.arrayUrlImage,
+      })
+    );
+  };
+
   function handleOnClickAuthor(event, keyAuthor) {
     event.preventDefault();
     navigate(keyAuthor);
@@ -31,12 +43,17 @@ export default function Book({ className = '' }) {
     dispatch(fetchWork(worksId));
   }, []);
 
+  useEffect(() => {
+    dispatch(fetchArrayImages(bookSelect.arrayUrlImage));
+  }, [bookSelect]);
+
   return (
     <BookView
       book={book}
       handleOnClickAuthor={handleOnClickAuthor}
       className={className}
       download={download}
+      handlerShowImage={handlerShowImage}
     />
   );
 }

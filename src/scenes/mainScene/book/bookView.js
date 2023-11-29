@@ -5,10 +5,16 @@ import { SmallLoader } from '../../../components/loader';
 
 import './book.scss';
 
-export default function bookView({ book, handleOnClickAuthor, className = '' }) {
+export default function bookView({
+  book,
+  handleOnClickAuthor,
+  className = '',
+  download,
+  handlerShowImage,
+}) {
   return (
     <div className={`${className} book book__container`}>
-      <div className="book__main-block">
+      <div className="book__main-block" onClick={handlerShowImage}>
         <div className="book__image-block">
           {book.bookData.arrayUrlImage.length !== 0 || <ImageNotFound />}
           {book.bookData.arrayUrlImage.length === 0 || (

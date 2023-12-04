@@ -8,6 +8,10 @@ import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
 import { setShowImage } from '../../../redux/modalWindowImageSlice';
 import { fetchArrayImages } from '../../../redux/imageSlice';
 import BookView from './bookView';
+import {
+  getUrlImage,
+  SIZE_IMAGE_LARGE,
+} from '../../../util/image';
 
 export default function Book({ className = '' }) {
   const { worksId } = useParams();
@@ -27,8 +31,10 @@ export default function Book({ className = '' }) {
     dispatch(
       setShowImage({
         show: true,
-        currentImage: bookSelect.arrayUrlImage[0],
-        arrayImage: bookSelect.arrayUrlImage,
+        currentImage: getUrlImage(SIZE_IMAGE_LARGE, bookSelect.arrayUrlImage[0]),
+        arrayImage: bookSelect.arrayUrlImage.map((item) => {
+          return getUrlImage(SIZE_IMAGE_LARGE, item);
+        }),
       })
     );
   };
@@ -44,7 +50,13 @@ export default function Book({ className = '' }) {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchArrayImages(bookSelect.arrayUrlImage));
+    dispatch(
+      fetchArrayImages(
+        bookSelect.arrayUrlImage.map((item) => {
+          return getUrlImage(SIZE_IMAGE_LARGE, item);
+        })
+      )
+    );
   }, [bookSelect]);
 
   return (

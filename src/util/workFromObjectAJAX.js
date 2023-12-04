@@ -12,10 +12,10 @@ export const workFromGetWorkObjects = (objectAJAX) => {
       return itemAuthors.author.key;
     }),
     description: objectAJAX.description?.value ?? objectAJAX.description ?? '',
-    arrayUrlImage:
-      objectAJAX.covers?.map((itemUrl) => {
-        return `https://covers.openlibrary.org/b/id/${itemUrl}-L.jpg`;
-      }) ?? [],
+    arrayUrlImage: objectAJAX.covers ?? [],
+    //      objectAJAX.covers?.map((itemUrl) => {
+    //        return `https://covers.openlibrary.org/b/id/${itemUrl}-L.jpg`;
+    //      }) ?? [],
   };
 };
 
@@ -34,11 +34,12 @@ export const workFromSearchObjects = (objectAJAX) => {
     }),
     authorsName: objectAJAX.author_name || '',
     description: objectAJAX.description?.value ?? objectAJAX.description ?? '',
-    arrayUrlImage:
+    arrayUrlImage: [objectAJAX.cover_i],
+    /*
       (objectAJAX.cover_i && [
         `https://covers.openlibrary.org/b/id/${objectAJAX.cover_i}-L.jpg`,
       ]) ||
-      [],
+      [],*/
   };
 };
 
@@ -61,10 +62,12 @@ export const workFromSubjectObjects = (objectAJAX) => {
     description: objectAJAX.description?.value ?? objectAJAX.description ?? '',
     arrayUrlImage:
       (objectAJAX.cover_i && [
-        `https://covers.openlibrary.org/b/id/${objectAJAX.cover_i}-L.jpg`,
+        objectAJAX.cover_i,
+        //        `https://covers.openlibrary.org/b/id/${objectAJAX.cover_i}-L.jpg`,
       ]) ||
       (objectAJAX.cover_id && [
-        `https://covers.openlibrary.org/b/id/${objectAJAX.cover_id}-L.jpg`,
+        objectAJAX.cover_id,
+        //        `https://covers.openlibrary.org/b/id/${objectAJAX.cover_id}-L.jpg`,
       ]) ||
       [],
   };

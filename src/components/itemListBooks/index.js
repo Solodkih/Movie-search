@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 import './itemListBooks.scss';
+import { getUrlImage, SIZE_IMAGE_SMALL, SIZE_IMAGE_MEDIUM } from '../../util/image';
 
 function imageNotFound() {
   return (
@@ -40,8 +41,8 @@ export default function ItemListBooks({ className, book = { title: 'Not found' }
         {(book.arrayUrlImage[0] && (
           <img
             className="item-list-books__image"
-            src={book.arrayUrlImage[0]}
-            alt="Omg"
+            src={getUrlImage(SIZE_IMAGE_MEDIUM, book.arrayUrlImage[0])}
+            alt="book.arrayUrlImage[0]"
           />
         )) ||
           imageNotFound()}

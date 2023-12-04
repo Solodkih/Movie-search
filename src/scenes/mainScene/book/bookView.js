@@ -2,6 +2,7 @@ import React from 'react';
 
 import ImageNotFound from '../../../components/imageNotFound';
 import { SmallLoader } from '../../../components/loader';
+import { getUrlImage, SIZE_IMAGE_LARGE } from '../../../util/image';
 
 import './book.scss';
 
@@ -14,13 +15,13 @@ export default function bookView({
 }) {
   return (
     <div className={`${className} book book__container`}>
-      <div className="book__main-block" onClick={handlerShowImage}>
-        <div className="book__image-block">
+      <div className="book__main-block">
+        <div className="book__image-block" onClick={handlerShowImage}>
           {book.bookData.arrayUrlImage.length !== 0 || <ImageNotFound />}
           {book.bookData.arrayUrlImage.length === 0 || (
             <img
               className="book__image"
-              src={book.bookData.arrayUrlImage[0]}
+              src={getUrlImage(SIZE_IMAGE_LARGE, book.bookData.arrayUrlImage[0])}
               alt={book.bookData.title}
             />
           )}

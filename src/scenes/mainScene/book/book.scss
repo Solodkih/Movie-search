@@ -24,6 +24,10 @@
     justify-content: center;
   }
 
+  &__image-block:hover {
+    background-color: rgba($lite-green, 0.3);
+  }
+
   &__image {
     max-width: 100%;
     max-height: 100%;

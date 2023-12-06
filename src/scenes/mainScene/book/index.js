@@ -5,13 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchWork, selectBookByKey } from '../../../redux/bookSlice';
 import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
-import { setShowImage } from '../../../redux/modalWindowImageSlice';
 import { fetchArrayImages } from '../../../redux/imageSlice';
 import BookView from './bookView';
-import {
-  getUrlImage,
-  SIZE_IMAGE_LARGE,
-} from '../../../util/image';
+import { getUrlImage, SIZE_IMAGE_LARGE } from '../../../util/image';
+
+import useGetHandlerShowImage from '../../../components/hooks/useGetHandlerShowImage';
 
 export default function Book({ className = '' }) {
   const { worksId } = useParams();
@@ -27,17 +25,7 @@ export default function Book({ className = '' }) {
   const book = { bookData: bookSelect, authors };
   const navigate = useNavigate();
 
-  const handlerShowImage = () => {
-    dispatch(
-      setShowImage({
-        show: true,
-        currentImage: getUrlImage(SIZE_IMAGE_LARGE, bookSelect.arrayUrlImage[0]),
-        arrayImage: bookSelect.arrayUrlImage.map((item) => {
-          return getUrlImage(SIZE_IMAGE_LARGE, item);
-        }),
-      })
-    );
-  };
+  const handlerShowImage = useGetHandlerShowImage(bookSelect.arrayUrlImage);
 
   function handleOnClickAuthor(event, keyAuthor) {
     event.preventDefault();

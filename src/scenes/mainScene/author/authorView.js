@@ -12,7 +12,6 @@ export default function AuthorView({
   handlerShowImage,
   className = '',
 }) {
-  console.log(urlImage);
 
   return (
     <div className={`${className} author author__container`}>

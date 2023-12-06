@@ -1,11 +1,11 @@
 import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setShowImage } from '../../../redux/modalWindowImageSlice';
 import React, { useEffect } from 'react';
 import { fetchArrayImages } from '../../../redux/imageSlice';
 import { getUrlImage, SIZE_IMAGE_LARGE } from '../../../util/image';
-import  useGetInternalUrlImage from '../../../components/hooks/useGetInternalUrlImage';
+import useGetInternalUrlImage from '../../../components/hooks/useGetInternalUrlImage';
+import useGetHandlerShowImage from '../../../components/hooks/useGetHandlerShowImage';
 
 export default function AuthorHOC(Component) {
   return function (props) {
@@ -29,17 +29,7 @@ export default function AuthorHOC(Component) {
       dispatch(fetchAuthor(`/authors/${authorId}`));
     }, []);
 
-    const handlerShowImage = () => {
-      dispatch(
-        setShowImage({
-          show: true,
-          currentImage: getUrlImage(SIZE_IMAGE_LARGE, author.photos[0]),
-          arrayImage: author.photos.map((item) => {
-            return getUrlImage(SIZE_IMAGE_LARGE, item);
-          }),
-        })
-      );
-    };
+    const handlerShowImage = useGetHandlerShowImage(author.photos);
 
     useEffect(() => {
       dispatch(

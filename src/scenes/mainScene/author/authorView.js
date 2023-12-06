@@ -5,15 +5,26 @@ import ImageNotFound from '../../../components/imageNotFound';
 
 import './author.scss';
 
-export default function AuthorView({ author, download, className = '' }) {
+export default function AuthorView({
+  urlImage,
+  author,
+  download,
+  handlerShowImage,
+  className = '',
+}) {
+  console.log(urlImage);
+
   return (
     <div className={`${className} author author__container`}>
       <div className="author-main-block">
-        <div className="author-main-block__image-block">
-          {author.photos.length !== 0 ? (
+        <div
+          className="author-main-block__image-block"
+          onClick={urlImage ? handlerShowImage : null}
+        >
+          {urlImage ? (
             <img
               className="author-main-block__image"
-              src={author.photos[0]}
+              src={urlImage}
               alt={author.name}
             />
           ) : (

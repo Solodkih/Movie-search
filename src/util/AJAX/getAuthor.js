@@ -34,10 +34,6 @@ export async function getAuthor(urlAuthor) {
     name: author.name,
     personalName: author.personal_name,
     title: author.title,
-    photos: author.photos
-      ? author.photos.map((item) => {
-          return getUrlImage(SIZE_IMAGE_LARGE, item);
-        })
-      : [],
+    photos: author.photos || [],
   };
 }

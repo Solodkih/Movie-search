@@ -56,6 +56,10 @@
     justify-content: center;
   }
 
+  &__image-block:hover {
+    background-color: rgba($lite-green, 0.3);
+  }
+
   &__name {
     flex: 1 1 100%;
     padding-top: 20px;

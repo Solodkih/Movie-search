@@ -2,12 +2,13 @@ import React from 'react';
 
 import ImageNotFound from '../../../components/imageNotFound';
 import { SmallLoader } from '../../../components/loader';
-import { getUrlImage, SIZE_IMAGE_LARGE } from '../../../util/image';
 
 import './book.scss';
 
 export default function bookView({
-  book,
+  urlImage,
+  book, 
+  authors,
   handleOnClickAuthor,
   className = '',
   download,
@@ -17,18 +18,14 @@ export default function bookView({
     <div className={`${className} book book__container`}>
       <div className="book__main-block">
         <div className="book__image-block" onClick={handlerShowImage}>
-          {book.bookData.arrayUrlImage.length !== 0 || <ImageNotFound />}
-          {book.bookData.arrayUrlImage.length === 0 || (
-            <img
-              className="book__image"
-              src={getUrlImage(SIZE_IMAGE_LARGE, book.bookData.arrayUrlImage[0])}
-              alt={book.bookData.title}
-            />
+          {!urlImage && <ImageNotFound />}
+          {urlImage && (
+            <img className="book__image" src={urlImage} alt={book.title} />
           )}
         </div>
         <div className="book-aboutBook">
           <div className="book-aboutBook__title">
-            <span>{book.bookData.title}</span>
+            <span>{book.title}</span>
           </div>
           <div className="book-aboutBook__first-publish-date">
             <div className="book-aboutBook__first-publish-date-title">
@@ -36,8 +33,8 @@ export default function bookView({
             </div>
             <div className="book-aboutBook__first-publish-date-data">
               <span>{`${
-                book.bookData.firstPublishDate
-                  ? book.bookData.firstPublishDate
+                book.firstPublishDate
+                  ? book.firstPublishDate
                   : 'unknown'
               }.`}</span>
             </div>
@@ -47,7 +44,7 @@ export default function bookView({
               <span>Authors:</span>
             </div>
             <ul className="book-aboutBook__authors-list">
-              {book.authors.map(({ name, key }, i) => {
+              {authors.map(({ name, key }, i) => {
                 return (
                   <li className="book-aboutBook__authors-item" key={key}>
                     <div
@@ -65,7 +62,7 @@ export default function bookView({
         </div>
         {download && <SmallLoader />}
         {!download && (
-          <div className="book-description">{book.bookData.description}</div>
+          <div className="book-description">{book.description}</div>
         )}
       </div>
       <div className="book-aboutBook__subject">
@@ -73,7 +70,7 @@ export default function bookView({
           <span>Subjects:</span>
         </div>
         <div className="book-aboutBook__subject-list">
-          {book.bookData.subjects.map((item, i, { length }) => {
+          {book.subjects.map((item, i, { length }) => {
             if (i + 1 === length) {
               return (
                 <span className="book-aboutBook__subject-item" key={`${item}`}>
@@ -94,7 +91,7 @@ export default function bookView({
           <span>Subject people:</span>
         </div>
         <div className="book-aboutBook__subject-list">
-          {book.bookData.subjectPeople.map((item, i, { length }) => {
+          {book.subjectPeople.map((item, i, { length }) => {
             if (i + 1 === length) {
               return (
                 <span className="book-aboutBook__subject-item" key={`${item}`}>
@@ -115,7 +112,7 @@ export default function bookView({
           <span>Subject places:</span>
         </div>
         <div className="book-aboutBook__subject-list">
-          {book.bookData.subjectPlaces.map((item, i, { length }) => {
+          {book.subjectPlaces.map((item, i, { length }) => {
             if (i + 1 === length) {
               return (
                 <span className="book-aboutBook__subject-item" key={`${item}`}>
@@ -137,7 +134,7 @@ export default function bookView({
         </div>
         <div className="book-aboutBook__subject-list">
           <p>
-            {book.bookData.subjectTimes.map((item, i, { length }) => {
+            {book.subjectTimes.map((item, i, { length }) => {
               if (i + 1 === length) {
                 return (
                   <span className="book-aboutBook__subject-item" key={`${item}`}>

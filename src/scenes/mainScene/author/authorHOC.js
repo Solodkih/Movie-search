@@ -9,27 +9,26 @@ import useGetHandlerShowImage from '../../../components/hooks/useGetHandlerShowI
 
 export default function AuthorHOC(Component) {
   return function (props) {
-    const { authorId } = useParams();
     const dispatch = useDispatch();
+    const { authorId } = useParams();
+
     const author = useSelector((state) => {
       return selectAuthor(state, `/authors/${authorId}`);
     });
-
-    const urlImage = useGetInternalUrlImage(
-      getUrlImage(SIZE_IMAGE_LARGE, author.photos[0])
-    );
-
     const download =
       useSelector((state) => {
         return state.author.statusDownloadAuthor;
       }) || false;
 
+    const handlerShowImage = useGetHandlerShowImage(author.photos);
+    const urlImage = useGetInternalUrlImage(
+      getUrlImage(SIZE_IMAGE_LARGE, author.photos[0])
+    );
+
     useEffect(() => {
       if (author.key === `/authors/${authorId}`) return;
       dispatch(fetchAuthor(`/authors/${authorId}`));
     }, []);
-
-    const handlerShowImage = useGetHandlerShowImage(author.photos);
 
     useEffect(() => {
       dispatch(

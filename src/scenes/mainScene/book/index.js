@@ -9,23 +9,27 @@ import { fetchArrayImages } from '../../../redux/imageSlice';
 import BookView from './bookView';
 import { getUrlImage, SIZE_IMAGE_LARGE } from '../../../util/image';
 
+import useGetInternalUrlImage from '../../../components/hooks/useGetInternalUrlImage';
 import useGetHandlerShowImage from '../../../components/hooks/useGetHandlerShowImage';
 
 export default function Book({ className = '' }) {
-  const { worksId } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const bookSelect = useSelector((state) => {
+  const { worksId } = useParams();
+
+  const book = useSelector((state) => {
     return selectBookByKey(state, worksId);
   });
   const download =
     useSelector((state) => {
       return state.book.statusDownloadWork;
     }) || false;
-  const authors = useSelector(createAuthorsByArrayKey(bookSelect.authors));
-  const book = { bookData: bookSelect, authors };
-  const navigate = useNavigate();
+  const authors = useSelector(createAuthorsByArrayKey(book.authors));
 
-  const handlerShowImage = useGetHandlerShowImage(bookSelect.arrayUrlImage);
+  const handlerShowImage = useGetHandlerShowImage(book.arrayUrlImage);
+  const urlImage = useGetInternalUrlImage(
+    getUrlImage(SIZE_IMAGE_LARGE, book.arrayUrlImage[0])
+  );
 
   function handleOnClickAuthor(event, keyAuthor) {
     event.preventDefault();
@@ -33,27 +37,29 @@ export default function Book({ className = '' }) {
   }
 
   useEffect(() => {
-    if (bookSelect.key === `/works/${worksId}` && bookSelect.download) return;
+    if (book.key === `/works/${worksId}` && book.download) return;
     dispatch(fetchWork(worksId));
   }, []);
 
   useEffect(() => {
     dispatch(
       fetchArrayImages(
-        bookSelect.arrayUrlImage.map((item) => {
+        book.arrayUrlImage.map((item) => {
           return getUrlImage(SIZE_IMAGE_LARGE, item);
         })
       )
     );
-  }, [bookSelect]);
+  }, [book]);
 
   return (
     <BookView
       book={book}
+      authors={authors}
       handleOnClickAuthor={handleOnClickAuthor}
       className={className}
       download={download}
       handlerShowImage={handlerShowImage}
+      urlImage={urlImage}
     />
   );
 }

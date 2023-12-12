@@ -1,53 +1,84 @@
 import React, { useState } from 'react';
 import './navigation.scss';
 import useGetSearchParams from '../../../components/hooks/useGetSearchParams';
+import useSetUrl from '../../../components/hooks/useSetUrl';
 
 export default function Navigation() {
   const [params, setParams] = useState({});
   useGetSearchParams(setParams);
+  const handleSetParam = useSetUrl(params);
+
+  const handleDeleteParam = (event) => {
+    handleSetParam(event, '');
+  };
 
   return (
     <nav className="navigation">
       <div className="navigation_title">
-        {`We are looking for `}
+        <span>{`We are looking `}</span>
         <span>a book</span>
-        {params.query && ` by request: `}
-        {params.query && <span>{params.query}</span>}
       </div>
+      {params.query && (
+        <div className="navigation_item">
+          <span>{`Query: `}</span>
+          <span onClick={handleDeleteParam} data-name="query">
+            {params.query}
+          </span>
+          <button className="navigation_button-cansel"></button>
+        </div>
+      )}
       {params.title && (
         <div className="navigation_item">
-          {`with title: `}
-          <span>{params.title}</span>
+          <span>{`Title: `}</span>
+          <span onClick={handleDeleteParam} data-name="title">
+            {params.title}
+          </span>
+          <button className="navigation_button-cansel"></button>
         </div>
       )}
       {params.author && (
         <div className="navigation_item">
-          {`with author: `}
-          <span>{params.author}</span>
+          <span>{`Author: `}</span>
+          <span onClick={handleDeleteParam} data-name="author">
+            {params.author}
+          </span>
+          <button className="navigation_button-cansel"></button>
         </div>
       )}
       {params.subject && (
         <div className="navigation_item">
-          {`with subject: `}
-          <span> {params.subject} </span>
+          <span>{`Subject: `}</span>
+          <span onClick={handleDeleteParam} data-name="subject">
+            {params.subject}
+          </span>
+          <button className="navigation_button-cansel"></button>
         </div>
       )}
       {params.place && (
         <div className="navigation_item">
-          {`Place: `}
-          <span> {params.place} </span>
+          <span>{`Place: `}</span>
+          <span onClick={handleDeleteParam} data-name="place">
+            {params.place}
+          </span>
+          <button className="navigation_button-cansel"></button>
         </div>
       )}
       {params.person && (
         <div className="navigation_item">
-          {`Person: `}
-          <span> {params.person} </span>
+          <span>{`Person: `}</span>
+          <span onClick={handleDeleteParam} data-name="person">
+            {params.person}
+          </span>
+          <button className="navigation_button-cansel"></button>
         </div>
       )}
       {params.publisher && (
         <div className="navigation_item">
-          {`Publisher: `}
-          <span> {params.person} </span>
+          <span>{`Publisher: `}</span>
+          <span onClick={handleDeleteParam} data-name="publisher">
+            {params.publisher}
+          </span>
+          <button className="navigation_button-cansel"></button>
         </div>
       )}
     </nav>

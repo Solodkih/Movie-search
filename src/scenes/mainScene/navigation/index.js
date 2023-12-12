@@ -14,73 +14,75 @@ export default function Navigation() {
 
   return (
     <nav className="navigation">
-      <div className="navigation_title">
-        <span>{`We are looking `}</span>
-        <span>a book</span>
-      </div>
-      {params.query && (
-        <div className="navigation_item">
-          <span>{`Query: `}</span>
-          <span onClick={handleDeleteParam} data-name="query">
-            {params.query}
-          </span>
-          <button className="navigation_button-cansel"></button>
-        </div>
-      )}
-      {params.title && (
-        <div className="navigation_item">
-          <span>{`Title: `}</span>
-          <span onClick={handleDeleteParam} data-name="title">
-            {params.title}
-          </span>
-          <button className="navigation_button-cansel"></button>
-        </div>
-      )}
-      {params.author && (
-        <div className="navigation_item">
-          <span>{`Author: `}</span>
-          <span onClick={handleDeleteParam} data-name="author">
-            {params.author}
-          </span>
-          <button className="navigation_button-cansel"></button>
-        </div>
-      )}
-      {params.subject && (
-        <div className="navigation_item">
-          <span>{`Subject: `}</span>
-          <span onClick={handleDeleteParam} data-name="subject">
-            {params.subject}
-          </span>
-          <button className="navigation_button-cansel"></button>
-        </div>
-      )}
-      {params.place && (
-        <div className="navigation_item">
-          <span>{`Place: `}</span>
-          <span onClick={handleDeleteParam} data-name="place">
-            {params.place}
-          </span>
-          <button className="navigation_button-cansel"></button>
-        </div>
-      )}
-      {params.person && (
-        <div className="navigation_item">
-          <span>{`Person: `}</span>
-          <span onClick={handleDeleteParam} data-name="person">
-            {params.person}
-          </span>
-          <button className="navigation_button-cansel"></button>
-        </div>
-      )}
-      {params.publisher && (
-        <div className="navigation_item">
-          <span>{`Publisher: `}</span>
-          <span onClick={handleDeleteParam} data-name="publisher">
-            {params.publisher}
-          </span>
-          <button className="navigation_button-cansel"></button>
-        </div>
-      )}
+      <ul className="navigation_list">
+        <li className="navigation_title">
+          <span>{`We are looking `}</span>
+          <button>a book</button>
+        </li>
+        {params.query && (
+          <li className="navigation_item">
+            <span>{`Query: `}</span>
+            <button onClick={handleDeleteParam} data-name="query">
+              {params.query}
+            </button>
+            <div className="navigation_button-cansel"></div>
+          </li>
+        )}
+        {params.title && (
+          <li className="navigation_item">
+            <span>{`Title: `}</span>
+            <button onClick={handleDeleteParam} data-name="title">
+              {params.title}
+            </button>
+            <div className="navigation_button-cansel"></div>
+          </li>
+        )}
+        {params.author && (
+          <li className="navigation_item">
+            <span>{`Author: `}</span>
+            <button onClick={handleDeleteParam} data-name="author">
+              {params.author}
+            </button>
+            <div className="navigation_button-cansel"></div>
+          </li>
+        )}
+        {params.subject && (
+          <li className="navigation_item">
+            <span>{`Subject: `}</span>
+            <button onClick={handleDeleteParam} data-name="subject">
+              {params.subject}
+            </button>
+            <div className="navigation_button-cansel"></div>
+          </li>
+        )}
+        {params.place && (
+          <li className="navigation_item">
+            <span>{`Place: `}</span>
+            <button onClick={handleDeleteParam} data-name="place">
+              {params.place}
+            </button>
+            <div className="navigation_button-cansel"></div>
+          </li>
+        )}
+        {params.person && (
+          <li className="navigation_item">
+            <span>{`Person: `}</span>
+            <button onClick={handleDeleteParam} data-name="person">
+              {params.person}
+            </button>
+            <div className="navigation_button-cansel"></div>
+          </li>
+        )}
+        {params.publisher && (
+          <li className="navigation_item">
+            <span>{`Publisher: `}</span>
+            <button onClick={handleDeleteParam} data-name="publisher">
+              {params.publisher}
+            </button>
+            <div className="navigation_button-cansel"></div>
+          </li>
+        )}
+      </ul>
     </nav>
   );
 }

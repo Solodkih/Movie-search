@@ -2,11 +2,15 @@
 
 .navigation {
   width: 100%;
-  font-size: 24px;
-  display: flex;
-  justify-content: flex-start;
   padding: 20px 20px 20px 20px;
-  flex-wrap: wrap;
+
+
+  &_list {
+    font-size: 24px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
 
   &_title {
     display: flex;
@@ -16,13 +20,13 @@
     font-size: 30px;
   }
 
-  &_title > span:first-child {
+  &_title > span {
     display: flex;
     align-items: center;
     padding-right: 5px;
   }
 
-  &_title > span:not(:first-child) {
+  &_title > button {
     padding: 4px;
     background-color: $lite-dark;
     border-radius: 7px;
@@ -38,13 +42,13 @@
     display: flex;
   }
 
-  &_item > span:first-child {
+  &_item > span {
     display: flex;
     align-items: center;
     padding-right: 5px;
   }
 
-  &_item > span:not(:first-child) {
+  &_item > button {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -54,12 +58,12 @@
     border: 2px solid $lite-green;
   }
 
-  &_item > span:hover + &_button-cansel {
+  &_item > button:hover + &_button-cansel {
     display: block;
     background-color: rgba($lite-green, 0.3);
   }
 
-  &_item > span:hover:not(:first-child) {
+  &_item > button:hover {
     background-color: rgba($lite-green, 0.3);
   }
 

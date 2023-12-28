@@ -24,27 +24,33 @@ export default function ModalWindowImage() {
   return (
     <div className="modalWindowImage">
       <button
+        aria-label="show previous image"
+        type="button"
         className="modalWindowImage_button"
         onClick={() => {
           dispatch(previousImage());
         }}
       >
-        <i className="modalWindowImage_arrow modalWindowImage_arrow__left"></i>
+        <i className="modalWindowImage_arrow modalWindowImage_arrow__left" />
       </button>
       <div className="modalWindowImage_image-block">
         <button
+          aria-label="clouse window image"
+          type="button"
           className="modalWindowImage_image-block-cansel"
           onClick={handlerCanselWindow}
-        ></button>
-        <img className="modalWindowImage_image" alt="image" src={url} />
+        />
+        <img className="modalWindowImage_image" alt={url} src={url} />
       </div>
       <button
+        aria-label="show next image"
+        type="button"
         className="modalWindowImage_button"
         onClick={() => {
           dispatch(nextImage());
         }}
       >
-        <i className="modalWindowImage_arrow modalWindowImage_arrow__right"></i>
+        <i className="modalWindowImage_arrow modalWindowImage_arrow__right" />
       </button>
     </div>
   );

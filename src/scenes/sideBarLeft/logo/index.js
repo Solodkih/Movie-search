@@ -15,13 +15,13 @@ export default function Logo({ className }) {
     <div className={`${className} logo`}>
       <div
         role="button"
-        tabIndex={0}
+        tabIndex="0"
         onClick={navigateToMainURL}
         className="logo__title"
       >
         BOOKS
       </div>
-      <div role="button" tabIndex={0} className="logo__subtitle">
+      <div role="button" tabIndex="0" className="logo__subtitle">
         SEARCH
       </div>
     </div>

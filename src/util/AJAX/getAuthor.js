@@ -1,5 +1,3 @@
-import { getUrlImage, SIZE_IMAGE_LARGE } from '../image';
-
 const urlMain = new URL('https://openlibrary.org');
 
 export async function getNameAuthorForBook(urlAuthor) {

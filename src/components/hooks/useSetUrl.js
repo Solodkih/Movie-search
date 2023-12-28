@@ -5,16 +5,19 @@ export default function useSetUrl(params) {
 
   const handleSetParam = (event, data) => {
     event.preventDefault();
-    params[event.target.dataset.name] = data;
+    const newParams = { ...params };
+    newParams[event.target.dataset.name] = data;
 
-    const queryUrlParams = params.query ? `query=${params.query}` : '';
-    const titleUrlParams = params.title ? `&title=${params.title}` : '';
-    const authorUrlParams = params.author ? `&author=${params.author}` : '';
-    const subjectUrlParams = params.subject ? `&subject=${params.subject}` : '';
-    const placeUrlParams = params.place ? `&place=${params.place}` : '';
-    const personUrlParams = params.person ? `&person=${params.person}` : '';
-    const publisherUrlParams = params.publisher
-      ? `&publisher=${params.publisher}`
+    const queryUrlParams = newParams.query ? `query=${newParams.query}` : '';
+    const titleUrlParams = newParams.title ? `&title=${newParams.title}` : '';
+    const authorUrlParams = newParams.author ? `&author=${newParams.author}` : '';
+    const subjectUrlParams = newParams.subject
+      ? `&subject=${newParams.subject}`
+      : '';
+    const placeUrlParams = newParams.place ? `&place=${newParams.place}` : '';
+    const personUrlParams = newParams.person ? `&person=${newParams.person}` : '';
+    const publisherUrlParams = newParams.publisher
+      ? `&publisher=${newParams.publisher}`
       : '';
     navigate(
       `/search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}${publisherUrlParams}`

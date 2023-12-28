@@ -2,45 +2,30 @@ import React from 'react';
 import './search.scss';
 import PropTypes from 'prop-types';
 
-export default function Seach({
-  placeholder = '',
-  imageButtonSeach,
-  value = '',
-  handleChange,
-}) {
+export default function Search({ handleChange, ...props }) {
   return (
-    <div className="seach">
-      {imageButtonSeach && (
-        <input
-          className="seach__button-seach"
-          type="image"
-          src={imageButtonSeach}
-          name="submit"
-          alt="отправить"
-        />
-      )}
+    <div className="search">
       <input
-        className="seach__input"
         type="textarea"
-        placeholder={placeholder}
-        value={value}
+        className="search__input"
         onChange={(event) => {
           event.preventDefault();
           handleChange(event);
         }}
+        {...props}
       />
     </div>
   );
 }
 
-Seach.propTypes = {
+Search.propTypes = {
   placeholder: PropTypes.string,
   imageButtonSeach: PropTypes.string,
   value: PropTypes.string,
   handleChange: PropTypes.func,
 };
 
-Seach.defaultProps = {
+Search.defaultProps = {
   placeholder: '',
   imageButtonSeach: '',
   value: '',

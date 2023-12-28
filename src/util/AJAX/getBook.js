@@ -13,7 +13,7 @@ export async function getBookSubjects() {
 
   const books = await responseBook.json();
   const arrayBooks = books.works.map((item) => {
-    return workFromSubjectObjects(item); 
+    return workFromSubjectObjects(item);
   });
   return arrayBooks;
 }

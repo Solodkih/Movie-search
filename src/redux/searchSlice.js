@@ -2,9 +2,11 @@ import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit'
 import getBooksBySearch from '../util/AJAX/getBooksBySearch';
 import { addListBook } from './bookSlice';
 
+/* eslint no-use-before-define: 0 */
+
 export const fetchSearchListWork = createAsyncThunk(
   'search/fetchSearchListWork',
-  async ({params, page, url}, { dispatch }) => {
+  async ({ params, page, url }, { dispatch }) => {
     const responsBooks = await getBooksBySearch(params, page);
     dispatch(addListBook(responsBooks.arrayWorks));
     const arrayKeyWorks = responsBooks.arrayWorks.map((item) => {

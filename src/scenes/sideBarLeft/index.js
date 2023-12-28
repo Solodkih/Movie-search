@@ -1,159 +1,81 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 import AdvanceSearch from './advanceSearch';
 import QuerySearch from './querySearch';
 import useGetSearchParams from '../../components/hooks/useGetSearchParams';
+import useSetUrl from '../../components/hooks/useSetUrl';
 
 import Logo from './logo';
 
 import './sideBarLeft.scss';
 
 export default function SideBarLeft({ className }) {
-  const navigate = useNavigate();
-  const [filter, setFilter] = useState({
-    queryData: { query: '', show: true },
-    titleData: { title: '', show: true },
-    authorData: { author: '', show: true },
-    subjectData: { subject: '', show: true },
-    placeData: { place: '', show: true },
-    personData: { person: '', show: true },
-    publisherData: { publisher: '', show: true },
+  const [params, setParams] = useState({
+    query: '',
+    title: '',
+    author: '',
+    subject: '',
+    place: '',
+    person: '',
+    publisher: '',
   });
 
+  const handleSetParam = useSetUrl(params);
+
   useGetSearchParams((searchParams) => {
-    setFilter((oldFilter) => {
+    setParams((oldFilter) => {
       return {
-        titleData: {
-          title: searchParams.title ? searchParams.title : oldFilter.titleData.title,
-          show: oldFilter.titleData.show,
-        },
-        authorData: {
-          author: searchParams.author
-            ? searchParams.author
-            : oldFilter.authorData.author,
-          show: oldFilter.authorData.show,
-        },
-        queryData: {
-          query: searchParams.query ? searchParams.query : oldFilter.queryData.query,
-          show: oldFilter.queryData.show,
-        },
-        subjectData: {
-          subject: searchParams.subject
-            ? searchParams.subject
-            : oldFilter.subjectData.subject,
-          show: oldFilter.subjectData.show,
-        },
-        placeData: {
-          place: searchParams.place ? searchParams.place : oldFilter.placeData.place,
-          show: oldFilter.placeData.show,
-        },
-        personData: {
-          person: searchParams.person
-            ? searchParams.person
-            : oldFilter.personData.person,
-          show: oldFilter.personData.show,
-        },
-        publisherData: {
-          publisher: searchParams.publisher
-            ? searchParams.publisher
-            : oldFilter.publisherData.publisher,
-          show: oldFilter.publisherData.show,
-        },
+        title: searchParams.title ? searchParams.title : oldFilter.title,
+        author: searchParams.author ? searchParams.author : oldFilter.author,
+        query: searchParams.query ? searchParams.query : oldFilter.query,
+        subject: searchParams.subject ? searchParams.subject : oldFilter.subject,
+        place: searchParams.place ? searchParams.place : oldFilter.place,
+        person: searchParams.person ? searchParams.person : oldFilter.person,
+        publisher: searchParams.publisher
+          ? searchParams.publisher
+          : oldFilter.publisher,
       };
     });
   });
 
-  function setTitle(title, show) {
-    setFilter({ ...filter, titleData: { title, show } });
-  }
-  function setAuthor(author, show) {
-    setFilter({ ...filter, authorData: { author, show } });
-  }
-  function setQuery(query, show) {
-    setFilter({ ...filter, queryData: { query, show } });
-  }
-  function setSubject(subject, show) {
-    setFilter({ ...filter, subjectData: { subject, show } });
-  }
-  function setPlace(place, show) {
-    setFilter({ ...filter, placeData: { place, show } });
-  }
-  function setPerson(person, show) {
-    setFilter({ ...filter, personData: { person, show } });
-  }
-  function setPublisher(publisher, show) {
-    setFilter({ ...filter, publisherData: { publisher, show } });
-  }
+  const handleOnClickReset = (event) => {
+    event.preventDefault();
+    setParams((oldParams) => {
+      const newParams = { ...oldParams };
+      newParams[event.target.dataset.name] = '';
+      return newParams;
+    });
+  };
+
+  const handleOnClickSetValue = (event) => {
+    event.preventDefault();
+    setParams((oldParams) => {
+      const newParams = { ...oldParams };
+      newParams[event.target.dataset.name] = event.target.value;
+      return newParams;
+    });
+  };
 
   return (
     <aside className={`${className} side-bar-left`}>
       <div className="side-bar-left__container">
         <Logo className="side-bar-left__log" />
         <QuerySearch
-          queryData={filter.queryData}
-          setQuery={(query, show) => {
-            setQuery(query, show);
-          }}
           className="side-bar-left__item"
+          query={params.query}
+          handleOnClickSetValue={handleOnClickSetValue}
+          handleOnClickReset={handleOnClickReset}
         />
         <AdvanceSearch
-          titleData={filter.titleData}
-          setTitle={(title, show) => {
-            setTitle(title, show);
-          }}
-          authorData={filter.authorData}
-          setAuthor={(author, show) => {
-            setAuthor(author, show);
-          }}
-          subjectData={filter.subjectData}
-          setSubject={(subject, show) => {
-            setSubject(subject, show);
-          }}
-          placeData={filter.placeData}
-          setPlace={(place, show) => {
-            setPlace(place, show);
-          }}
-          personData={filter.personData}
-          setPerson={(person, show) => {
-            setPerson(person, show);
-          }}
-          publisherData={filter.publisherData}
-          setPublisher={(publisher, show) => {
-            setPublisher(publisher, show);
-          }}
           className="side-bar-left__item"
+          params={params}
+          handleOnClickSetValue={handleOnClickSetValue}
+          handleOnClickReset={handleOnClickReset}
         />
         <button
           type="button"
           className="menu-side-bar__button-search"
-          onClick={(e) => {
-            e.preventDefault();
-            const queryUrlParams = filter.queryData.query
-              ? `query=${filter.queryData.query}`
-              : '';
-            const titleUrlParams = filter.titleData.title
-              ? `&title=${filter.titleData.title}`
-              : '';
-            const authorUrlParams = filter.authorData.author
-              ? `&author=${filter.authorData.author}`
-              : '';
-            const subjectUrlParams = filter.subjectData.subject
-              ? `&subject=${filter.subjectData.subject}`
-              : '';
-            const placeUrlParams = filter.placeData.place
-              ? `&place=${filter.placeData.place}`
-              : '';
-            const personUrlParams = filter.personData.person
-              ? `&person=${filter.personData.person}`
-              : '';
-            const publisherUrlParams = filter.publisherData.publisher
-              ? `&publisher=${filter.publisherData.publisher}`
-              : '';
-            navigate(
-              `/search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}${publisherUrlParams}`
-            );
-          }}
+          onClick={handleSetParam}
         >
           SEACH
         </button>

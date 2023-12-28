@@ -1,14 +1,14 @@
-import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
+import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
 import { fetchArrayImages } from '../../../redux/imageSlice';
 import { getUrlImage, SIZE_IMAGE_LARGE } from '../../../util/image';
 import useGetInternalUrlImage from '../../../components/hooks/useGetInternalUrlImage';
 import useGetHandlerShowImage from '../../../components/hooks/useGetHandlerShowImage';
 
 export default function AuthorHOC(Component) {
-  return function (props) {
+  return function returnFuncAuthorHOC(props) {
     const dispatch = useDispatch();
     const { authorId } = useParams();
 

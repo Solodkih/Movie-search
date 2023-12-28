@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getImageUrl } from '../util/AJAX/getImageUrl';
+import getImageUrl from '../util/AJAX/getImageUrl';
+
+/* eslint no-use-before-define: 0 */
 
 export const fetchImage = createAsyncThunk(
   'image/fetchImage',

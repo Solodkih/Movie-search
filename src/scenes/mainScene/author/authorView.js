@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { SmallLoader } from '../../../components/loader';
 import ImageNotFound from '../../../components/imageNotFound';
@@ -12,11 +13,12 @@ export default function AuthorView({
   handlerShowImage,
   className = '',
 }) {
-
   return (
     <div className={`${className} author author__container`}>
       <div className="author-main-block">
         <div
+          role="link"
+          tabIndex="0"
           className="author-main-block__image-block"
           onClick={urlImage ? handlerShowImage : null}
         >
@@ -78,3 +80,18 @@ export default function AuthorView({
     </div>
   );
 }
+
+AuthorView.propTypes = {
+  className: PropTypes.string.isRequired,
+  urlImage: PropTypes.string.isRequired,
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    bio: PropTypes.string.isRequired,
+    personalName: PropTypes.string.isRequired,
+    birthDate: PropTypes.string.isRequired,
+    deathDate: PropTypes.string.isRequired,
+    alternateNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  download: PropTypes.bool.isRequired,
+  handlerShowImage: PropTypes.func.isRequired,
+};

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 import './itemListBooks.scss';
-import { getUrlImage, SIZE_IMAGE_SMALL, SIZE_IMAGE_MEDIUM } from '../../util/image';
+import { getUrlImage, SIZE_IMAGE_MEDIUM } from '../../util/image';
 
 function imageNotFound() {
   return (
@@ -15,7 +15,10 @@ function imageNotFound() {
   );
 }
 
-export default function ItemListBooks({ className, book = { title: 'Not found' } }) {
+export default function ItemListBooks({
+  className,
+  book = { title: 'Not found', arrayUrlImage: [] },
+}) {
   const MAX_LENGTH_STRING = 35;
   const navigate = useNavigate();
 
@@ -33,7 +36,8 @@ export default function ItemListBooks({ className, book = { title: 'Not found' }
 
   return (
     <div
-      role="presentation"
+      role="link"
+      tabIndex="0"
       className={`${className} item-list-books`}
       onClick={(event) => handleOnClick(event)}
     >
@@ -59,6 +63,6 @@ ItemListBooks.propTypes = {
   className: PropTypes.string.isRequired,
   book: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    arrayUrlImage: PropTypes.array.isRequired,
+    arrayUrlImage: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };

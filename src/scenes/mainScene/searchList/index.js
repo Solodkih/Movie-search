@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { SmallLoader } from '../../../components/loader';
 import {
   setPageSearchObject,
   createSelectListWorkByArrayKey,
 } from '../../../redux/searchSlice';
 
-import PropTypes from 'prop-types';
 import useIntersect from './useIntersect';
 import ItemListBooks from '../../../components/itemListBooks';
 import useUpdateList from './useUpdateList';

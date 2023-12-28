@@ -1,45 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Search from '../../../components/search';
+import ItemSeach from '../advanceSearch/itemSeach';
 
-export default function QuerySearch({ className, queryData, setQuery }) {
+export default function QuerySearch({
+  className,
+  query,
+  handleOnClickReset,
+  handleOnClickSetValue,
+}) {
   return (
     <div className={`${className} menu-side-bar`}>
       <ul className="menu-side-bar__list">
         <li>
-          <div className="menu-side-bar__buttons">
-            <button
-              type="button"
-              className="menu-side-bar__logo"
-              onClick={(e) => {
-                e.preventDefault();
-                setQuery(queryData.query, !queryData.show);
-              }}
-            >
-              Book search
-            </button>
-            {queryData.show && (
-              <button
-                type="button"
-                className="menu-side-bar__button-clear"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setQuery('', queryData.show);
-                }}
-              >
-                CLEAR
-              </button>
-            )}
-          </div>
-          {queryData.show && (
-            <Search
-              placeholder="e.g Leo"
-              value={queryData.query}
-              handleChange={(event) => {
-                setQuery(event.target.value, queryData.show);
-              }}
-            />
-          )}
+          <ItemSeach
+            data-name="query"
+            placeholder="e.g Leo"
+            value={query}
+            name="Query"
+            handleOnClickReset={handleOnClickReset}
+            handleOnClickSetValue={handleOnClickSetValue}
+          />
         </li>
       </ul>
     </div>
@@ -48,18 +28,12 @@ export default function QuerySearch({ className, queryData, setQuery }) {
 
 QuerySearch.propTypes = {
   className: PropTypes.string,
-  queryData: PropTypes.shape({
-    query: PropTypes.string,
-    show: PropTypes.bool.isRequired,
-  }),
-  setQuery: PropTypes.func,
+  query: PropTypes.string,
+  handleOnClickReset: PropTypes.func.isRequired,
+  handleOnClickSetValue: PropTypes.func.isRequired,
 };
 
 QuerySearch.defaultProps = {
   className: '',
-  queryData: PropTypes.shape({
-    query: '',
-    show: false,
-  }),
-  setQuery: () => {},
+  query: '',
 };

@@ -48,7 +48,7 @@ export default function AdvanceSearch({
           <li>
             <ItemSeach
               data-name="subject"
-              placeholder="e.g J. K. Rowling"
+              placeholder="e.g love"
               value={subject}
               name="Subject"
               handleOnClickReset={handleOnClickReset}

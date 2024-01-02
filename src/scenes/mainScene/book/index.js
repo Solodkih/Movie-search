@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchWork, selectBookByKey } from '../../../redux/bookSlice';
 import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
-import { fetchArrayImages } from '../../../redux/imageSlice';
+import {
+  fetchArrayImages,
+  STATUS_IMAGE_ERROR,
+  STATUS_IMAGE_PENDING,
+} from '../../../redux/imageSlice';
 import BookView from './bookView';
 import { getUrlImage, SIZE_IMAGE_LARGE } from '../../../util/image';
 
@@ -27,10 +31,14 @@ export default function Book({ className = '' }) {
   const authors = useSelector(createAuthorsByArrayKey(book.authors));
 
   const handlerShowImage = useGetHandlerShowImage(book.arrayUrlImage);
-  const urlImage = useGetInternalUrlImage(
+  let urlImage = useGetInternalUrlImage(
     getUrlImage(SIZE_IMAGE_LARGE, book.arrayUrlImage[0])
   );
 
+  if (urlImage === STATUS_IMAGE_ERROR || urlImage === STATUS_IMAGE_PENDING) {
+    urlImage = null;
+  }
+  
   function handleOnClickAuthor(event, keyAuthor) {
     event.preventDefault();
     navigate(keyAuthor);

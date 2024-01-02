@@ -2,7 +2,11 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
 import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
-import { fetchArrayImages } from '../../../redux/imageSlice';
+import {
+  fetchArrayImages,
+  STATUS_IMAGE_ERROR,
+  STATUS_IMAGE_PENDING,
+} from '../../../redux/imageSlice';
 import { getUrlImage, SIZE_IMAGE_LARGE } from '../../../util/image';
 import useGetInternalUrlImage from '../../../components/hooks/useGetInternalUrlImage';
 import useGetHandlerShowImage from '../../../components/hooks/useGetHandlerShowImage';
@@ -21,9 +25,13 @@ export default function AuthorHOC(Component) {
       }) || false;
 
     const handlerShowImage = useGetHandlerShowImage(author.photos);
-    const urlImage = useGetInternalUrlImage(
+    let urlImage = useGetInternalUrlImage(
       getUrlImage(SIZE_IMAGE_LARGE, author.photos[0])
     );
+
+    if (urlImage === STATUS_IMAGE_ERROR || urlImage === STATUS_IMAGE_PENDING) {
+      urlImage = null;
+    }
 
     useEffect(() => {
       if (author.key === `/authors/${authorId}`) return;

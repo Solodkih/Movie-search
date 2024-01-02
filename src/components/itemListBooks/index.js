@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import './itemListBooks.scss';
 import { getUrlImage, SIZE_IMAGE_MEDIUM } from '../../util/image';
+import useGetInternalUrlImage from '../../components/hooks/useGetInternalUrlImage';
+import { STATUS_IMAGE_ERROR, STATUS_IMAGE_PENDING } from '../../redux/imageSlice';
 
 function imageNotFound() {
   return (
@@ -21,6 +23,14 @@ export default function ItemListBooks({
 }) {
   const MAX_LENGTH_STRING = 35;
   const navigate = useNavigate();
+
+  let urlImage = useGetInternalUrlImage(
+    getUrlImage(SIZE_IMAGE_MEDIUM, book.arrayUrlImage[0])
+  );
+
+  if (urlImage === STATUS_IMAGE_ERROR || urlImage === STATUS_IMAGE_PENDING) {
+    urlImage = null;
+  }
 
   function handleOnClick(event) {
     event.preventDefault();
@@ -42,7 +52,7 @@ export default function ItemListBooks({
       onClick={(event) => handleOnClick(event)}
     >
       <div className="item-list-books__image-wrapper">
-        {(book.arrayUrlImage[0] && (
+        {(urlImage && (
           <img
             className="item-list-books__image"
             src={getUrlImage(SIZE_IMAGE_MEDIUM, book.arrayUrlImage[0])}

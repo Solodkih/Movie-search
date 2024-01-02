@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getBookSubjects } from '../../../util/AJAX/getBook';
-import './listBooks.scss';
+import '../searchList';
 import ItemListBooks from '../../../components/itemListBooks';
 
 export default function ListBooks() {

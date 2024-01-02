@@ -10,7 +10,7 @@ import {
 import useIntersect from './useIntersect';
 import ItemListBooks from '../../../components/itemListBooks';
 import useUpdateList from './useUpdateList';
-import './searchList.scss';
+import './listBooks.scss';
 
 export default function SearchList({ className = '' }) {
   const dispatch = useDispatch();
@@ -45,6 +45,19 @@ export default function SearchList({ className = '' }) {
   }, [intersection]);
 
   useUpdateList(page, books, resetPage);
+
+  if (books.length === 0 && statusDownloadWork === false) {
+    return (
+      <div className={`${className} list-books`}>
+        <div className="list-books__container">
+          <div className="list-books__not-found">
+            Sorry, but we didn't find anything matching your request. Try changing
+            your request.
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`${className} list-books`}>

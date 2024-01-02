@@ -1,4 +1,7 @@
 @import '../../../constants.scss';
+#ref {
+  padding: 3px;
+}
 
 .list-books {
   background-color: $big-dark;
@@ -12,4 +15,13 @@
 .list-books__item {
   flex: 0 0 auto;
   margin: 10px 10px;
+}
+
+.list-books__not-found {
+  font-family: 'Goma Octagon';
+  text-align: center;
+  margin-top: 20px;
+  font-size: 50px;
+  border: 2px solid $lite-green;
+  border-radius: 10px;
 }

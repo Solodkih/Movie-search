@@ -26,9 +26,10 @@ export const workFromSearchObjects = (objectAJAX) => {
     subjects: objectAJAX.subjects ?? [],
     title: objectAJAX.title,
     firstPublishDate: objectAJAX.first_publish_date || objectAJAX.first_publish_year,
-    authors: objectAJAX.author_key.map((key) => {
-      return `/authors/${key}`;
-    }),
+    authors:
+      objectAJAX?.author_key?.map((key) => {
+        return `/authors/${key}`;
+      }) ?? [],
     authorsName: objectAJAX.author_name || '',
     description: objectAJAX.description?.value ?? objectAJAX.description ?? '',
     arrayUrlImage: [objectAJAX.cover_i],

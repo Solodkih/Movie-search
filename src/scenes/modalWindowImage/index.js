@@ -6,14 +6,16 @@ import {
   previousImage,
   setShowImage,
 } from '../../redux/modalWindowImageSlice';
+import { STATUS_IMAGE_ERROR, STATUS_IMAGE_PENDING } from '../../redux/imageSlice';
 import useGetInternalUrlImage from '../../components/hooks/useGetInternalUrlImage';
+import ImageNotFound from '../../components/imageNotFound';
+import { SmallLoader } from '../../components/loader';
 
 export default function ModalWindowImage() {
   const dispatch = useDispatch();
-  const currentImage =
-    useSelector((state) => {
-      return state.modalWindowImage.currentImage;
-    }) || null;
+  const currentImage = useSelector((state) => {
+    return state.modalWindowImage.currentImage;
+  });
 
   const url = useGetInternalUrlImage(currentImage);
 
@@ -40,7 +42,19 @@ export default function ModalWindowImage() {
           className="modalWindowImage_image-block-cansel"
           onClick={handlerCanselWindow}
         />
-        <img className="modalWindowImage_image" alt={url} src={url} />
+        {url === STATUS_IMAGE_ERROR && (
+          <div className="modalWindowImage_image">
+            <ImageNotFound className="modal-image-not-found " />
+          </div>
+        )}
+        {url === STATUS_IMAGE_PENDING && (
+          <div className="modalWindowImage_image">
+            <SmallLoader />
+          </div>
+        )}
+        {url !== STATUS_IMAGE_ERROR && url !== STATUS_IMAGE_PENDING && (
+          <img className="modalWindowImage_image" alt={url} src={url} />
+        )}
       </div>
       <button
         aria-label="show next image"

@@ -1,5 +1,10 @@
 export default async function getImageUrl(url) {
-  const responseImage = await fetch(url, { method: 'get' });
-  const imageBlob = await responseImage.blob();
-  return URL.createObjectURL(imageBlob);
+  try {
+    const responseImage = await fetch(url);
+    if (!responseImage.ok) return Promise.reject(responseImage);
+    const imageBlob = await responseImage.blob();
+    return URL.createObjectURL(imageBlob);
+  } catch (e) {
+    return Promise.reject(e);
+  }
 }

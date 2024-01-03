@@ -6,6 +6,7 @@ import StartScene from './scenes/mainScene/startScene';
 import Book from './scenes/mainScene/book';
 import Author from './scenes/mainScene/author';
 import SearchList from './scenes/mainScene/searchList';
+import BadUrl from './scenes/mainScene/badUrl';
 
 import store from './redux/store';
 
@@ -23,6 +24,7 @@ export default function App() {
               <Route path=":authorId" element={<Author />} />
             </Route>
             <Route path="search/*" element={<SearchList />} />
+            <Route path="*" element={<BadUrl />} />
           </Route>
         </Routes>
       </BrowserRouter>

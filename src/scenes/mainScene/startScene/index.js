@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { getBookSubjects } from '../../../util/AJAX/getBook';
+import React from 'react';
 import './startScene.scss';
-import ItemListBooks from '../../../components/itemListBooks';
 
 export default function StartScene() {
   return (

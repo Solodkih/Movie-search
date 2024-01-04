@@ -5,6 +5,9 @@ import { SmallLoader } from '../../../components/loader';
 import {
   setPageSearchObject,
   createSelectListWorkByArrayKey,
+  STATUS_DOWLOAD_ERROR,
+  STATUS_DOWLOAD_PENDING,
+  STATUS_DOWLOAD_ANSWER_IS_NULL,
 } from '../../../redux/searchSlice';
 
 import useIntersect from './useIntersect';
@@ -34,7 +37,11 @@ export default function SearchList({ className = '' }) {
   const intersection = useIntersect(containerRef);
 
   useEffect(() => {
-    if (statusDownloadWork) {
+    if (
+      statusDownloadWork === STATUS_DOWLOAD_PENDING ||
+      statusDownloadWork === STATUS_DOWLOAD_ERROR ||
+      statusDownloadWork === STATUS_DOWLOAD_ANSWER_IS_NULL
+    ) {
       return;
     }
     if (intersection) {
@@ -46,13 +53,26 @@ export default function SearchList({ className = '' }) {
 
   useUpdateList(page, books, resetPage);
 
-  if (books.length === 0 && statusDownloadWork === false) {
+  if (statusDownloadWork === STATUS_DOWLOAD_ANSWER_IS_NULL) {
     return (
       <div className={`${className} list-books`}>
         <div className="list-books__container">
           <div className="list-books__not-found">
-            Sorry, but we didn't find anything matching your request. Try changing
-            your request.
+            Sorry, but we didn't find anything matching your request. <br /> Try
+            changing your request.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (statusDownloadWork === STATUS_DOWLOAD_ERROR) {
+    return (
+      <div className={`${className} list-books`}>
+        <div className="list-books__container">
+          <div className="list-books__not-found">
+            Excuse me, but there was a mistake.
+            <br /> Try to change the request or use the site later.
           </div>
         </div>
       </div>
@@ -72,7 +92,7 @@ export default function SearchList({ className = '' }) {
           );
         })}
       </div>
-      {statusDownloadWork && <SmallLoader />}
+      {statusDownloadWork == STATUS_DOWLOAD_PENDING && <SmallLoader />}
       <div id="ref" ref={containerRef} />
     </div>
   );

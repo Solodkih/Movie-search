@@ -5,9 +5,9 @@ import { SmallLoader } from '../../../components/loader';
 import {
   setPageSearchObject,
   createSelectListWorkByArrayKey,
-  STATUS_DOWLOAD_ERROR,
-  STATUS_DOWLOAD_PENDING,
-  STATUS_DOWLOAD_ANSWER_IS_NULL,
+  STATUS_SEARCH_DOWLOAD_ERROR,
+  STATUS_SEARCH_DOWLOAD_PENDING,
+  STATUS_SEARCH_DOWLOAD_ANSWER_IS_NULL,
 } from '../../../redux/searchSlice';
 
 import useIntersect from './useIntersect';
@@ -38,9 +38,9 @@ export default function SearchList({ className = '' }) {
 
   useEffect(() => {
     if (
-      statusDownloadWork === STATUS_DOWLOAD_PENDING ||
-      statusDownloadWork === STATUS_DOWLOAD_ERROR ||
-      statusDownloadWork === STATUS_DOWLOAD_ANSWER_IS_NULL
+      statusDownloadWork === STATUS_SEARCH_DOWLOAD_PENDING ||
+      statusDownloadWork === STATUS_SEARCH_DOWLOAD_ERROR ||
+      statusDownloadWork === STATUS_SEARCH_DOWLOAD_ANSWER_IS_NULL
     ) {
       return;
     }
@@ -53,7 +53,7 @@ export default function SearchList({ className = '' }) {
 
   useUpdateList(page, books, resetPage);
 
-  if (statusDownloadWork === STATUS_DOWLOAD_ANSWER_IS_NULL) {
+  if (statusDownloadWork === STATUS_SEARCH_DOWLOAD_ANSWER_IS_NULL) {
     return (
       <div className={`${className} list-books`}>
         <div className="list-books__container">
@@ -66,7 +66,7 @@ export default function SearchList({ className = '' }) {
     );
   }
 
-  if (statusDownloadWork === STATUS_DOWLOAD_ERROR) {
+  if (statusDownloadWork === STATUS_SEARCH_DOWLOAD_ERROR) {
     return (
       <div className={`${className} list-books`}>
         <div className="list-books__container">
@@ -92,7 +92,7 @@ export default function SearchList({ className = '' }) {
           );
         })}
       </div>
-      {statusDownloadWork == STATUS_DOWLOAD_PENDING && <SmallLoader />}
+      {statusDownloadWork == STATUS_SEARCH_DOWLOAD_PENDING && <SmallLoader />}
       <div id="ref" ref={containerRef} />
     </div>
   );

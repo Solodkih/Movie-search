@@ -2,6 +2,7 @@ import React from 'react';
 
 import ImageNotFound from '../../../components/imageNotFound';
 import { SmallLoader } from '../../../components/loader';
+import { STATUS_BOOK_DOWLOAD_PENDING } from '../../../redux/bookSlice';
 
 import './book.scss';
 
@@ -63,8 +64,10 @@ export default function bookView({
             </ul>
           </div>
         </div>
-        {download && <SmallLoader />}
-        {!download && <div className="book-description">{book.description}</div>}
+        {download === STATUS_BOOK_DOWLOAD_PENDING && <SmallLoader />}
+        {download !== STATUS_BOOK_DOWLOAD_PENDING && (
+          <div className="book-description">{book.description}</div>
+        )}
       </div>
       <div className="book-aboutBook__subject">
         <div className="book-aboutBook__subject-title">

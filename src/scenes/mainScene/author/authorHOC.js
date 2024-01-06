@@ -1,7 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
-import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
+import {
+  selectAuthor,
+  fetchAuthor,
+} from '../../../redux/authorSlice';
 import {
   fetchArrayImages,
   STATUS_IMAGE_ERROR,
@@ -19,10 +22,9 @@ export default function AuthorHOC(Component) {
     const author = useSelector((state) => {
       return selectAuthor(state, `/authors/${authorId}`);
     });
-    const download =
-      useSelector((state) => {
-        return state.author.statusDownloadAuthor;
-      }) || false;
+    const download = useSelector((state) => {
+      return state.author.statusDownloadAuthor;
+    });
 
     const handlerShowImage = useGetHandlerShowImage(author.photos);
     let urlImage = useGetInternalUrlImage(

@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {
+  STATUS_AUTHOR_DOWLOAD_ERROR,
+  STATUS_AUTHOR_DOWLOAD_PENDING,
+} from '../../../redux/authorSlice';
+
 import { SmallLoader } from '../../../components/loader';
 import ImageNotFound from '../../../components/imageNotFound';
 
@@ -13,6 +18,20 @@ export default function AuthorView({
   handlerShowImage,
   className = '',
 }) {
+
+  if (download === STATUS_AUTHOR_DOWLOAD_ERROR) {
+    return (
+      <div className={`${className} list-books`}>
+        <div className="list-books__container">
+          <div className="list-books__not-found">
+            Excuse me, but there was a mistake.
+            <br /> Try to change the request or use the site later.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`${className} author author__container`}>
       <div className="author-main-block">
@@ -60,8 +79,10 @@ export default function AuthorView({
             {author.deathDate ? author.deathDate : 'unknown'}
           </div>
         </div>
-        {download && <SmallLoader />}
-        {!download && <div className="author-main-block__bio">{author.bio}</div>}
+        {download === STATUS_AUTHOR_DOWLOAD_PENDING && <SmallLoader />}
+        {download !== STATUS_AUTHOR_DOWLOAD_PENDING && (
+          <div className="author-main-block__bio">{author.bio}</div>
+        )}
       </div>
       <div className="author__category">
         <div className="author__category-title">

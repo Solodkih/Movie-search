@@ -3,12 +3,11 @@ import getBooksBySearch from '../util/AJAX/getBooksBySearch';
 import { addListBook } from './bookSlice';
 
 /* eslint no-use-before-define: 0 */
-export const STATUS_DOWLOAD_PENDING = 'PENDING';
-export const STATUS_DOWLOAD_ANSWER_IS_NULL = 'NULL';
-export const STATUS_DOWLOAD_ERROR = 'ERROR';
-export const STATUS_DOWLOAD_FINISH = 'FINISH';
-export const STATUS_DOWLOAD_WAIT = 'WAIT';
-
+export const STATUS_SEARCH_DOWLOAD_PENDING = 'PENDING';
+export const STATUS_SEARCH_DOWLOAD_ANSWER_IS_NULL = 'NULL';
+export const STATUS_SEARCH_DOWLOAD_ERROR = 'ERROR';
+export const STATUS_SEARCH_DOWLOAD_FINISH = 'FINISH';
+export const STATUS_SEARCH_DOWLOAD_WAIT = 'WAIT';
 
 export const fetchSearchListWork = createAsyncThunk(
   'search/fetchSearchListWork',
@@ -47,7 +46,7 @@ export const createSelectListWorkByArrayKey = (arrayKey = []) => {
 export const searchSlice = createSlice({
   name: 'search',
   initialState: {
-    statusDownloadWork: STATUS_DOWLOAD_WAIT,
+    statusDownloadWork: STATUS_SEARCH_DOWLOAD_WAIT,
     seachList: {},
     pageList: {},
   },
@@ -77,17 +76,17 @@ export const searchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchSearchListWork.pending, (state) => {
-      state.statusDownloadWork = STATUS_DOWLOAD_PENDING;
+      state.statusDownloadWork = STATUS_SEARCH_DOWLOAD_PENDING;
     });
     builder.addCase(fetchSearchListWork.rejected, (state, action) => {
       state.seachList[action.meta.arg.url] = null;
-      state.statusDownloadWork = STATUS_DOWLOAD_ERROR;
+      state.statusDownloadWork = STATUS_SEARCH_DOWLOAD_ERROR;
     });
     builder.addCase(fetchSearchListWork.fulfilled, (state, action) => {
       if (action.payload.arrayWorks.length === 0) {
-        state.statusDownloadWork = STATUS_DOWLOAD_ANSWER_IS_NULL;
+        state.statusDownloadWork = STATUS_SEARCH_DOWLOAD_ANSWER_IS_NULL;
       } else {
-        state.statusDownloadWork = STATUS_DOWLOAD_FINISH;
+        state.statusDownloadWork = STATUS_SEARCH_DOWLOAD_FINISH;
       }
     });
   },

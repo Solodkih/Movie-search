@@ -2,6 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getBookByWorks } from '../util/AJAX/getBook';
 import { fetchAuthor } from './authorSlice';
 
+export const STATUS_BOOK_DOWLOAD_PENDING = 'PENDING';
+export const STATUS_BOOK_DOWLOAD_ERROR = 'ERROR';
+export const STATUS_BOOK_DOWLOAD_FINISH = 'FINISH';
+export const STATUS_BOOK_DOWLOAD_WAIT = 'WAIT';
+
 export const fetchWork = createAsyncThunk(
   'book/fetchWork',
   async (url, thunkAPI) => {
@@ -26,7 +31,7 @@ export const bookSlice = createSlice({
         authors: [],
       },
     },
-    statusDownloadWork: false,
+    statusDownloadWork: STATUS_BOOK_DOWLOAD_WAIT,
   },
   reducers: {
     setBook: (state, action) => {
@@ -46,10 +51,13 @@ export const bookSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWork.pending, (state) => {
-      state.statusDownloadWork = true;
+      state.statusDownloadWork = STATUS_BOOK_DOWLOAD_PENDING;
+    });
+    builder.addCase(fetchWork.rejected, (state) => {
+      state.statusDownloadWork = STATUS_BOOK_DOWLOAD_ERROR;
     });
     builder.addCase(fetchWork.fulfilled, (state, action) => {
-      state.statusDownloadWork = false;
+      state.statusDownloadWork = STATUS_BOOK_DOWLOAD_FINISH;
       state.worksList[action.payload.key] = {
         ...state.worksList[action.payload.key],
         ...action.payload,

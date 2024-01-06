@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchWork, selectBookByKey } from '../../../redux/bookSlice';
+import {
+  fetchWork,
+  selectBookByKey,
+  STATUS_BOOK_DOWLOAD_ERROR,
+} from '../../../redux/bookSlice';
 import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
 import {
   fetchArrayImages,
@@ -38,7 +42,7 @@ export default function Book({ className = '' }) {
   if (urlImage === STATUS_IMAGE_ERROR || urlImage === STATUS_IMAGE_PENDING) {
     urlImage = null;
   }
-  
+
   function handleOnClickAuthor(event, keyAuthor) {
     event.preventDefault();
     navigate(keyAuthor);
@@ -58,6 +62,19 @@ export default function Book({ className = '' }) {
       )
     );
   }, [book]);
+
+  if (download === STATUS_BOOK_DOWLOAD_ERROR) {
+    return (
+      <div className={`${className} list-books`}>
+        <div className="list-books__container">
+          <div className="list-books__not-found">
+            Excuse me, but there was a mistake.
+            <br /> Try to change the request or use the site later.
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <BookView

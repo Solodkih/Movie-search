@@ -5,29 +5,38 @@ export default async function getBooksBySearch(
   { query, title, author, subject, place, person, language, publisher },
   page
 ) {
-  const url = new URL('https://openlibrary.org/search.json');
-  query && url.searchParams.set('q', stringWithSpaceToStringWithPlus(query));
-  title && url.searchParams.set('title', stringWithSpaceToStringWithPlus(title));
-  author && url.searchParams.set('author', stringWithSpaceToStringWithPlus(author));
-  subject &&
-    url.searchParams.set('subject', stringWithSpaceToStringWithPlus(subject));
-  place && url.searchParams.set('place', stringWithSpaceToStringWithPlus(place));
-  person && url.searchParams.set('person', stringWithSpaceToStringWithPlus(person));
-  language &&
-    url.searchParams.set('language', stringWithSpaceToStringWithPlus(language));
-  publisher &&
-    url.searchParams.set('publisher', stringWithSpaceToStringWithPlus(publisher));
-  url.searchParams.set('page', page);
+  try {
+    const url = new URL('https://openlibrary.org/search.json');
+    query && url.searchParams.set('q', stringWithSpaceToStringWithPlus(query));
+    title && url.searchParams.set('title', stringWithSpaceToStringWithPlus(title));
+    author &&
+      url.searchParams.set('author', stringWithSpaceToStringWithPlus(author));
+    subject &&
+      url.searchParams.set('subject', stringWithSpaceToStringWithPlus(subject));
+    place && url.searchParams.set('place', stringWithSpaceToStringWithPlus(place));
+    person &&
+      url.searchParams.set('person', stringWithSpaceToStringWithPlus(person));
+    language &&
+      url.searchParams.set('language', stringWithSpaceToStringWithPlus(language));
+    publisher &&
+      url.searchParams.set('publisher', stringWithSpaceToStringWithPlus(publisher));
+    url.searchParams.set('page', page);
 
-  const response = await fetch(url, {
-    method: 'GET',
-  });
+    const response = await fetch(url, {
+      method: 'GET',
+    });
 
-  const works = await response.json();
-  const maxPage = Math.ceil((works.num_found || works.numFound) / 100);
+    if (!response.ok) return Promise.reject(response);
+    const works = await response.json();
 
-  const arrayWorks = works.docs.map((item) => {
-    return workFromSearchObjects(item);
-  });
-  return { arrayWorks, maxPage };
+    const maxPage = Math.ceil((works.num_found || works.numFound) / 100);
+
+    const arrayWorks = works.docs.map((item) => {
+      return workFromSearchObjects(item);
+    });
+
+    return { arrayWorks, maxPage };
+  } catch (e) {
+    return Promise.reject(e);
+  }
 }

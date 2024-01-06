@@ -2,6 +2,11 @@ import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit'
 
 import { getAuthor } from '../util/AJAX/getAuthor';
 
+export const STATUS_AUTHOR_DOWLOAD_PENDING = 'PENDING';
+export const STATUS_AUTHOR_DOWLOAD_ERROR = 'ERROR';
+export const STATUS_AUTHOR_DOWLOAD_FINISH = 'FINISH';
+export const STATUS_AUTHOR_DOWLOAD_WAIT = 'WAIT';
+
 export const fetchAuthor = createAsyncThunk('author/fetchAuthor', async (url) => {
   const response = await getAuthor(url);
   return response;
@@ -16,7 +21,7 @@ export const authorSlice = createSlice({
         alternateNames: [],
       },
     },
-    statusDownloadAuthor: false,
+    statusDownloadAuthor: STATUS_AUTHOR_DOWLOAD_WAIT,
   },
   reducers: {
     setAuthor: (state, action) => {
@@ -25,10 +30,15 @@ export const authorSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAuthor.pending, (state) => {
-      state.statusDownloadAuthor = true;
+      state.statusDownloadAuthor = STATUS_AUTHOR_DOWLOAD_PENDING;
     });
+    
+    builder.addCase(fetchAuthor.rejected, (state) => {
+      state.statusDownloadAuthor = STATUS_AUTHOR_DOWLOAD_ERROR;
+    });
+
     builder.addCase(fetchAuthor.fulfilled, (state, action) => {
-      state.statusDownloadAuthor = false;
+      state.statusDownloadAuthor = STATUS_AUTHOR_DOWLOAD_FINISH;
       state.authorList[action.payload.key] = action.payload;
     });
   },

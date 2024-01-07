@@ -2,6 +2,9 @@ import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { SmallLoader } from '../../../components/loader';
+import ErrorFetch from '../../../components/errors/errorFetch';
+import AnswerIsNull from '../../../components/errors/answerIsNull';
+
 import {
   setPageSearchObject,
   createSelectListWorkByArrayKey,
@@ -54,29 +57,11 @@ export default function SearchList({ className = '' }) {
   useUpdateList(page, books, resetPage);
 
   if (statusDownloadWork === STATUS_SEARCH_DOWLOAD_ANSWER_IS_NULL) {
-    return (
-      <div className={`${className} list-books`}>
-        <div className="list-books__container">
-          <div className="list-books__not-found">
-            Sorry, but we didn't find anything matching your request. <br /> Try
-            changing your request.
-          </div>
-        </div>
-      </div>
-    );
+    return <AnswerIsNull />;
   }
 
   if (statusDownloadWork === STATUS_SEARCH_DOWLOAD_ERROR) {
-    return (
-      <div className={`${className} list-books`}>
-        <div className="list-books__container">
-          <div className="list-books__not-found">
-            Excuse me, but there was a mistake.
-            <br /> Try to change the request or use the site later.
-          </div>
-        </div>
-      </div>
-    );
+    return <ErrorFetch />;
   }
 
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ErrorFetch from '../../../components/errors/errorFetch';
 
 import {
   STATUS_AUTHOR_DOWLOAD_ERROR,
@@ -20,16 +21,7 @@ export default function AuthorView({
 }) {
 
   if (download === STATUS_AUTHOR_DOWLOAD_ERROR) {
-    return (
-      <div className={`${className} list-books`}>
-        <div className="list-books__container">
-          <div className="list-books__not-found">
-            Excuse me, but there was a mistake.
-            <br /> Try to change the request or use the site later.
-          </div>
-        </div>
-      </div>
-    );
+    return <ErrorFetch />;
   }
 
   return (

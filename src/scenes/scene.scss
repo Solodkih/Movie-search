@@ -1,15 +1,31 @@
+@import '../constants.scss';
+
 .scene {
   max-width: 1370px;
   min-height: 100vh;
   margin: 0 auto;
   display: flex;
+
+  @media screen and (max-width: $SCREEN_SM) {
+    display: block;
+    min-width: $SCREEN_SM;
+  }
 }
 
 .scene__side-bar-left {
   flex: 0 0 300px;
+  overflow: hidden;
+  @media screen and (max-width: $SCREEN_SM) {
+    display: block;
+    min-width: $SCREEN_SM;
+  }
 }
 
 .scene__main-scene {
   flex: 1 1 auto;
   overflow: hidden;
+  @media screen and (max-width: $SCREEN_SM) {
+    display: block;
+    min-width: $SCREEN_SM;
+  }
 }

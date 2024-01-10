@@ -4,8 +4,10 @@ import AdvanceSearch from './advanceSearch';
 import QuerySearch from './querySearch';
 import useGetSearchParams from '../../components/hooks/useGetSearchParams';
 import useSetUrl from '../../components/hooks/useSetUrl';
+import { useResize } from '../../components/hooks/useResize';
 
 import Logo from './logo';
+import Loupe from './loupe';
 
 import './sideBarLeft.scss';
 
@@ -19,6 +21,9 @@ export default function SideBarLeft({ className }) {
     person: '',
     publisher: '',
   });
+
+  const [showMenu, setShowMenu] = useState(true);
+  const { isScreenSm } = useResize();
 
   const handleSetParam = useSetUrl(params);
 
@@ -59,26 +64,40 @@ export default function SideBarLeft({ className }) {
   return (
     <aside className={`${className} side-bar-left`}>
       <div className="side-bar-left__container">
-        <Logo className="side-bar-left__log" />
-        <QuerySearch
-          className="side-bar-left__item"
-          query={params.query}
-          handleOnClickSetValue={handleOnClickSetValue}
-          handleOnClickReset={handleOnClickReset}
-        />
-        <AdvanceSearch
-          className="side-bar-left__item"
-          params={params}
-          handleOnClickSetValue={handleOnClickSetValue}
-          handleOnClickReset={handleOnClickReset}
-        />
-        <button
-          type="button"
-          className="menu-side-bar__button-search"
-          onClick={handleSetParam}
-        >
-          SEACH
-        </button>
+        <div className="side-bar-left__item-logo">
+          <Logo className="side-bar-left__logo" />
+          <button
+            className="side-bar-left__bnt-show-search"
+            onClick={() => setShowMenu(!showMenu)}
+          >
+            <Loupe />
+          </button>
+        </div>
+        {(!isScreenSm || showMenu) && (
+          <QuerySearch
+            className="side-bar-left__item"
+            query={params.query}
+            handleOnClickSetValue={handleOnClickSetValue}
+            handleOnClickReset={handleOnClickReset}
+          />
+        )}
+        {(!isScreenSm || showMenu) && (
+          <AdvanceSearch
+            className="side-bar-left__item"
+            params={params}
+            handleOnClickSetValue={handleOnClickSetValue}
+            handleOnClickReset={handleOnClickReset}
+          />
+        )}
+        {(!isScreenSm || showMenu) && (
+          <button
+            type="button"
+            className="menu-side-bar__button-search"
+            onClick={handleSetParam}
+          >
+            SEACH
+          </button>
+        )}
       </div>
     </aside>
   );

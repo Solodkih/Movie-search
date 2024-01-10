@@ -1,5 +1,9 @@
 @import 'reset.scss';
 @import 'constants.scss';
+html,
+body {
+  min-width: $SCREEN_SM;
+}
 
 @font-face {
   font-family: 'Goma Octagon';
@@ -16,5 +20,5 @@
 }
 
 #root {
-  background:linear-gradient(to right, $big-dark, $lite-dark);
+  background: linear-gradient(to right, $big-dark, $lite-dark);
 }

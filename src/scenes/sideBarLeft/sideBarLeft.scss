@@ -3,7 +3,6 @@
 .side-bar-left {
   background-color: $lite-dark;
   color: $main-white;
-  min-height: 100%;
 }
 
 .side-bar-left__container {
@@ -16,4 +15,27 @@
 
 .side-bar-left__item {
   margin-top: 10px;
+}
+
+.side-bar-left__item-logo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.side-bar-left__logo {
+  flex: 0 0 100%;
+
+  @media screen and (max-width: $SCREEN_SM) {
+    flex: 0 0 auto;
+  }
+}
+
+.side-bar-left__bnt-show-search {
+  display: none;
+
+  @media screen and (max-width: $SCREEN_SM) {
+    display: flex;
+    height: 70px;
+    width: 70px;
+  }
 }

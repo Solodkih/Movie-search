@@ -23,18 +23,14 @@
 }
 
 .side-bar-left__logo {
-  flex: 0 0 100%;
-
-  @media screen and (max-width: $SCREEN_SM) {
-    flex: 0 0 auto;
-  }
+  flex: 0 0;
 }
 
 .side-bar-left__bnt-show-search {
   display: none;
 
   @media screen and (max-width: $SCREEN_SM) {
-    display: flex;
+    display: initial;
     height: 70px;
     width: 70px;
   }

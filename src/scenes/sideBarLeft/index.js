@@ -6,12 +6,12 @@ import useGetSearchParams from '../../components/hooks/useGetSearchParams';
 import useSetUrl from '../../components/hooks/useSetUrl';
 import { useResize } from '../../components/hooks/useResize';
 
-import Logo from './logo';
-import Loupe from './loupe';
+import Logo from '../../components/logo';
+import Loupe from '../../components/loupe';
 
 import './sideBarLeft.scss';
 
-export default function SideBarLeft({ className }) {
+export default function SideBarLeft({ className, showMenu, setShowMenu }) {
   const [params, setParams] = useState({
     query: '',
     title: '',
@@ -22,7 +22,6 @@ export default function SideBarLeft({ className }) {
     publisher: '',
   });
 
-  const [showMenu, setShowMenu] = useState(true);
   const { isScreenSm } = useResize();
 
   const handleSetParam = useSetUrl(params);
@@ -73,7 +72,7 @@ export default function SideBarLeft({ className }) {
             <Loupe />
           </button>
         </div>
-        {(!isScreenSm || showMenu) && (
+        {(isScreenSm || showMenu) && (
           <QuerySearch
             className="side-bar-left__item"
             query={params.query}
@@ -81,7 +80,7 @@ export default function SideBarLeft({ className }) {
             handleOnClickReset={handleOnClickReset}
           />
         )}
-        {(!isScreenSm || showMenu) && (
+        {(isScreenSm || showMenu) && (
           <AdvanceSearch
             className="side-bar-left__item"
             params={params}
@@ -89,7 +88,7 @@ export default function SideBarLeft({ className }) {
             handleOnClickReset={handleOnClickReset}
           />
         )}
-        {(!isScreenSm || showMenu) && (
+        {(isScreenSm || showMenu) && (
           <button
             type="button"
             className="menu-side-bar__button-search"

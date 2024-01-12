@@ -5,10 +5,10 @@ import Navigation from './navigation';
 
 import './mainScene.scss';
 
-export default function MainScene({ className }) {
+export default function MainScene({ className, showMenu, setShowMenu }) {
   return (
     <section className={`${className} main-scene`}>
-      <Navigation />
+      <Navigation showMenu={showMenu} setShowMenu={setShowMenu} />
       <Outlet />
     </section>
   );

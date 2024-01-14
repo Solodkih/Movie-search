@@ -4,6 +4,20 @@
   width: 100%;
   padding: 20px 20px 20px 20px;
 
+  @media screen and (width <= $SCREEN_SM) {
+    display: none;
+    min-width: $SCREEN_SM;
+  }
+
+  &_logo {
+    @media screen and (width >= $SCREEN_MD) {
+      display: none;
+    }
+
+    @media screen and (width <= $SCREEN_SM) {
+      display: none;
+    }
+  }
 
   &_list {
     font-size: 24px;

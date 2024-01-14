@@ -21,7 +21,12 @@ export default function Logo({ className }) {
       >
         BOOKS
       </div>
-      <div role="button" tabIndex="0" className="logo__subtitle">
+      <div
+        role="button"
+        tabIndex="0"
+        onClick={navigateToMainURL}
+        className="logo__subtitle"
+      >
         SEARCH
       </div>
     </div>

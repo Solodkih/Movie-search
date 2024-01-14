@@ -2,6 +2,7 @@
 
 .loupe {
   &__background-loupe {
+    background-color: rgba($lite-green, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;

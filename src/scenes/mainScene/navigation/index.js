@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './navigation.scss';
 import useGetSearchParams from '../../../components/hooks/useGetSearchParams';
 import useSetUrl from '../../../components/hooks/useSetUrl';
+import Logo from '../../../components/logo';
 
 export default function Navigation() {
   const [params, setParams] = useState({});
@@ -14,6 +15,7 @@ export default function Navigation() {
 
   return (
     <nav className="navigation">
+      <Logo className="navigation_logo" />
       <ul className="navigation_list">
         <li className="navigation_title">
           <span>{`We are looking `}</span>

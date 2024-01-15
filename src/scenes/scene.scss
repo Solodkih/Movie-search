@@ -17,15 +17,29 @@
   flex: 0 0 300px;
   overflow: hidden;
 
-  @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
-    flex-direction: row;
-    flex: 10000 0 300px;
-    display: block;
-  }
-
   @media screen and (width <= $SCREEN_SM) {
     display: block;
     min-width: $SCREEN_SM;
+    position: fixed;
+  }
+
+  &__full-dispay {
+    flex: 0 0 300px;
+    overflow-y: scroll;
+
+    @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
+      flex-direction: row;
+      flex: 10000 0 300px;
+      display: block;
+    }
+    @media screen and (width <= $SCREEN_SM) {
+      display: block;
+      min-width: $SCREEN_SM;
+      position: fixed;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height: 100vh;
+    }
   }
 }
 
@@ -36,24 +50,40 @@
   @media screen and (width <= $SCREEN_SM) {
     display: block;
     min-width: $SCREEN_SM;
+    padding-top: 160px;
   }
 }
 
 .scene__btn-show-menu {
-  position: relative;
   display: none;
 
   @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
-    flex: 0 0 100px;
     position: relative;
+    flex: 0 0 100px;
     display: block;
     background-color: rgba($lite-green, 0.3);
   }
 }
 
 .scene {
+  &__loupe {
+    height: 70px;
+    width: 70px;
+    position: fixed;
+    top: 30px;
+
+    &__right {
+      right: 15px;
+    }
+
+    &__left {
+      left: 15px;
+    }
+  }
+
   &__arrow {
-    position: absolute;
+    position: fixed;
+    top: 45vh;
     border: solid $lite-green;
     display: inline-block;
     padding: 30px;

@@ -31,11 +31,11 @@
     justify-content: space-between;
   }
   &__button-search {
+    flex: 0 0 40px;
     display: block;
     border-radius: 10px;
     color: black;
     background-color: $lite-green;
     width: 100%;
-    height: 40px;
   }
 }

@@ -10,7 +10,22 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  height: 100%;
+
+  @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
+    width: calc(100vw - 100px);
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  @media screen and (width > $SCREEN_MD) {
+    width: 300px;
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+  }
 }
 
 .side-bar-left__item {

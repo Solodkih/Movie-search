@@ -49,11 +49,15 @@
 
   &_item {
     position: relative;
-    max-width: 33%;
+    flex: 1 1 150px;
     padding: 5px 5px 0 0;
     font-family: 'Bombardier Regular';
-    font-size: 30px;
     display: flex;
+
+    @media screen and (width < $SCREEN_MD) {
+      font-size: 20px;
+      max-width: 150px;
+    }
   }
 
   &_item > span {

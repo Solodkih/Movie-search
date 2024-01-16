@@ -59,7 +59,7 @@
 
   @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
     position: relative;
-    flex: 0 0 100px;
+    flex: 0 0 50px;
     display: block;
     background-color: rgba($lite-green, 0.3);
   }
@@ -67,17 +67,17 @@
 
 .scene {
   &__loupe {
-    height: 70px;
-    width: 70px;
+    height: 40px;
+    width: 40px;
     position: fixed;
     top: 30px;
 
     &__right {
-      right: 15px;
+      right: 5px;
     }
 
     &__left {
-      left: 15px;
+      left: 5px;
     }
   }
 
@@ -86,17 +86,17 @@
     top: 45vh;
     border: solid $lite-green;
     display: inline-block;
-    padding: 30px;
+    padding: 15px;
     transform: rotate(-45deg);
 
     &__right {
       left: 0%;
-      border-width: 0 10px 10px 0;
+      border-width: 0 7px 7px 0;
     }
 
     &__left {
       right: 0%;
-      border-width: 10px 0px 0px 10px;
+      border-width: 7px 0px 0px 7px;
     }
   }
 }

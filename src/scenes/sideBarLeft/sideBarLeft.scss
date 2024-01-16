@@ -14,7 +14,7 @@
   scrollbar-width: none;
 
   @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
-    width: calc(100vw - 100px);
+    width: calc(100vw - 50px);
     position: fixed;
     overflow-x: hidden;
     overflow-y: scroll;

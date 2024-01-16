@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
     width: calc(100vw - 100px);
@@ -26,6 +28,10 @@
     overflow-y: scroll;
     height: 100%;
   }
+}
+
+.side-bar-left__container::-webkit-scrollbar {
+  display: none;
 }
 
 .side-bar-left__item {

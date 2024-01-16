@@ -19,9 +19,16 @@
     background-color: $lite-dark;
     border-radius: 10px;
     border: 2px solid $lite-green;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    @media screen and (width <= $SCREEN_MD) {
+      float: none;
+      margin: auto;
+    }
+
+    @media screen and (width >= $SCREEN_MD) and (width <= $SCREEN_LG) {
+      width: 200px;
+      height: 333.33px;
+    }
   }
 
   &__image-block:hover {
@@ -51,7 +58,7 @@
   }
 
   &__authors {
-    padding-top: 20px;
+    padding-top: 10px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -60,6 +67,7 @@
       flex: 0 0 160px;
       font-size: 20px;
       padding-right: 7px;
+      padding-bottom: 7px;
     }
 
     &-title > span {
@@ -88,7 +96,6 @@
     }
 
     &-list {
-      flex: 1 1 content;
       font-size: 20px;
     }
   }
@@ -107,6 +114,7 @@
     &-title {
       flex: 0 0 160px;
       padding-right: 7px;
+      padding-bottom: 7px;
     }
 
     &-title > span {

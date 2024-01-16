@@ -19,6 +19,9 @@
     background-color: $lite-dark;
     border-radius: 10px;
     border: 2px solid $lite-green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @media screen and (width <= $SCREEN_MD) {
       float: none;

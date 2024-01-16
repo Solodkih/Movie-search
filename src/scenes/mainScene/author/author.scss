@@ -54,6 +54,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (width <= $SCREEN_MD) {
+      float: none;
+      margin: auto;
+    }
+
+    @media screen and (width >= $SCREEN_MD) and (width <= $SCREEN_LG) {
+      width: 200px;
+      height: 333.33px;
+    }
   }
 
   &__image-block:hover {
@@ -87,7 +97,7 @@
   }
 
   &__category-title {
-    flex: 0 1 170px;
+    flex: 0 0 160px;
     text-indent: 20px;
     padding-right: 7px;
   }
@@ -97,6 +107,6 @@
   }
 
   &__category-data {
-    flex: 1 1 auto;
+    flex: 1 1 ;
   }
 }

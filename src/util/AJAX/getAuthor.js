@@ -6,7 +6,7 @@ export default async function getAuthor(urlAuthor) {
     const responseAuthor = await fetch(newUrl, {
       method: 'get',
     });
-    if (!responseAuthor.ok) return Promise.reject(responseAuthor);
+    if (!responseAuthor.ok) throw new Error(responseAuthor);
     const author = await responseAuthor.json();
     return {
       key: author.key,
@@ -28,6 +28,6 @@ export default async function getAuthor(urlAuthor) {
       photos: author.photos || [],
     };
   } catch (e) {
-    return Promise.reject(e);
+    throw new Error(e);
   }
 }

@@ -26,7 +26,7 @@ export default async function getBooksBySearch(
       method: 'GET',
     });
 
-    if (!response.ok) return Promise.reject(response);
+    if (!response.ok) throw new Error(response);
     const works = await response.json();
 
     const maxPage = Math.ceil((works.num_found || works.numFound) / 100);
@@ -37,6 +37,6 @@ export default async function getBooksBySearch(
 
     return { arrayWorks, maxPage };
   } catch (e) {
-    return Promise.reject(e);
+    throw new Error(e);
   }
 }

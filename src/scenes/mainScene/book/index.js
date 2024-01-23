@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  fetchWork,
-  selectBookByKey,
-} from '../../../redux/bookSlice';
+import { fetchWork, selectBookByKey } from '../../../redux/bookSlice';
 import { createAuthorsByArrayKey } from '../../../redux/authorSlice';
 import {
   fetchArrayImages,

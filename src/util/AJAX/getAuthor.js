@@ -1,6 +1,6 @@
 const urlMain = new URL('https://openlibrary.org');
 
-export async function getAuthor(urlAuthor) {
+export default async function getAuthor(urlAuthor) {
   try {
     const newUrl = new URL(`${urlAuthor}.json`, urlMain);
     const responseAuthor = await fetch(newUrl, {
@@ -31,4 +31,3 @@ export async function getAuthor(urlAuthor) {
     return Promise.reject(e);
   }
 }
-

@@ -77,7 +77,7 @@ export default function SearchList({ className = '' }) {
           );
         })}
       </div>
-      {statusDownloadWork == STATUS_SEARCH_DOWLOAD_PENDING && <SmallLoader />}
+      {statusDownloadWork === STATUS_SEARCH_DOWLOAD_PENDING && <SmallLoader />}
       <div id="ref" ref={containerRef} />
     </div>
   );

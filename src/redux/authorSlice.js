@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
-import { getAuthor } from '../util/AJAX/getAuthor';
+import getAuthor from '../util/AJAX/getAuthor';
 
 export const STATUS_AUTHOR_DOWLOAD_PENDING = 'PENDING';
 export const STATUS_AUTHOR_DOWLOAD_ERROR = 'ERROR';
@@ -32,7 +32,7 @@ export const authorSlice = createSlice({
     builder.addCase(fetchAuthor.pending, (state) => {
       state.statusDownloadAuthor = STATUS_AUTHOR_DOWLOAD_PENDING;
     });
-    
+
     builder.addCase(fetchAuthor.rejected, (state) => {
       state.statusDownloadAuthor = STATUS_AUTHOR_DOWLOAD_ERROR;
     });

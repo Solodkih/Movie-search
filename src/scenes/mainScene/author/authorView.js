@@ -19,7 +19,6 @@ export default function AuthorView({
   handlerShowImage,
   className = '',
 }) {
-
   if (download === STATUS_AUTHOR_DOWLOAD_ERROR) {
     return <ErrorFetch />;
   }

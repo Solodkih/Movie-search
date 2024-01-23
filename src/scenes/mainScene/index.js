@@ -16,4 +16,6 @@ export default function MainScene({ className, showMenu, setShowMenu }) {
 
 MainScene.propTypes = {
   className: PropTypes.string.isRequired,
+  showMenu: PropTypes.bool.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };

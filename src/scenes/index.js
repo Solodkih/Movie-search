@@ -29,6 +29,7 @@ export default function Main() {
           />
         )}
         <button
+          type="button"
           onClick={() => {
             setShowMenu(!showMenu);
           }}

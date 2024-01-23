@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getBookByWorks } from '../util/AJAX/getBook';
+import getBookByWorks from '../util/AJAX/getBook';
 import { fetchAuthor } from './authorSlice';
 
 export const STATUS_BOOK_DOWLOAD_PENDING = 'PENDING';

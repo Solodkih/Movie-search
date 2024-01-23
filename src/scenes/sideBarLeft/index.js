@@ -66,6 +66,7 @@ export default function SideBarLeft({ className, showMenu, setShowMenu }) {
         <div className="side-bar-left__item-logo">
           <Logo className="side-bar-left__logo" />
           <button
+            type="button"
             className="side-bar-left__bnt-show-search"
             onClick={() => setShowMenu(!showMenu)}
           >
@@ -92,7 +93,10 @@ export default function SideBarLeft({ className, showMenu, setShowMenu }) {
           <button
             type="button"
             className="menu-side-bar__button-search"
-            onClick={handleSetParam}
+            onClick={(event) => {
+              handleSetParam(event);
+              setShowMenu(false);
+            }}
           >
             SEACH
           </button>
@@ -104,4 +108,6 @@ export default function SideBarLeft({ className, showMenu, setShowMenu }) {
 
 SideBarLeft.propTypes = {
   className: PropTypes.string.isRequired,
+  showMenu: PropTypes.bool.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };

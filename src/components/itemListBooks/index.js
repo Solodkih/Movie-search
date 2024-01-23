@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './itemListBooks.scss';
 import { getUrlImage, SIZE_IMAGE_MEDIUM } from '../../util/image';
-import useGetInternalUrlImage from '../../components/hooks/useGetInternalUrlImage';
+import useGetInternalUrlImage from '../hooks/useGetInternalUrlImage';
 import { STATUS_IMAGE_ERROR, STATUS_IMAGE_PENDING } from '../../redux/imageSlice';
 
 function imageNotFound() {

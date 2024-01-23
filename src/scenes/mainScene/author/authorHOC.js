@@ -1,10 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
-import {
-  selectAuthor,
-  fetchAuthor,
-} from '../../../redux/authorSlice';
+import { selectAuthor, fetchAuthor } from '../../../redux/authorSlice';
 import {
   fetchArrayImages,
   STATUS_IMAGE_ERROR,

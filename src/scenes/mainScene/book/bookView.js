@@ -2,7 +2,10 @@ import React from 'react';
 
 import ImageNotFound from '../../../components/imageNotFound';
 import { SmallLoader } from '../../../components/loader';
-import { STATUS_BOOK_DOWLOAD_PENDING, STATUS_BOOK_DOWLOAD_ERROR } from '../../../redux/bookSlice';
+import {
+  STATUS_BOOK_DOWLOAD_PENDING,
+  STATUS_BOOK_DOWLOAD_ERROR,
+} from '../../../redux/bookSlice';
 import ErrorFetch from '../../../components/errors/errorFetch';
 
 import './book.scss';
@@ -16,11 +19,9 @@ export default function bookView({
   download,
   handlerShowImage,
 }) {
-
   if (download === STATUS_BOOK_DOWLOAD_ERROR) {
     return <ErrorFetch />;
   }
-
 
   return (
     <div className={`${className} book book__container`}>

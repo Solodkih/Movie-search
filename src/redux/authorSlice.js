@@ -12,15 +12,15 @@ export const fetchAuthor = createAsyncThunk('author/fetchAuthor', async (url) =>
   return response;
 });
 
+const notFoundAuthor = {
+  photos: [],
+  alternateNames: [],
+};
+
 export const authorSlice = createSlice({
   name: 'author',
   initialState: {
-    authorList: {
-      notFoundAuthor: {
-        photos: [],
-        alternateNames: [],
-      },
-    },
+    authorList: {},
     statusDownloadAuthor: STATUS_AUTHOR_DOWLOAD_WAIT,
   },
   reducers: {
@@ -46,7 +46,7 @@ export const authorSlice = createSlice({
 
 export const selectAuthor = (state, key) => {
   if (!state.author.authorList[key]) {
-    return state.author.authorList.notFoundAuthor;
+    return notFoundAuthor;
   }
   return state.author.authorList[key];
 };

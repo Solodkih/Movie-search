@@ -18,19 +18,19 @@ export const fetchWork = createAsyncThunk(
   }
 );
 
+const workNotFound = {
+  arrayUrlImage: [],
+  subjects: [],
+  subjectPlaces: [],
+  subjectPeople: [],
+  subjectTimes: [],
+  authors: [],
+};
+
 export const bookSlice = createSlice({
   name: 'book',
   initialState: {
-    worksList: {
-      workNotFound: {
-        arrayUrlImage: [],
-        subjects: [],
-        subjectPlaces: [],
-        subjectPeople: [],
-        subjectTimes: [],
-        authors: [],
-      },
-    },
+    worksList: {},
     statusDownloadWork: STATUS_BOOK_DOWLOAD_WAIT,
   },
   reducers: {
@@ -67,8 +67,7 @@ export const bookSlice = createSlice({
 });
 
 export const selectBookByKey = (state, key) => {
-  if (!state.book.worksList[`/works/${key}`])
-    return state.book.worksList.workNotFound;
+  if (!state.book.worksList[`/works/${key}`]) return workNotFound;
   return state.book.worksList[`/works/${key}`];
 };
 

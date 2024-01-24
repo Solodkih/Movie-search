@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './imageNotFound.scss';
 
-export default function ImageNotFound({ className }) {
+export default function ImageNotFound({ className = '' }) {
   return (
     <div className={`${className} image-not-found`}>
       Sorry, we didn&apos;t find the picture.
@@ -13,5 +13,8 @@ export default function ImageNotFound({ className }) {
 }
 
 ImageNotFound.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+ImageNotFound.defaultProps = {
+  className: '',
 };

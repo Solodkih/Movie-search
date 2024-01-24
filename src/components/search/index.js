@@ -20,14 +20,12 @@ export default function Search({ handleChange, ...props }) {
 
 Search.propTypes = {
   placeholder: PropTypes.string,
-  imageButtonSeach: PropTypes.string,
   value: PropTypes.string,
   handleChange: PropTypes.func,
 };
 
 Search.defaultProps = {
   placeholder: '',
-  imageButtonSeach: '',
   value: '',
   handleChange: () => {},
 };

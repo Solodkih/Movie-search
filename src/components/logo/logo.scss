@@ -1,3 +1,4 @@
+@import '../../constants.scss';
 .logo {
   font-family: 'Goma Octagon';
   margin-bottom: 20px;
@@ -9,4 +10,8 @@
   &__subtitle {
     font-size: 30px;
   }
+}
+
+.logo:hover {
+  color: rgba($lite-green, 0.7);
 }

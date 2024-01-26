@@ -93,9 +93,7 @@
     }
 
     &-item > div > span:hover {
-      padding: 5px;
-      background-color: $lite-green;
-      border-radius: 3px;
+      background-color: rgba($lite-green, 0.3);
     }
 
     &-list {

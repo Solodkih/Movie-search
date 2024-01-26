@@ -9,7 +9,7 @@
     min-width: $SCREEN_SM;
   }
 
-  &_logo {
+  &__logo {
     @media screen and (width >= $SCREEN_MD) {
       display: none;
     }
@@ -19,14 +19,14 @@
     }
   }
 
-  &_list {
+  &__list {
     font-size: 30px;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
   }
 
-  &_title {
+  &__title {
     display: flex;
     flex-basis: 100%;
     white-space: nowrap;
@@ -34,20 +34,20 @@
     font-size: 30px;
   }
 
-  &_title > span {
+  &__title > span {
     display: flex;
     align-items: center;
     padding-right: 5px;
   }
 
-  &_title > button {
+  &__title > button {
     padding: 4px;
     background-color: $lite-dark;
     border-radius: 7px;
     border: 2px solid $lite-green;
   }
 
-  &_item {
+  &__item {
     position: relative;
     flex: 1 1 150px;
     padding: 5px 5px 0 0;
@@ -60,13 +60,13 @@
     }
   }
 
-  &_item > span {
+  &__item > span {
     display: flex;
     align-items: center;
     padding-right: 5px;
   }
 
-  &_item > button {
+  &__item > button {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -76,16 +76,16 @@
     border: 2px solid $lite-green;
   }
 
-  &_item > button:hover + &_button-cansel {
+  &__item > button:hover + &_button-cansel {
     display: block;
     background-color: rgba($lite-green, 0.3);
   }
 
-  &_item > button:hover {
+  &__item > button:hover {
     background-color: rgba($lite-green, 0.3);
   }
 
-  &_button-cansel {
+  &__button-cansel {
     display: none;
     z-index: 2;
     border-radius: 50%;
@@ -96,7 +96,7 @@
     top: 0px;
   }
 
-  &_button-cansel:before {
+  &__button-cansel:before {
     content: '';
     position: absolute;
     top: 7px;
@@ -106,7 +106,7 @@
     background: $lite-green;
     transform: rotate(45deg);
   }
-  &_button-cansel:after {
+  &__button-cansel:after {
     content: '';
     position: absolute;
     top: 7px;

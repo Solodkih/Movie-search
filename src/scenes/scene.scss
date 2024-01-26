@@ -23,7 +23,7 @@
     position: fixed;
   }
 
-  &__full-dispay {
+  &-full-dispay {
     flex: 0 0 300px;
     overflow-y: scroll;
 
@@ -72,11 +72,11 @@
     position: fixed;
     top: 30px;
 
-    &__right {
+    &_right {
       right: 5px;
     }
 
-    &__left {
+    &_left {
       left: 5px;
     }
   }
@@ -89,12 +89,12 @@
     padding: 15px;
     transform: rotate(-45deg);
 
-    &__right {
+    &_right {
       left: 0%;
       border-width: 0 7px 7px 0;
     }
 
-    &__left {
+    &_left {
       right: 0%;
       border-width: 7px 0px 0px 7px;
     }

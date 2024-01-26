@@ -25,7 +25,7 @@ export default function Main() {
           <SideBarLeft
             showMenu={showMenu}
             setShowMenu={setShowMenu}
-            className={`scene__side-bar-left${showMenu ? '__full-dispay' : ''}`}
+            className={`scene__side-bar-left${showMenu ? '-full-dispay' : ''}`}
           />
         )}
         <button
@@ -36,12 +36,12 @@ export default function Main() {
           className="scene__btn-show-menu"
         >
           <div
-            className={`scene__loupe scene__loupe__${showMenu ? 'right' : 'left'}`}
+            className={`scene__loupe scene__loupe_${showMenu ? 'right' : 'left'}`}
           >
             <Loupe />
           </div>
           <i
-            className={`scene__arrow scene__arrow__${showMenu ? 'left' : 'right'}`}
+            className={`scene__arrow scene__arrow_${showMenu ? 'left' : 'right'}`}
           />
         </button>
         <MainScene

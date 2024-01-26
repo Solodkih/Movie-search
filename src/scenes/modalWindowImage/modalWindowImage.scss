@@ -13,7 +13,7 @@
     flex-direction: column;
   }
 
-  &_button {
+  &__button {
     position: relative;
     height: 100%;
     flex: 0 0 15%;
@@ -27,11 +27,11 @@
     }
   }
 
-  &_button:hover {
+  &__button:hover {
     background-color: rgba($lite-green, 0.3);
   }
 
-  &_arrow {
+  &__arrow {
     position: absolute;
     border: solid $lite-green;
     display: inline-block;
@@ -50,7 +50,7 @@
       padding: 14px;
     }
 
-    &__right {
+    &_right {
       left: 0%;
       border-width: 0 10px 10px 0;
 
@@ -61,7 +61,7 @@
       }
     }
 
-    &__left {
+    &_left {
       right: 0%;
       border-width: 10px 0px 0px 10px;
 
@@ -73,7 +73,7 @@
     }
   }
 
-  &_image-block {
+  &__image-block {
     position: relative;
     height: 100%;
     flex: 1 1 60%;
@@ -116,7 +116,7 @@
     }
   }
 
-  &_image {
+  &__image {
     max-width: 90%;
     max-height: 90%;
   }

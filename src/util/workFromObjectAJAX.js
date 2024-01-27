@@ -32,6 +32,6 @@ export const workFromSearchObjects = (objectAJAX) => {
       }) ?? [],
     authorsName: objectAJAX.author_name || '',
     description: objectAJAX.description?.value ?? objectAJAX.description ?? '',
-    arrayUrlImage: [objectAJAX.cover_i],
+    arrayUrlImage: objectAJAX.cover_i ? [objectAJAX.cover_i] : [],
   };
 };

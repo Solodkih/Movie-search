@@ -73,6 +73,6 @@ ItemListBooks.propTypes = {
   className: PropTypes.string.isRequired,
   book: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    arrayUrlImage: PropTypes.arrayOf(PropTypes.string),
+    arrayUrlImage: PropTypes.arrayOf(PropTypes.number),
   }).isRequired,
 };

@@ -8,7 +8,7 @@ export default function Logo({ className }) {
   const navigate = useNavigate();
 
   function navigateToMainURL() {
-    navigate('/');
+    navigate('/books-search/');
   }
 
   return (

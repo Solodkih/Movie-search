@@ -41,7 +41,7 @@ export default function Book({ className = '' }) {
 
   function handleOnClickAuthor(event, keyAuthor) {
     event.preventDefault();
-    navigate(keyAuthor);
+    navigate(`/books-search${keyAuthor}`);
   }
 
   useEffect(() => {

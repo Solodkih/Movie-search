@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Main from './scenes';
 import StartScene from './scenes/mainScene/startScene';
@@ -10,12 +10,22 @@ import BadUrl from './scenes/mainScene/badUrl';
 
 import store from './redux/store';
 
+function Redirect() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate('/books-search');
+    console.log('Redirect');
+  }, []);
+  return null;
+}
+
 export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />}>
+          <Route path="/books-search" element={<Main />}>
             <Route index element={<StartScene />} />
             <Route path="works">
               <Route path=":worksId" element={<Book />} />
@@ -26,6 +36,7 @@ export default function App() {
             <Route path="search/*" element={<SearchList />} />
             <Route path="*" element={<BadUrl />} />
           </Route>
+          <Route path="*" element={<Redirect />} />
         </Routes>
       </BrowserRouter>
     </Provider>

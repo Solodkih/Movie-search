@@ -94,16 +94,29 @@ export default function AuthorView({
 }
 
 AuthorView.propTypes = {
-  className: PropTypes.string.isRequired,
-  urlImage: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  urlImage: PropTypes.string,
   author: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    bio: PropTypes.string.isRequired,
-    personalName: PropTypes.string.isRequired,
-    birthDate: PropTypes.string.isRequired,
-    deathDate: PropTypes.string.isRequired,
-    alternateNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+    name: PropTypes.string,
+    bio: PropTypes.string,
+    personalName: PropTypes.string,
+    birthDate: PropTypes.string,
+    deathDate: PropTypes.string,
+    alternateNames: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-  download: PropTypes.bool.isRequired,
+  download: PropTypes.string.isRequired,
   handlerShowImage: PropTypes.func.isRequired,
+};
+
+AuthorView.defaultProps = {
+  className: '',
+  urlImage: '',
+  author: PropTypes.shape({
+    name: '',
+    bio: '',
+    personalName: '',
+    birthDate: '',
+    deathDate: '',
+    alternateNames: [''],
+  }),
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ImageNotFound from '../../../components/imageNotFound';
 import { SmallLoader } from '../../../components/loader';
@@ -56,7 +57,7 @@ export default function bookView({
               <span>Authors:</span>
             </div>
             <ul className="book-aboutBook__authors-list">
-              {authors.map(({ name, key }) => {
+              {authors.map(({ name, key = 1 }) => {
                 return (
                   <li className="book-aboutBook__authors-item" key={key}>
                     <div
@@ -166,3 +167,44 @@ export default function bookView({
     </div>
   );
 }
+
+bookView.propTypes = {
+  className: PropTypes.string,
+  urlImage: PropTypes.string,
+  book: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    subjects: PropTypes.arrayOf(PropTypes.string),
+    subjectPeople: PropTypes.arrayOf(PropTypes.string),
+    subjectPlaces: PropTypes.arrayOf(PropTypes.string),
+    subjectTimes: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+  authors: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      key: PropTypes.string,
+    }).isRequired
+  ),
+  download: PropTypes.string.isRequired,
+  handlerShowImage: PropTypes.func.isRequired,
+  handleOnClickAuthor: PropTypes.func.isRequired,
+};
+
+bookView.defaultProps = {
+  className: '',
+  urlImage: '',
+  book: PropTypes.shape({
+    title: '',
+    description: '',
+    subjects: [],
+    subjectPeople: [],
+    subjectPlaces: [],
+    subjectTimes: [],
+  }),
+  authors: [
+    PropTypes.shape({
+      name: '',
+      key: 1,
+    }),
+  ],
+};

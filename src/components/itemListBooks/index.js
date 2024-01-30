@@ -34,7 +34,7 @@ export default function ItemListBooks({
 
   function handleOnClick(event) {
     event.preventDefault();
-    navigate(book.key);
+    navigate(`/books-search${book.key}`);
   }
 
   const checkAndTrimString = (string) => {

@@ -20,7 +20,7 @@ export default function useSetUrl(params) {
       ? `&publisher=${newParams.publisher}`
       : '';
     navigate(
-      `/search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}${publisherUrlParams}`
+      `/books-search/search?${queryUrlParams}${titleUrlParams}${authorUrlParams}${subjectUrlParams}${placeUrlParams}${personUrlParams}${publisherUrlParams}`
     );
   };
   return handleSetParam;

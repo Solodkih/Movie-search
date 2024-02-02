@@ -1,0 +1,58 @@
+@import '../../constants.scss';
+
+.side-bar-left {
+  background-color: $lite-dark;
+  color: $main-white;
+}
+
+.side-bar-left__container {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
+    width: calc(100vw - 50px);
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  @media screen and (width > $SCREEN_MD) {
+    width: 300px;
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+  }
+}
+
+.side-bar-left__container::-webkit-scrollbar {
+  display: none;
+}
+
+.side-bar-left__item {
+  margin-top: 10px;
+}
+
+.side-bar-left__item-logo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.side-bar-left__logo {
+  flex: 0 0;
+}
+
+.side-bar-left__bnt-show-search {
+  display: none;
+
+  @media screen and (max-width: $SCREEN_SM) {
+    display: initial;
+    height: 70px;
+    width: 70px;
+  }
+}

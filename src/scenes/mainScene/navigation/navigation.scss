@@ -1,0 +1,119 @@
+@import '../../../constants.scss';
+
+.navigation {
+  width: 100%;
+  padding: 20px 20px 20px 20px;
+
+  @media screen and (width <= $SCREEN_SM) {
+    display: none;
+    min-width: $SCREEN_SM;
+  }
+
+  &__logo {
+    @media screen and (width >= $SCREEN_MD) {
+      display: none;
+    }
+
+    @media screen and (width <= $SCREEN_SM) {
+      display: none;
+    }
+  }
+
+  &__list {
+    font-size: 30px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    display: flex;
+    flex-basis: 100%;
+    white-space: nowrap;
+    font-family: 'Bombardier Regular';
+    font-size: 30px;
+  }
+
+  &__title > span {
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+  }
+
+  &__title > button {
+    padding: 4px;
+    background-color: $lite-dark;
+    border-radius: 7px;
+    border: 2px solid $lite-green;
+  }
+
+  &__item {
+    position: relative;
+    flex: 1 1 150px;
+    padding: 5px 5px 0 0;
+    font-family: 'Bombardier Regular';
+    display: flex;
+
+    @media screen and (width < $SCREEN_MD) {
+      font-size: 20px;
+      max-width: 150px;
+    }
+  }
+
+  &__item > span {
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+  }
+
+  &__item > button {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 4px 4px 4px 4px;
+    background-color: $lite-dark;
+    border-radius: 7px;
+    border: 2px solid $lite-green;
+  }
+
+  &__item > button:hover + &_button-cansel {
+    display: block;
+    background-color: rgba($lite-green, 0.3);
+  }
+
+  &__item > button:hover {
+    background-color: rgba($lite-green, 0.3);
+  }
+
+  &__button-cansel {
+    display: none;
+    z-index: 2;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+
+  &__button-cansel:before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    right: 0px;
+    width: 20px;
+    height: 5px;
+    background: $lite-green;
+    transform: rotate(45deg);
+  }
+  &__button-cansel:after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    right: 0px;
+    width: 20px;
+    height: 5px;
+    background: $lite-green;
+    transform: rotate(-45deg);
+  }
+}

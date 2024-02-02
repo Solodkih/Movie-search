@@ -1,0 +1,123 @@
+@import '../../constants.scss';
+
+.modalWindowImage {
+  position: fixed;
+  z-index: 10000000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (width <= $SCREEN_SM) {
+    flex-direction: column;
+  }
+
+  &__button {
+    position: relative;
+    height: 100%;
+    flex: 0 0 15%;
+    @media screen and (width <= $SCREEN_LG) {
+      flex: 0 0 10%;
+    }
+
+    @media screen and (width <= $SCREEN_SM) {
+      height: initial;
+      width: 100%;
+    }
+  }
+
+  &__button:hover {
+    background-color: rgba($lite-green, 0.3);
+  }
+
+  &__arrow {
+    position: absolute;
+    border: solid $lite-green;
+    display: inline-block;
+    padding: 50px;
+    transform: rotate(-45deg);
+
+    @media screen and (width >= $SCREEN_MD) and (width <= $SCREEN_LG) {
+      padding: 25px;
+    }
+
+    @media screen and (width > $SCREEN_SM) and (width < $SCREEN_MD) {
+      padding: 14px;
+    }
+
+    @media screen and (width <= $SCREEN_SM) {
+      padding: 14px;
+    }
+
+    &_right {
+      left: 0%;
+      border-width: 0 10px 10px 0;
+
+      @media screen and (width <= $SCREEN_SM) {
+        bottom: calc(50% - 5px - 14px);
+        left: calc(50% - 5px - 14px);
+        border-width: 0 0 10px 10px;
+      }
+    }
+
+    &_left {
+      right: 0%;
+      border-width: 10px 0px 0px 10px;
+
+      @media screen and (width <= $SCREEN_SM) {
+        top: calc(50% - 5px - 14px);
+        right: calc(50% - 5px - 14px);
+        border-width: 10px 10px 0px 0px;
+      }
+    }
+  }
+
+  &__image-block {
+    position: relative;
+    height: 100%;
+    flex: 1 1 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &-cansel {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+
+    &-cansel:hover {
+      background-color: rgba($lite-green, 0.3);
+    }
+
+    &-cansel:before {
+      content: '';
+      position: absolute;
+      top: 45px;
+      right: 25px;
+      width: 50px;
+      height: 8px;
+      background: $lite-green;
+      transform: rotate(45deg);
+    }
+    &-cansel:after {
+      content: '';
+      position: absolute;
+      top: 45px;
+      right: 25px;
+      width: 50px;
+      height: 8px;
+      background: $lite-green;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__image {
+    max-width: 90%;
+    max-height: 90%;
+  }
+}

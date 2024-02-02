@@ -1,0 +1,16 @@
+@import '../../constants.scss';
+
+.image-not-found {
+  max-width: 100%;
+  max-height: 100%;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Goma Octagon';
+  color: $lite-green;
+}
+
+.modal-image-not-found {
+  background-color: $lite-dark;
+  padding: 100px 10px 100px 10px;
+  border-radius: 10px;
+}

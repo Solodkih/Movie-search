@@ -1,0 +1,102 @@
+@import '../constants.scss';
+
+.scene {
+  max-width: $SCREEN_XXL;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  overflow: hidden;
+
+  @media screen and (width <= $SCREEN_SM) {
+    display: block;
+    min-width: $SCREEN_SM;
+  }
+}
+
+.scene__side-bar-left {
+  flex: 0 0 300px;
+  overflow: hidden;
+
+  @media screen and (width <= $SCREEN_SM) {
+    display: block;
+    min-width: $SCREEN_SM;
+    position: fixed;
+  }
+
+  &-full-dispay {
+    flex: 0 0 300px;
+    overflow-y: scroll;
+
+    @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
+      flex-direction: row;
+      flex: 10000 0 300px;
+      display: block;
+    }
+    @media screen and (width <= $SCREEN_SM) {
+      display: block;
+      min-width: $SCREEN_SM;
+      position: fixed;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height: 100vh;
+    }
+  }
+}
+
+.scene__main-scene {
+  flex: 1 1;
+  overflow: hidden;
+
+  @media screen and (width <= $SCREEN_SM) {
+    display: block;
+    min-width: $SCREEN_SM;
+    padding-top: 160px;
+  }
+}
+
+.scene__btn-show-menu {
+  display: none;
+
+  @media screen and (width < $SCREEN_MD) and (width > $SCREEN_SM) {
+    position: relative;
+    flex: 0 0 50px;
+    display: block;
+    background-color: rgba($lite-green, 0.3);
+  }
+}
+
+.scene {
+  &__loupe {
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    top: 30px;
+
+    &_right {
+      right: 5px;
+    }
+
+    &_left {
+      left: 5px;
+    }
+  }
+
+  &__arrow {
+    position: fixed;
+    top: 45vh;
+    border: solid $lite-green;
+    display: inline-block;
+    padding: 15px;
+    transform: rotate(-45deg);
+
+    &_right {
+      left: 0%;
+      border-width: 0 7px 7px 0;
+    }
+
+    &_left {
+      right: 0%;
+      border-width: 7px 0px 0px 7px;
+    }
+  }
+}

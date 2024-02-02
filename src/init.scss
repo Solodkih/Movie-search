@@ -1,0 +1,32 @@
+@import 'reset.scss';
+@import 'constants.scss';
+html,
+body {
+  min-width: $SCREEN_SM;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to right, $big-dark, $lite-dark);
+  background-repeat: repeat;
+
+  @media screen and (width <= $SCREEN_SM) {
+    background-color: $big-dark;
+    background-image: none;
+  }
+}
+
+@font-face {
+  font-family: 'Goma Octagon';
+  src: url('./fonts/goma-octagon.regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Bombardier Regular';
+  src: url('./fonts/BOMBARD_.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+#root {
+}

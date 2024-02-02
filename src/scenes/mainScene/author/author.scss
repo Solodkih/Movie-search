@@ -1,0 +1,112 @@
+@import '../../../constants.scss';
+
+.author {
+  &__container {
+    padding: 20px;
+  }
+
+  &__category {
+    display: flex;
+    font-size: 20px;
+    padding-top: 20px;
+  }
+
+  &__category-title {
+    flex: 0 1 170px;
+    text-indent: 20px;
+    padding-right: 7px;
+  }
+
+  &__category-title > span {
+    border-bottom: 3px solid $lite-green;
+  }
+
+  &__category-data {
+    flex: 1 1 auto;
+  }
+
+  &__category-list {
+    line-height: 30px;
+    white-space: pre-line;
+    flex: 0 999 content;
+    font-size: 20px;
+  }
+}
+
+.author-main-block {
+  overflow: hidden;
+
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  &__image-block {
+    width: 300px;
+    height: 500px;
+    float: left;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    background-color: $lite-dark;
+    border-radius: 10px;
+    border: 2px solid $lite-green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (width <= $SCREEN_MD) {
+      float: none;
+      margin: auto;
+    }
+
+    @media screen and (width >= $SCREEN_MD) and (width <= $SCREEN_LG) {
+      width: 200px;
+      height: 333.33px;
+    }
+  }
+
+  &__image-block:hover {
+    background-color: rgba($lite-green, 0.3);
+  }
+
+  &__name {
+    flex: 1 1 100%;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 40px;
+  }
+
+  &__name > span {
+    border-bottom: 3px solid $lite-green;
+  }
+
+  &__bio {
+    white-space: pre-wrap;
+    padding-top: 20px;
+    text-indent: 20px;
+    line-height: 30px;
+    text-align: justify;
+    font-size: 20px;
+  }
+
+  &__category {
+    display: flex;
+    font-size: 20px;
+    padding-top: 10px;
+  }
+
+  &__category-title {
+    flex: 0 0 160px;
+    text-indent: 20px;
+    padding-right: 7px;
+  }
+
+  &__category-title > span {
+    border-bottom: 3px solid $lite-green;
+  }
+
+  &__category-data {
+    flex: 1 1 ;
+  }
+}

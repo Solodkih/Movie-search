@@ -1,0 +1,10 @@
+@import '../../constants.scss';
+
+.error {
+  font-family: 'Goma Octagon';
+  text-align: center;
+  margin-top: 20px;
+  font-size: 35px;
+  border: 2px solid $lite-green;
+  border-radius: 10px;
+}

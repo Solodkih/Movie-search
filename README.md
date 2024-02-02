@@ -46,10 +46,17 @@ The repository was created for educational purposes.
 ### Сборка/Assembly
 
 - [Клонировать репозиторий/Clone repository](https://docs.github.com/ru/repositories/creating-and-managing-repositories/cloning-a-repository)
+- В корне скачанного репозитория исполнить/In the root of the downloaded repository, execute: `npm install`
 - В корне скачанного репозитория исполнить/In the root of the downloaded repository, execute: `npm run build`
 
 ### Запуск/Launch
 
 - В корне скачанного репозитория исполнить/In the root of the downloaded repository, execute `docker-compose up`
 
-## [Github-pages](https://solodkih.github.io/books-search/)
+Собранное приложение будет запущенно по адресу [http://localhost:80](http://localhost:80) /
+The assembled application will be launched at [http://localhost:80](http://localhost:80)
+
+## Github-pages
+
+Cсылка на Github-pages/Link to Github-pages:
+[https://solodkih.github.io/books-search/](https://solodkih.github.io/books-search/)

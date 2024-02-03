@@ -46,7 +46,9 @@ The repository was created for educational purposes.
 ### Сборка/Assembly
 
 - [Клонировать репозиторий/Clone repository](https://docs.github.com/ru/repositories/creating-and-managing-repositories/cloning-a-repository)
+
 - В корне скачанного репозитория исполнить/In the root of the downloaded repository, execute: `npm install`
+
 - В корне скачанного репозитория исполнить/In the root of the downloaded repository, execute: `npm run build`
 
 ### Запуск/Launch
